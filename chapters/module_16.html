@@ -1,1 +1,866 @@
 
+<!DOCTYPE html\>
+
+\<html lang="en"\>
+\<head\>
+\<meta charset="UTF-8"\>
+\<meta name="viewport" content="width=device-width, initial-scale=1.0"\>
+\<title\>Cybersecurity - Module 16: Risk Management\</title\>
+\<style\>
+body {
+font-family: Arial, sans-serif;
+background-color: \#f8f9fa;
+margin: 0;
+padding: 20px;
+line-height: 1.6;
+color: \#333;
+}
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px; /* Reduced top margin for sections */
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around; /* Or flex-start, center */
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px; /* Adjusted padding slightly */
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em; /* Slightly smaller font */
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden; /* Contain borders */
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6; /* Separator */
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative; /* For the indicator */
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    /* Indicator (+/-) */
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg); /* Optional: animate the sign itself */
+    }
+    /* Optional: Slightly different style for active header */
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px; /* Start with 0 padding top/bottom */
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Smooth transition */
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0; /* Add margin back when panel is open */
+        color: #333; /* Reset color for definition */
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Frameworks Styles */
+    #frameworks .framework-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    #frameworks ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    #frameworks .example {
+         margin-top: 15px;
+         padding-left: 15px;
+         border-left: 3px solid #17a2b8; /* Info Blue */
+    }
+     #frameworks .solution {
+         margin-top: 10px;
+         padding-left: 15px;
+         font-style: italic;
+    }
+
+    /* Quiz Styles (apply within #fill, #tf, #mc) */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff; /* White background for questions */
+        position: relative; /* For feedback positioning */
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa; /* Light background for options */
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745; /* Success Green */
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+```
+
+\</head\>
+\<body\>
+\<div class="container"\>
+\<h1\>Module 16: Risk Management\</h1\>
+
+```
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="frameworks">Frameworks & Processes</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">Risk</button>
+                <div class="accordion-panel">
+                    <p>The probability that the actual outcome or result of an action will be different from the expected outcome.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Risk Appetite</button>
+                <div class="accordion-panel">
+                    <p>The level of risk that an organization is prepared to accept in the pursuit of its objectives.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Risk Tolerance</button>
+                <div class="accordion-panel">
+                    <p>The degree of risk or uncertainty that is deemed acceptable to either an individual or an organization.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Human Risk</button>
+                <div class="accordion-panel">
+                    <p>Risk stemming from people, such as employees falling for phishing attempts or malicious "insider threats" who sell or misuse company data.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Technical Risk</button>
+                <div class="accordion-panel">
+                    <p>Risk arising from sources like insecure devices, network vulnerabilities, loose firewall rules, or insecurely stored passwords.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Operational Risk</button>
+                <div class="accordion-panel">
+                    <p>Risk from threats that hinder everyday business functionality, such as physical threats (fires, floods) or large-scale technical issues like ransomware attacks.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Regulatory Risk</button>
+                <div class="accordion-panel">
+                    <p>The possibility that future regulations or legal restrictions may not align with the current business model, potentially forcing major changes or even business failure.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Risk Identification</button>
+                <div class="accordion-panel">
+                    <p>The process of identifying potential risks that could prevent an organization from achieving its objectives. It is the first step in the risk management process.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Threat Modeling</button>
+                <div class="accordion-panel">
+                    <p>A method of creating scenarios to identify potential threats to system security. A common technique is STRIDE (Spoofing, Tampering, Repudiation, Information Disclosure, Denial of Service, Elevation of Privilege).</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Risk Assessment</button>
+                <div class="accordion-panel">
+                    <p>The process used to identify, evaluate, and estimate the levels of risks involved in a situation, followed by determining an acceptable risk level.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Qualitative Risk Assessment</button>
+                <div class="accordion-panel">
+                    <p>A subjective analysis of the probability and impact of risks, often based on expertise and judgment, using categories like "High," "Medium," and "Low."</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Quantitative Risk Assessment</button>
+                <div class="accordion-panel">
+                    <p>A method that seeks to assign numerical values to risks, using data and statistical methods to quantify probability and potential losses (e.g., in monetary terms).</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Risk Management Framework</button>
+                <div class="accordion-panel">
+                    <p>Tools designed to help identify, evaluate, and mitigate risks in organizations of all sizes. Examples include NIST RMF, TARA, COSO, and COBIT.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">NIST RMF</button>
+                <div class="accordion-panel">
+                    <p>The National Institute for Standards and Technology (NIST) Risk Management Framework, designed to integrate security and privacy into the development cycle of digital systems from the start.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">COSO Framework</button>
+                <div class="accordion-panel">
+                    <p>The COSO enterprise risk management framework, designed to seamlessly integrate risk management into a corporate strategy for success. It is often visualized as a cube.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">COBIT Framework</button>
+                <div class="accordion-panel">
+                    <p>The Control Objectives for Information and related Technology (COBIT) framework, developed by ISACA for IT management and governance.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Standards</button>
+                <div class="accordion-panel">
+                    <p>Voluntary sets of guidelines and practices to help organizations mitigate risks (e.g., CIS Controls, NIST SP 800-53).</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Regulations</button>
+                <div class="accordion-panel">
+                    <p>Mandated procedures aimed at mitigating risks and their potential harms, which often entail consequences (like fines) for non-compliance.</p>
+                </div>
+            </div>
+        </div> </section>
+
+    <section id="frameworks" class="main-content">
+         <h2>Frameworks & Processes</h2>
+         <h3>Components of Risk Assessment</h3>
+         <div class="framework-block">
+            <h4>A 3-Step Process</h4>
+            <p>A comprehensive risk assessment generally involves these three main components:</p>
+            <ul>
+                <li><strong>1. Risk Identification:</strong> Recognizing threats that could affect the system, identifying vulnerabilities that could be exploited, and understanding the potential consequences.</li>
+                <li><strong>2. Risk Analysis:</strong> Assessing the likelihood of each identified risk occurring and the potential impact it would have on the organization. This can be qualitative or quantitative.</li>
+                <li><strong>3. Risk Evaluation:</strong> Comparing the estimated levels of risk against the organization's predefined risk criteria to determine which risks need treatment and prioritization.</li>
+            </ul>
+            <div class="example"><p><strong>Example: Phishing Attack Assessment</strong></p><div class="solution"><p>Applying the 3-step process to a phishing threat:</p><ul><li><strong>Identification:</strong> The threat is a phishing attack. Vulnerabilities could be weak passwords, lack of user training, and outdated software.</li><li><strong>Analysis:</strong> Determine the likelihood is high due to industry trends, and the impact is severe due to sensitive customer data.</li><li><strong>Evaluation:</strong> Conclude that the risk is unacceptable given the high likelihood and high impact, and therefore requires mitigation.</li></ul></div></div>
+         </div>
+         <h3>NIST Risk Management Framework (RMF)</h3>
+         <div class="framework-block">
+            <h4>7 Key Steps</h4>
+            <p>The NIST RMF integrates security and privacy throughout the system development lifecycle with the following steps:</p>
+             <ul>
+                <li><strong>Prepare:</strong> Essential activities to prepare the organization to manage security and privacy risks.</li>
+                <li><strong>Categorize:</strong> Categorize the system and information based on an impact analysis.</li>
+                <li><strong>Select:</strong> Select the set of NIST SP 800-53 controls to protect the system.</li>
+                <li><strong>Implement:</strong> Implement the controls and document how they are deployed.</li>
+                <li><strong>Assess:</strong> Assess the controls to determine if they are operating as intended.</li>
+                <li><strong>Authorize:</strong> A senior official makes a risk-based decision to authorize the system to operate.</li>
+                <li><strong>Monitor:</strong> Continuously monitor control implementation and risks to the system.</li>
+            </ul>
+         </div>
+          <h3>COSO Enterprise Risk Management Framework</h3>
+         <div class="framework-block">
+            <h4>Key Components</h4>
+            <p>The COSO framework integrates risk management into corporate strategy. Key components include:</p>
+            <ul>
+                <li>Evaluating the internal environment (ethics, core values, risk tolerance).</li>
+                <li>Using the organization's mission for objective setting.</li>
+                <li>Distinguishing between risks (negative) and opportunities (positive) for event identification.</li>
+                <li>Identifying the likelihood and impact of risks through a risk assessment.</li>
+                <li>Selecting one of four risk responses (reduce, accept, transfer, avoid) based on risk tolerance.</li>
+            </ul>
+         </div>
+         <h3>NIST Cybersecurity Framework (CSF)</h3>
+         <div class="framework-block">
+            <h4>Three Main Components</h4>
+            <p>The NIST CSF provides flexible and cost-effective risk management strategies with three main components:</p>
+            <ul>
+                <li><strong>The Core:</strong> A set of cybersecurity activities and outcomes aimed at mitigating risks.</li>
+                <li><strong>Implementation Tiers:</strong> Help organizations determine the level of risk they are willing to accept based on factors like budget and data sensitivity.</li>
+                <li><strong>Profiles:</strong> Unique to each organization to align their cybersecurity risk with specific objectives and resources.</li>
+            </ul>
+         </div>
+    </section>
+
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div> <script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        {
+            question: "_______ is the probability that the actual outcome of an action will be different from the expected outcome.",
+            options: ["Tolerance", "Risk", "Appetite", "Reward"],
+            answer: "Risk"
+        },
+        {
+            question: "The level of risk an organization is prepared to accept in pursuit of its objectives is known as its risk _______.",
+            options: ["Tolerance", "Appetite", "Management", "Framework"],
+            answer: "Appetite"
+        },
+        {
+            question: "Risk that stems from disgruntled or malicious employees is known as an _______.",
+            options: ["External Threat", "Operational Risk", "Insider Threat", "Regulatory Risk"],
+            answer: "Insider Threat"
+        },
+        {
+            question: "Physical threats like bombs, fires, and floods are examples of _______ risk.",
+            options: ["Technical", "Human", "Regulatory", "Operational"],
+            answer: "Operational"
+        },
+        {
+            question: "The first step in the risk management process is risk _______.",
+            options: ["Assessment", "Mitigation", "Evaluation", "Identification"],
+            answer: "Identification"
+        },
+        {
+            question: "The _______ risk assessment method involves a subjective analysis using categories like 'High', 'Medium', and 'Low'.",
+            options: ["Quantitative", "Numerical", "Qualitative", "Statistical"],
+            answer: "Qualitative"
+        },
+        {
+            question: "Assigning numerical values to risks, such as potential financial losses, is part of a _______ risk assessment.",
+            options: ["Subjective", "Qualitative", "Quantitative", "Theoretical"],
+            answer: "Quantitative"
+        },
+        {
+            question: "The _______ framework from NIST is designed to integrate security and privacy into the development cycle from the beginning.",
+            options: ["COSO", "COBIT", "Risk Management Framework (RMF)", "CIS Controls"],
+            answer: "Risk Management Framework (RMF)"
+        },
+        {
+            question: "_______ are voluntary sets of guidelines, whereas _______ are mandated procedures with consequences for non-compliance.",
+            options: ["Frameworks, Regulations", "Standards, Regulations", "Rules, Standards", "Regulations, Standards"],
+            answer: "Standards, Regulations"
+        },
+        {
+            question: "The CIS Controls are a prioritized set of 18 actions designed to protect an organization from known ______.",
+            options: ["Financial losses", "Cyber-attacks", "Physical damage", "Regulations"],
+            answer: "Cyber-attacks"
+        }
+    ];
+
+    const trueOrFalse = [
+        {
+            question: "Risk appetite and risk tolerance are identical concepts.",
+            answer: false
+        },
+        {
+            question: "Human risk can only come from malicious employees, not from unintentional mistakes.",
+            answer: false
+        },
+        {
+            question: "A ransomware attack that prevents users from accessing the system can be considered an operational risk.",
+            answer: true
+        },
+        {
+            question: "Risk identification is the final step in the risk management process.",
+            answer: false
+        },
+        {
+            question: "STRIDE is a technique used in Threat Modeling to identify potential security threats.",
+            answer: true
+        },
+        {
+            question: "Qualitative risk assessment is generally quicker and easier to execute than quantitative assessment.",
+            answer: true
+        },
+        {
+            question: "Quantitative risk assessment relies on expert judgment and categories like 'Low' impact, rather than numerical data.",
+            answer: false
+        },
+        {
+            question: "The COSO framework for enterprise risk management is often conceptualized as a cube.",
+            answer: true
+        },
+        {
+            question: "All risk management standards, like ISO/IEC 27001, are legally mandatory for all companies.",
+            answer: false
+        },
+        {
+            question: "Consequences of poor risk management can include loss of customer trust, financial fines, and lawsuits.",
+            answer: true
+        },
+        {
+            question: "The 'Authorize' step in the NIST RMF involves a senior official making a risk-based decision to allow a system to operate.",
+            answer: true
+        },
+        {
+            question: "SWOT Analysis is a technique used for risk assessment, not risk identification.",
+            answer: false
+        }
+    ];
+
+    const multipleChoice = [
+        {
+            question: "Which of the following is NOT a type of risk discussed in the material?",
+            options: ["Human Risk", "Technical Risk", "Financial Risk", "Regulatory Risk"],
+            answer: "Financial Risk"
+        },
+        {
+            question: "A company deciding whether to use customer data for targeted ads while weighing privacy concerns is an example of:",
+            options: ["Risk Tolerance", "Risk Appetite", "A Risk/Reward Balance", "Regulatory Compliance"],
+            answer: "A Risk/Reward Balance"
+        },
+        {
+            question: "Which risk identification technique involves bringing together individuals from various departments for structured discussions?",
+            options: ["Threat Modeling", "SWOT Analysis", "Brainstorming", "Root Cause Analysis"],
+            answer: "Brainstorming"
+        },
+        {
+            question: "Which of these is the final step of the three main components of risk assessment?",
+            options: ["Risk Identification", "Risk Analysis", "Risk Mitigation", "Risk Evaluation"],
+            answer: "Risk Evaluation"
+        },
+         {
+            question: "A risk assessment that calculates a potential loss of $1 million from a specific cyber attack is an example of what method?",
+            options: ["Qualitative Assessment", "Subjective Assessment", "Quantitative Assessment", "Theoretical Assessment"],
+            answer: "Quantitative Assessment"
+        },
+        {
+            question: "Which framework was developed by MITRE to aid in assessing and tackling cyber vulnerabilities?",
+            options: ["NIST RMF", "TARA", "COSO", "COBIT"],
+            answer: "TARA"
+        },
+        {
+            question: "The COBIT framework for IT management and governance was developed by which organization?",
+            options: ["NIST", "MITRE", "COSO", "ISACA"],
+            answer: "ISACA"
+        },
+        {
+            question: "Which of the following is an example of a risk management *standard*?",
+            options: ["EPA Risk Management Program Rule", "The 1990 Clean Air Act", "CIS Controls", "A fine from the FTC"],
+            answer: "CIS Controls"
+        },
+        {
+            question: "Which of the following is NOT a potential consequence of regulatory non-compliance and poor risk management?",
+            options: ["Data Loss", "Increased Customer Trust", "Fines and Lawsuits", "Profit and Stock Value Loss"],
+            answer: "Increased Customer Trust"
+        },
+        {
+            question: "The 'Profiles' component of the NIST Cybersecurity Framework (CSF) is used to:",
+            options: ["Provide a set of all possible cybersecurity activities.", "Help organizations determine the risk level they will accept.", "Align cybersecurity risk with an organization's specific objectives and resources.", "Mandate specific security controls for all industries."],
+            answer: "Align cybersecurity risk with an organization's specific objectives and resources."
+        }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Select main tabs and content sections
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+
+        // Select quiz content containers
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+
+         // Select accordion elements
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+
+        // --- Main Tab Switching Logic ---
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab'); // Get the ID of the target content
+
+                // Deactivate all main buttons and content
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+
+                // Activate the clicked button
+                button.classList.add('active');
+
+                // Activate the corresponding content section
+                const targetContent = document.getElementById(tabId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+
+        // --- Accordion Logic (for Glossary) ---
+         accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                // Toggle active class on the header for styling (+) (-) sign
+                this.classList.toggle('active');
+
+                // Get the panel sibling
+                const panel = this.nextElementSibling;
+
+                // Toggle the max-height for smooth transition
+                if (panel.style.maxHeight) {
+                    // If panel is open, close it
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px"; // Remove padding when closing
+                } else {
+                     // If panel is closed, open it
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px"; // Add padding back when opening
+                }
+            });
+        });
+
+
+        // --- Function to handle option selection within a question ---
+        function handleOptionSelection(button, questionDiv) {
+            // Deselect siblings within the same question
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            // Select clicked button
+            button.classList.add('selected');
+             // Clear previous feedback when a new option is selected
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        // --- Function to create and append feedback ---
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+             // Remove existing feedback first
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            // Append feedback after the check button
+            const checkButton = questionDiv.querySelector('.check-answer');
+             if (checkButton) {
+                // Insert after the check button if it exists
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 // Otherwise, append to the end of the question div
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        // --- Load Fill in the Blank Questions ---
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = ''; // Clear previous content
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer); // Indicate incorrect if nothing selected
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        // --- Load True/False Questions ---
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = ''; // Clear previous content
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+
+                 const optionsDiv = document.createElement('div'); // Keep consistent structure
+                optionsDiv.className = 'options';
+
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+
+                questionDiv.appendChild(optionsDiv);
+
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                     const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        // --- Load Multiple Choice Questions ---
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = ''; // Clear previous content
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        // --- Initial Load ---
+        // Load all quiz questions initially so they are ready when tabs are clicked
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+    // --- END OF SCRIPT LOGIC ---
+</script>
+
+
+</body\>
+</html\>
