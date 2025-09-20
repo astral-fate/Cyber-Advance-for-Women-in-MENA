@@ -1,1 +1,712 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 1: Introduction to IT & Cybersecurity</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+     .table-container {
+        overflow-x: auto;
+     }
+     table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+     }
+     th, td {
+        border: 1px solid #dee2e6;
+        padding: 8px 12px;
+        text-align: left;
+     }
+     th {
+        background-color: #e9ecef;
+        font-weight: bold;
+     }
+
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 1: Introduction to IT & Cybersecurity</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="core-concepts">Core Concepts</button>
+        <button class="tab-button" data-tab="cia-triad">CIA Triad</button>
+        <button class="tab-button" data-tab="careers">Career Paths</button>
+        <button class="tab-button" data-tab="departments">Security & Departments</button>
+        <button class="tab-button" data-tab="legal">Legal & GRC</button>
+        <button class="tab-button" data-tab="privacy">Privacy vs. Security</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">Information Technology (IT)</button><div class="accordion-panel"><p>The use of technology like computers and networks to manage and handle information. [cite_start]It is the broad field concerned with all aspects of managing and processing information. [cite: 610, 613]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Information Security</button><div class="accordion-panel"><p>A subset of IT focused on protecting information from being stolen, altered, or accessed without permission, regardless of its format (digital or physical). [cite: 613, 1477]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Cybersecurity</button><div class="accordion-panel"><p>A specific field within Information Security focused on protecting computer systems, networks, and programs from digital attacks. [cite: 613, 1478]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">CIA Triad</button><div class="accordion-panel"><p>A foundational security model designed to guide information security policies. [cite_start]It stands for Confidentiality, Integrity, and Availability. [cite: 620, 1511]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Confidentiality</button><div class="accordion-panel"><p>The principle of protecting data from unauthorized access, ensuring only the right people can view it. [cite: 625, 1514]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Integrity</button><div class="accordion-panel"><p>The principle of ensuring the accuracy and reliability of data, protecting it from unauthorized alteration. [cite: 627, 1516]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Availability</button><div class="accordion-panel"><p>The principle of ensuring that information is accessible to authorized users when they need it. [cite: 629, 1519]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Phishing</button><div class="accordion-panel"><p>A type of cyberattack where an attacker sends deceptive emails or messages to trick a recipient into revealing sensitive information like passwords or financial details. [cite: 693, 697, 1445]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">GRC</button><div class="accordion-panel"><p>Stands for Governance, Risk, and Compliance. [cite_start]It's a strategic framework for managing an organization's overall governance, enterprise risk management, and compliance with regulations. [cite: 733, 735, 736]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">NIST</button><div class="accordion-panel"><p>The National Institute of Standards and Technology. [cite_start]It provides a widely used framework that helps organizations manage and improve their cybersecurity risk management. [cite: 738, 745, 746]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">HIPAA</button><div class="accordion-panel"><p>The Health Insurance Portability and Accountability Act. [cite_start]A US law that sets the standard for protecting sensitive patient health information. [cite: 738, 743]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">GDPR</button><div class="accordion-panel"><p>The General Data Protection Regulation. [cite_start]A comprehensive EU data protection law that affects any organization processing the personal data of EU citizens. [cite: 749, 776]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Privacy</button><div class="accordion-panel"><p>Focuses on respecting and protecting an individual's rights concerning their personal information, ensuring it is used in a way that respects those rights. [cite: 768, 783, 2265]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Security</button><div class="accordion-panel"><p>Focuses on protecting data from external threats and unauthorized access through technical controls and measures. [cite: 783, 2261]</p></div></div>
+        </div>
+    </section>
+
+    <section id="core-concepts" class="main-content">
+         <h2>Core Concepts: IT, InfoSec, and Cybersecurity</h2>
+         <div class="process-block">
+            <h3>Understanding the Differences</h3>
+            <p>
+                While often used interchangeably, these three terms have distinct meanings. [cite_start]Think of them as nested concepts. [cite: 612]
+            </p>
+            <ul>
+                <li><strong>Information Technology (IT):</strong> This is the broadest category. It's the "big picture" of using technology like computers and networks to manage information for a company. [cite_start]It's the backbone that supports everything else. [cite: 610, 613]</li>
+                <li><strong>Information Security:</strong> This is a field within IT. [cite_start]Its goal is to protect all company information, whether it's digital files or paper documents, from being stolen, changed, or accessed without permission. [cite: 613, 1477]</li>
+                <li><strong>Cybersecurity:</strong> This is a specialized area within Information Security. [cite_start]It focuses specifically on protecting digital assets—computer systems, networks, and software—from digital attacks like hacking and malware. [cite: 613, 1478]</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Balancing Security and Convenience</h3>
+            [cite_start]<p>A key challenge in IT and cybersecurity is finding the right balance between robust security measures and user convenience. [cite: 1823]</p>
+            <div class="example">
+                <ul>
+                    [cite_start]<li><strong>Too Much Security:</strong> Can lead to frustrated users who find workarounds, decreasing productivity. [cite: 1838, 1839, 1840]</li>
+                    [cite_start]<li><strong>Too Little Security:</strong> Makes the organization an easy target for attackers, leading to data breaches and compliance violations. [cite: 1847, 1848, 1849]</li>
+                    [cite_start]<li><strong>The Perfect Balance:</strong> Involves verifying user identity, following clear security policies, and providing helpful guidance to maintain both security and user satisfaction. [cite: 1842, 1843, 1844, 1845]</li>
+                </ul>
+            </div>
+         </div>
+    </section>
+
+    <section id="cia-triad" class="main-content">
+        <h2>The CIA Triad</h2>
+        <div class="process-block">
+            <h3>A Foundational Model for Security</h3>
+            [cite_start]<p>The CIA Triad is a model designed to guide policies for information security within an organization. [cite: 620] It's made up of three core principles that must be balanced to keep data safe.</p>
+        </div>
+        <div class="process-block">
+            <h3>The Three Principles</h3>
+            <ul>
+                <li>
+                    [cite_start]<strong>Confidentiality:</strong> This principle is about preventing the unauthorized disclosure of information. [cite: 625, 1514] [cite_start]It means ensuring that only the right people can access the data. [cite: 1514]
+                    <div class="example">
+                        [cite_start]<strong>Real-World Example:</strong> In a shared Google Drive folder, only Joe, Anna, and Jess have access. [cite: 1531] [cite_start]If anyone else gets in, confidentiality is breached. [cite: 1533]
+                    </div>
+                </li>
+                <li>
+                    [cite_start]<strong>Integrity:</strong> This principle focuses on ensuring that data is accurate, reliable, and has not been altered by unauthorized parties. [cite: 627, 1516] [cite_start]It's about trusting that your data is correct. [cite: 1517]
+                    <div class="example">
+                        [cite_start]<strong>Real-World Example:</strong> In the "BigData" folder, Joe is the only one with editing privileges. [cite: 1530] [cite_start]Integrity means the files cannot be changed without his permission, ensuring the data remains accurate. [cite: 1534]
+                    </div>
+                </li>
+                <li>
+                    [cite_start]<strong>Availability:</strong> This principle is about making sure that data is accessible to authorized users whenever they need it. [cite: 629, 1519] [cite_start]Secure data is useless if the right people can't access it for legitimate work. [cite: 629]
+                    <div class="example">
+                        [cite_start]<strong>Real-World Example:</strong> The "BigData" folder must always be accessible to Jess for viewing and Anna for commenting during their work. [cite: 1535] [cite_start]If the service goes down and they can't access it, availability is compromised. [cite: 1536]
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="careers" class="main-content">
+        <h2>Career Paths in IT and Cybersecurity</h2>
+        <div class="process-block">
+            <h3>From IT Support to Specialized Roles</h3>
+            [cite_start]<p>A role in IT support provides a strong foundation in how technology, systems, and networks work, which serves as a stepping stone to more specialized careers in cybersecurity. [cite: 643] [cite_start]The field is vast and offers many different paths. [cite: 641]</p>
+        </div>
+        <div class="process-block">
+            <h3>Common Cybersecurity Roles</h3>
+            <ul>
+                [cite_start]<li><strong>IT Support Technician:</strong> The first point of contact for users with technical problems, responsible for fixing issues and making sure systems work well. [cite: 648, 1868]</li>
+                [cite_start]<li><strong>Network Administrator:</strong> Sets up, maintains, and secures the company's computer networks. [cite: 650, 1870]</li>
+                [cite_start]<li><strong>Cybersecurity Analyst:</strong> Monitors systems for signs of hackers, stops attacks, and keeps data safe, much like a digital detective. [cite: 646, 1872]</li>
+                [cite_start]<li><strong>Penetration Tester (Ethical Hacker):</strong> Intentionally tries to break into systems to find weak spots before malicious hackers do. [cite: 653, 1874]</li>
+                [cite_start]<li><strong>Security Engineer:</strong> Designs, builds, and maintains the security systems that protect a company's data. [cite: 655, 1876]</li>
+                [cite_start]<li><strong>Incident Responder:</strong> Acts quickly to fix problems and stop hackers during a security breach. [cite: 657, 658, 1878]</li>
+                [cite_start]<li><strong>Chief Information Security Officer (CISO):</strong> The senior-level executive responsible for a company's entire information security program. [cite: 660, 661, 1880]</li>
+                [cite_start]<li><strong>Security Auditor:</strong> Checks the company's systems to ensure they comply with security laws and standards. [cite: 665, 1885]</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="departments" class="main-content">
+        <h2>Cybersecurity Across Corporate Departments</h2>
+        <div class="process-block">
+            <h3>A Shared Responsibility</h3>
+            [cite_start]<p>Cybersecurity is not just a job for the IT department; it's a shared responsibility that is vital to the success of the entire organization. [cite: 712] [cite_start]Every department handles sensitive data and relies on technology, making them a potential target for attacks like phishing. [cite: 694]</p>
+        </div>
+        <div class="process-block">
+            <h3>Security's Role in Different Departments</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>Department</th><th>Importance of Cybersecurity</th></tr>
+                    </thead>
+                    <tbody>
+                        [cite_start]<tr><td><strong>Human Resources</strong></td><td>Protects sensitive employee data and ensures compliance with data protection laws. [cite: 721]</td></tr>
+                        [cite_start]<tr><td><strong>Finance</strong></td><td>Safeguards financial data and transactions to prevent fraud and financial loss. [cite: 721]</td></tr>
+                        [cite_start]<tr><td><strong>Operations</strong></td><td>Ensures the integrity of operational data and the uninterrupted performance of systems. [cite: 721]</td></tr>
+                        [cite_start]<tr><td><strong>Sales & Marketing</strong></td><td>Protects customer data and intellectual property to maintain customer trust. [cite: 721]</td></tr>
+                        [cite_start]<tr><td><strong>R&D</strong></td><td>Keeps innovations and product designs confidential to maintain a competitive advantage. [cite: 721]</td></tr>
+                        [cite_start]<tr><td><strong>Legal</strong></td><td>Protects sensitive legal documents and ensures adherence to regulatory requirements. [cite: 721]</td></tr>
+                        [cite_start]<tr><td><strong>Executive Leadership</strong></td><td>Protects strategic decision-making data to keep company insights confidential. [cite: 721]</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <section id="legal" class="main-content">
+        <h2>The Legalities of Cyber (GRC)</h2>
+        <div class="process-block">
+            <h3>Introduction to GRC</h3>
+            [cite_start]<p>GRC stands for <strong>Governance, Risk, and Compliance.</strong> It is a strategic approach that ensures an organization's IT systems align with business goals, manages risks effectively, and complies with all relevant laws and regulations. [cite: 733, 735, 736]</p>
+            <ul>
+                [cite_start]<li><strong>Governance:</strong> The policies and processes that align IT with the organization's goals. [cite: 736]</li>
+                [cite_start]<li><strong>Risk Management:</strong> The process of identifying, analyzing, and addressing risks to operations. [cite: 736]</li>
+                [cite_start]<li><strong>Compliance:</strong> The act of following applicable laws and regulations. [cite: 736]</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Key Regulatory Frameworks</h3>
+            [cite_start]<p>Compliance is not optional; it's a legal requirement that often involves adhering to specific frameworks. [cite: 742]</p>
+            <ul>
+                <li><strong>HIPAA (Health Insurance Portability and Accountability Act):</strong> A US law that sets the standard for protecting sensitive patient health data. [cite_start]Any organization handling this data must comply. [cite: 743, 744]</li>
+                [cite_start]<li><strong>NIST (National Institute of Standards and Technology):</strong> Provides a comprehensive framework of guidelines and best practices to help organizations manage their cybersecurity risk. [cite: 745, 746]</li>
+                <li><strong>GDPR (General Data Protection Regulation):</strong> An EU law that governs data protection and privacy for all individual citizens of the European Union. [cite_start]It affects any organization worldwide that deals with EU citizens' data. [cite: 749]</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="privacy" class="main-content">
+        <h2>Privacy vs. Security</h2>
+        <div class="process-block">
+            <h3>Two Sides of the Same Coin</h3>
+            <p>While closely related, privacy and security are distinct concepts. [cite_start]An effective data protection strategy requires balancing both. [cite: 782, 783]</p>
+            <ul>
+                [cite_start]<li><strong>Security:</strong> Focuses on <strong>protecting data from unauthorized access</strong> and external threats. [cite: 783, 2261] [cite_start]It uses controls, like encryption, to limit who can access information. [cite: 2262] Security is about defending the data itself.</li>
+                [cite_start]<li><strong>Privacy:</strong> Focuses on <strong>respecting individual rights</strong> regarding their personal data. [cite: 783] [cite_start]It's about ensuring data is used in a way that aligns with user expectations and legal rights, like the right to be free from surveillance. [cite: 2265] Privacy is about defending the individual's rights over their data.</li>
+            </ul>
+            <div class="example">
+                [cite_start]Encryption is a <strong>security</strong> tool. [cite: 765] [cite_start]However, it must be implemented with <strong>privacy</strong> in mind to ensure that legitimate users, including the data owners themselves, are not improperly locked out of their own information. [cite: 769]
+            </div>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "The 'C' in the CIA Triad stands for _______.", options: ["Compliance", "Cybersecurity", "Confidentiality", "Control"], answer: "Confidentiality" },
+        { question: "A deceptive email designed to trick you into revealing your password is a common cyber threat known as _______.", options: ["A virus", "Phishing", "A worm", "Ransomware"], answer: "Phishing" },
+        { question: "The regulatory framework from the EU that governs data protection for its citizens is called _______.", options: ["HIPAA", "NIST", "GRC", "GDPR"], answer: "GDPR" },
+        { question: "A _______ is a professional also known as an 'ethical hacker' who tries to find vulnerabilities in a system.", options: ["Security Auditor", "Penetration Tester", "Network Administrator", "Incident Responder"], answer: "Penetration Tester" },
+        { question: "The principle of ensuring that data is accurate and has not been altered by unauthorized parties is known as _______.", options: ["Availability", "Confidentiality", "Integrity", "Privacy"], answer: "Integrity" },
+        { question: "_______ is the broad field of using technology to manage information, acting as the 'backbone' of a company.", options: ["Information Security", "Information Technology", "Cybersecurity", "Compliance"], answer: "Information Technology" },
+        { question: "GRC is a strategic framework that stands for Governance, Risk, and _______.", options: ["Regulation", "Compliance", "Control", "Continuity"], answer: "Compliance" },
+        { question: "_______ focuses on respecting individual rights over their personal data, while Security focuses on protecting the data itself.", options: ["Policy", "Privacy", "Availability", "Governance"], answer: "Privacy" }
+    ];
+
+    const trueOrFalse = [
+        { question: "Cybersecurity is a broader field that contains Information Security.", answer: false },
+        { question: "The 'Availability' principle in the CIA Triad means that data is protected from unauthorized access.", answer: false },
+        { question: "A Chief Information Security Officer (CISO) is typically an entry-level position.", answer: false },
+        { question: "Cybersecurity is only the responsibility of the IT department and does not affect other departments like HR or Finance.", answer: false },
+        { question: "HIPAA is a regulation that primarily concerns the protection of financial data.", answer: false },
+        { question: "An IT Support Technician is often the first person users go to when they have a computer problem.", answer: true },
+        { question: "Too much security can sometimes lead to decreased productivity as users try to find workarounds.", answer: true },
+        { question: "Security and Privacy are the exact same concept.", answer: false },
+        { question: "An Incident Responder's main job is to proactively design secure systems from the ground up.", answer: false },
+        { question: "The NIST framework provides guidelines and best practices for managing cybersecurity risk.", answer: true }
+    ];
+
+    const multipleChoice = [
+        { question: "Which of the following best describes the principle of 'Integrity' in the CIA Triad?", options: ["Ensuring only authorized users can access data", "Ensuring data is accessible when needed", "Ensuring data is accurate and has not been altered", "Ensuring all data is encrypted"], answer: "Ensuring data is accurate and has not been altered" },
+        { question: "You work in a hospital's IT department. Which regulation is most critical for you to understand regarding patient data?", options: ["GDPR", "NIST", "HIPAA", "GRC"], answer: "HIPAA" },
+        { question: "A colleague receives an email that looks like it's from the CEO, asking for urgent login details. What is this an example of?", options: ["A malware attack", "A compliance audit", "A phishing attack", "A GRC policy"], answer: "A phishing attack" },
+        { question: "Which cybersecurity role is responsible for setting up and maintaining the company's computer networks to ensure they are secure and functional?", options: ["Cybersecurity Analyst", "Incident Responder", "Penetration Tester", "Network Administrator"], answer: "Network Administrator" },
+        { question: "What is the primary difference between Information Security and Cybersecurity?", options: ["There is no difference.", "InfoSec is broader, covering digital and physical data, while CyberSec focuses only on digital threats.", "CyberSec is broader, covering all technology, while InfoSec is only about data.", "InfoSec deals with law, while CyberSec deals with technology."], answer: "InfoSec is broader, covering digital and physical data, while CyberSec focuses only on digital threats." },
+        { question: "An organization's security plan ensures that backups are available so that data can be accessed after a system failure. Which part of the CIA Triad does this primarily support?", options: ["Confidentiality", "Integrity", "Availability", "Compliance"], answer: "Availability" },
+        { question: "The framework that involves policies, risk management, and compliance to align IT with business goals is known as:", options: ["CIA Triad", "NIST", "GDPR", "GRC"], answer: "GRC" },
+        { question: "Which role is considered the 'big boss' of cybersecurity in a company, making major decisions and leading the security teams?", options: ["Security Engineer", "Security Consultant", "Chief Information Security Officer (CISO)", "IT Support Technician"], answer: "Chief Information Security Officer (CISO)" },
+        { question: "When comparing security and privacy, which statement is most accurate?", options: ["Security protects individual rights, while privacy protects the data.", "They are conflicting goals that cannot coexist.", "Security protects data from threats, while privacy respects individual rights over their data.", "They are identical and the terms can be used interchangeably."], answer: "Security protects data from threats, while privacy respects individual rights over their data." }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
