@@ -1,1 +1,823 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 2: OS and Networking Fundamentals</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+     .table-container {
+        overflow-x: auto;
+     }
+     table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+     }
+     th, td {
+        border: 1px solid #dee2e6;
+        padding: 8px 12px;
+        text-align: left;
+     }
+     th {
+        background-color: #e9ecef;
+        font-weight: bold;
+     }
+
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 2: OS and Networking Fundamentals</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="fundamentals">IT Fundamentals</button>
+        <button class="tab-button" data-tab="osi">OSI Model</button>
+        <button class="tab-button" data-tab="hardware">Networking Hardware</button>
+        <button class="tab-button" data-tab="ip">IP Addressing</button>
+        <button class="tab-button" data-tab="firewalls">Firewalls</button>
+        <button class="tab-button" data-tab="terminal">The Terminal</button>
+        <button class="tab-button" data-tab="permissions">File Permissions</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">CIA Triad</button><div class="accordion-panel"><p>A foundational model in information security consisting of three core principles: Confidentiality, Integrity, and Availability.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Attack Surface</button><div class="accordion-panel"><p>All the possible entry points in an IT architecture that an attacker could use to gain unauthorized access.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Attack Vector</button><div class="accordion-panel"><p>The specific method or pathway an attacker uses to infiltrate an attack surface, such as phishing or malware.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">OSI Model</button><div class="accordion-panel"><p>The Open Systems Interconnection model is a 7-layer conceptual framework that standardizes the functions of a network communication system.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">PDU (Protocol Data Unit)</button><div class="accordion-panel"><p>The fundamental unit of information exchanged between devices at a specific layer of a network protocol stack. Examples include Frames (Layer 2) and Packets (Layer 3).</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Switch</button><div class="accordion-panel"><p>A Layer 2 networking device that connects devices within a single local network (LAN) using MAC addresses.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Router</button><div class="accordion-panel"><p>A Layer 3 networking device that connects different networks together using IP addresses, determining the best path for data to travel.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">LAN (Local Area Network)</button><div class="accordion-panel"><p>A network that connects devices within a small, localized area like a home or office.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">WAN (Wide Area Network)</button><div class="accordion-panel"><p>A network that connects multiple LANs across large geographical distances. The internet is the largest example of a WAN.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">IP Address</button><div class="accordion-panel"><p>A unique numerical identifier for a device on a network, similar to a postal address, that allows devices to send and receive data.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Subnetting</button><div class="accordion-panel"><p>The process of dividing a large network into smaller, more manageable sub-networks for improved security, performance, and organization.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">DHCP (Dynamic Host Configuration Protocol)</button><div class="accordion-panel"><p>A network protocol that automatically assigns IP addresses to devices from a predefined pool.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Firewall</button><div class="accordion-panel"><p>A network security device that monitors and controls incoming and outgoing network traffic based on a set of security rules, acting as a barrier between a trusted internal network and an untrusted external network.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Terminal (CLI)</button><div class="accordion-panel"><p>A text-based interface (Command Line Interface) that allows a user to interact directly with an operating system by typing commands.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">chmod</button><div class="accordion-panel"><p>A command in Unix-like operating systems used to change the access permissions of files and directories.</p></div></div>
+        </div>
+    </section>
+
+    <section id="fundamentals" class="main-content">
+         <h2>IT Fundamentals</h2>
+         <div class="process-block">
+            <h3>The CIA Triad</h3>
+            <p>The CIA Triad is a foundational model for guiding information security policy, ensuring data is protected in three key ways.</p>
+            <ul>
+                <li><strong>Confidentiality:</strong> Protecting data from unauthorized access. The goal is that only authorized users can see the information. (e.g., Encryption, access controls).</li>
+                <li><strong>Integrity:</strong> Ensuring the accuracy and reliability of data. The goal is that data remains unaltered and trustworthy. (e.g., Digital signatures, checksums).</li>
+                <li><strong>Availability:</strong> Ensuring information is accessible to authorized users when needed. The goal is to keep systems and data available. (e.g., Backups, redundancy).</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Cyber Vulnerabilities</h3>
+            <p>Vulnerabilities are weaknesses in systems that can be exploited by attackers. Understanding them is key to defense.</p>
+            <ul>
+                <li><strong>Malware:</strong> Viruses, worms, and ransomware that can compromise data.</li>
+                <li><strong>Phishing:</strong> Social engineering attacks that trick users into revealing sensitive information.</li>
+                <li><strong>Weak Security Practices:</strong> Using weak passwords, not patching software, or lacking encryption.</li>
+                <li><strong>Human Error:</strong> Unintentional mistakes like accidental data deletion.</li>
+                <li><strong>Insider Threats:</strong> Malicious or negligent actions by people inside the organization.</li>
+                <li><strong>Third-Party Risks:</strong> Vulnerabilities introduced through vendors and partners.</li>
+            </ul>
+         </div>
+          <div class="process-block">
+            <h3>Attack Surface vs. Attack Vector</h3>
+            <p>These two terms define the "where" and "how" of a cyberattack.</p>
+            <ul>
+                <li><strong>Attack Surface:</strong> This refers to all the possible entry points an attacker could use to get unauthorized access. This includes things like Wi-Fi devices, laptops, USB ports, and IoT points.</li>
+                <li><strong>Attack Vector:</strong> This is the specific method an attacker uses to exploit an entry point on the attack surface. Examples include phishing emails, malware, and compromised credentials.</li>
+            </ul>
+         </div>
+    </section>
+
+    <section id="osi" class="main-content">
+        <h2>The OSI Model</h2>
+        <div class="process-block">
+            <h3>What is the OSI Model?</h3>
+            <p>The OSI (Open Systems Interconnection) Model is a conceptual framework that standardizes network communication into seven distinct layers. Developed by the ISO, it ensures that diverse hardware and software from different vendors can communicate with each other seamlessly. In cybersecurity, it's crucial for troubleshooting, analysis, and designing layered defense strategies.</p>
+        </div>
+        <div class="process-block">
+            <h3>The 7 Layers of the OSI Model</h3>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>Layer</th><th>Name</th><th>PDU</th><th>Function</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>7</td><td>Application</td><td>Data</td><td>Human-computer interaction layer; where applications access network services.</td></tr>
+                        <tr><td>6</td><td>Presentation</td><td>Data</td><td>Ensures data is in a usable format; handles encryption and compression.</td></tr>
+                        <tr><td>5</td><td>Session</td><td>Data</td><td>Maintains connections and is responsible for controlling ports and sessions.</td></tr>
+                        <tr><td>4</td><td>Transport</td><td>Segment/Datagram</td><td>Provides reliable data transmission using protocols like TCP and UDP.</td></tr>
+                        <tr><td>3</td><td>Network</td><td>Packet</td><td>Decides the physical path data will take (routing) using IP addresses.</td></tr>
+                        <tr><td>2</td><td>Data Link</td><td>Frame</td><td>Defines the format of data on the network for node-to-node transfer using MAC addresses.</td></tr>
+                        <tr><td>1</td><td>Physical</td><td>Bit/Symbol</td><td>Transmits the raw bit stream over the physical medium (e.g., wires, antennas).</td></tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="example">
+                <strong>Attacks by Layer:</strong>
+                <ul>
+                    <li><strong>Layer 7 (Application):</strong> Exploits</li>
+                    <li><strong>Layer 4 (Transport):</strong> Denial of Service (DoS) attacks like SYN Floods</li>
+                    <li><strong>Layer 3 (Network):</strong> Man-in-the-Middle attacks</li>
+                    <li><strong>Layer 2 (Data Link):</strong> MAC Spoofing</li>
+                    <li><strong>Layer 1 (Physical):</strong> Sniffing</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="hardware" class="main-content">
+        <h2>Networking Hardware</h2>
+        <div class="process-block">
+            <h3>Switches</h3>
+            <p>A switch acts like a smart traffic director for a local network (LAN). It connects multiple devices (computers, printers) and learns the physical MAC address of each one. When one device sends data to another, the switch creates a direct path between them, making communication fast and secure because the data only goes where it's supposed to.
+            </p>
+            <ul>
+                <li><strong>OSI Layer:</strong> Layer 2 (Data Link)</li>
+                <li><strong>Key Function:</strong> Uses MAC addresses for device-to-device communication within a single network.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Routers</h3>
+            <p>A router acts like a postal service for networks. Its job is to connect different networks together and determine the best path for data to travel between them. Your home router, for instance, connects your local network (LAN) to the internet (a WAN). It makes forwarding decisions by looking at the logical IP address of the data packet.
+            </p>
+            <ul>
+                <li><strong>OSI Layer:</strong> Layer 3 (Network)</li>
+                <li><strong>Key Function:</strong> Uses IP addresses to connect different networks (e.g., LAN to WAN).</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>LANs and WANs</h3>
+            <ul>
+                <li><strong>LAN (Local Area Network):</strong> Your "neighborhood network." It connects devices in a small, localized area like a home, office, or school. LANs are characterized by high speed and are typically owned by a single organization.</li>
+                <li><strong>WAN (Wide Area Network):</strong> A "highway system" connecting multiple LANs over large geographical distances. The internet is the world's largest WAN. WANs are more complex and require security measures like VPNs to protect data traveling over public infrastructure.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="ip" class="main-content">
+        <h2>IP Addressing</h2>
+        <div class="process-block">
+            <h3>IP Addresses: The Postal Address of the Network</h3>
+            <p>An IP address is a unique identifier that tells devices where to send data on a network. Just as a home needs a street address to receive mail, every device needs an IP address to participate in network traffic. It identifies both the network a device is on and the specific device itself.</p>
+        </div>
+        <div class="process-block">
+            <h3>IPv4 vs. IPv6</h3>
+            <ul>
+                <li><strong>IPv4 (Internet Protocol version 4):</strong> A 32-bit address written as four numbers separated by dots (e.g., `192.168.1.100`). It provides about 4.3 billion addresses. Private address ranges (like `192.168.x.x`, `10.x.x.x`) are not routable on the public internet.</li>
+                <li><strong>IPv6 (Internet Protocol version 6):</strong> A 128-bit address written in hexadecimal notation (e.g., `2001:0db8:85a3::8a2e:0370:7334`). It was created to solve the shortage of IPv4 addresses and provides a virtually limitless number. It also has built-in security features like mandatory IPsec.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Subnetting and IP Assignment</h3>
+            <ul>
+                <li><strong>Subnetting:</strong> This is the process of dividing a large network into smaller, more manageable sub-networks. This improves security by isolating departments, reduces network congestion, and makes management easier. A subnet mask (e.g., `255.255.255.0` or `/24`) defines which part of the IP address is the network and which part is the host.</li>
+                <li><strong>Static vs. Dynamic (DHCP) Assignment:</strong>
+                    <ul>
+                        <li><strong>Static:</strong> An IP address is manually configured and never changes. Ideal for servers and printers.</li>
+                        <li><strong>Dynamic (DHCP):</strong> A DHCP server automatically assigns available IP addresses to devices as they join the network. Most client devices (laptops, phones) use DHCP.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="firewalls" class="main-content">
+        <h2>Firewalls</h2>
+        <div class="process-block">
+            <h3>What is a Firewall?</h3>
+            <p>A firewall is a network security device that acts like a security guard for your network. It monitors and controls all incoming and outgoing traffic based on a set of predetermined security rules. It creates a barrier between your trusted internal network and untrusted external networks like the internet.</p>
+        </div>
+        <div class="process-block">
+            <h3>Types of Firewalls</h3>
+            <ul>
+                <li><strong>Packet-Filtering:</strong> Filters traffic based on basic criteria like IP address, port, and protocol.</li>
+                <li><strong>Stateful Inspection:</strong> A smarter firewall that tracks the state of active connections and only allows traffic that is part of a legitimate, established session.</li>
+                <li><strong>Application-Level Gateway (Proxy):</strong> Inspects traffic at the application layer, allowing for much more granular control (e.g., blocking specific web requests).</li>
+                <li><strong>Next-Generation Firewall (NGFW):</strong> Integrates multiple features, including packet filtering, stateful inspection, and deep packet inspection (DPI), along with Intrusion Prevention Systems (IPS) and application control.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Common Service Ports</h3>
+            <p>Firewall rules are often configured based on service ports. Knowing common ports is essential.</p>
+             <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>Port</th><th>Protocol</th><th>Service</th><th>Description</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>21</td><td>TCP</td><td>FTP</td><td>File Transfer Protocol</td></tr>
+                        <tr><td>22</td><td>TCP</td><td>SSH/SFTP</td><td>Secure Shell / Secure File Transfer</td></tr>
+                        <tr><td>23</td><td>TCP</td><td>Telnet</td><td>Insecure remote access</td></tr>
+                        <tr><td>25</td><td>TCP</td><td>SMTP</td><td>Simple Mail Transfer Protocol (email)</td></tr>
+                        <tr><td>53</td><td>TCP/UDP</td><td>DNS</td><td>Domain Name System</td></tr>
+                        <tr><td>80</td><td>TCP</td><td>HTTP</td><td>HyperText Transfer Protocol (web)</td></tr>
+                        <tr><td>443</td><td>TCP</td><td>HTTPS</td><td>Secure HTTP (encrypted web)</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    
+    <section id="terminal" class="main-content">
+        <h2>The Terminal (CLI)</h2>
+        <div class="process-block">
+            <h3>What is the Terminal?</h3>
+            <p>A terminal, or Command Line Interface (CLI), is a text-based interface for interacting directly with a computer's operating system. Instead of clicking on icons, you type commands to manage files, run programs, and perform administrative tasks. It is an essential and powerful tool for efficiency, control, and automation in IT and cybersecurity.</p>
+        </div>
+        <div class="process-block">
+            <h3>Basic File System Commands (Linux/Mac)</h3>
+            <ul>
+                <li><code>ls</code>: Lists the contents of the current directory.</li>
+                <li><code>cd [directory]</code>: Changes the current directory. (e.g., <code>cd Documents</code>).</li>
+                <li><code>pwd</code>: Prints the current working directory path.</li>
+                <li><code>mkdir [name]</code>: Creates a new directory.</li>
+                <li><code>touch [filename]</code>: Creates a new empty file.</li>
+                <li><code>cat [filename]</code>: Displays the content of a file.</li>
+                <li><code>cp [source] [destination]</code>: Copies a file or directory.</li>
+                <li><code>mv [source] [destination]</code>: Moves or renames a file or directory.</li>
+                <li><code>rm [filename]</code>: Deletes a file.</li>
+                <li><code>rm -r [directory]</code>: Deletes a directory and its contents recursively.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Command Comparison: Linux/Mac vs. Windows</h3>
+             <div class="table-container">
+                <table>
+                    <thead>
+                        <tr><th>Function</th><th>Linux/Mac</th><th>Windows (CMD)</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr><td>List files</td><td><code>ls</code></td><td><code>dir</code></td></tr>
+                        <tr><td>Change directory</td><td><code>cd</code></td><td><code>cd</code></td></tr>
+                        <tr><td>Copy files</td><td><code>cp</code></td><td><code>copy</code></td></tr>
+                        <tr><td>Move files</td><td><code>mv</code></td><td><code>move</code></td></tr>
+                        <tr><td>Delete files</td><td><code>rm</code></td><td><code>del</code></td></tr>
+                        <tr><td>Create directory</td><td><code>mkdir</code></td><td><code>mkdir</code></td></tr>
+                        <tr><td>Display file content</td><td><code>cat</code></td><td><code>type</code></td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+
+    <section id="permissions" class="main-content">
+        <h2>File Permissions (Linux/Mac)</h2>
+        <div class="process-block">
+            <h3>Understanding Permissions</h3>
+            <p>In Linux, every file and directory has permissions that control who can do what. There are three types of access:</p>
+            <ul>
+                <li><strong>Read (r):</strong> View the contents of a file or list the contents of a directory.</li>
+                <li><strong>Write (w):</strong> Modify a file, or create/delete files within a directory.</li>
+                <li><strong>Execute (x):</strong> Run a file (if it's a script/program) or enter a directory.</li>
+            </ul>
+            <p>These permissions are set for three classes of users:</p>
+            <ul>
+                <li><strong>User (Owner):</strong> The person who created the file.</li>
+                <li><strong>Group:</strong> A group of users who share permissions.</li>
+                <li><strong>Other (Everyone):</strong> All other users on the system.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>The `chmod` Command</h3>
+            <p>The <code>chmod</code> command is used to change permissions. This can be done in two ways: symbolic and octal (numeric).</p>
+            <div class="example">
+                <strong>Symbolic Method:</strong> Uses letters to add (+), remove (-), or set (=) permissions.
+                <ul>
+                    <li><code>chmod u+x script.sh</code> (Adds execute permission for the User)</li>
+                    <li><code>chmod g-w data.txt</code> (Removes write permission for the Group)</li>
+                    <li><code>chmod o=r config.file</code> (Sets Other permissions to read-only)</li>
+                </ul>
+            </div>
+            <div class="example">
+                <strong>Octal (Numeric) Method:</strong> Uses numbers to represent permissions. Each number is the sum of the desired permission values: Read (4) + Write (2) + Execute (1).
+                <ul>
+                    <li><strong>7 (4+2+1):</strong> Read, Write, Execute (rwx)</li>
+                    <li><strong>6 (4+2):</strong> Read, Write (rw-)</li>
+                    <li><strong>5 (4+1):</strong> Read, Execute (r-x)</li>
+                    <li><strong>4 (4):</strong> Read only (r--)</li>
+                </ul>
+                <p>A three-digit number sets permissions for User, Group, and Other. For example, <code>chmod 754 notes.txt</code> sets:</p>
+                <ul>
+                    <li><strong>User:</strong> 7 (rwx)</li>
+                    <li><strong>Group:</strong> 5 (r-x)</li>
+                    <li><strong>Other:</strong> 4 (r--)</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "The conceptual framework that standardizes network functions into seven layers is the _______ Model.", options: ["TCP/IP", "CIA", "OSI", "DHCP"], answer: "OSI" },
+        { question: "A network device that connects different networks together using IP addresses is called a _______.", options: ["Switch", "Hub", "Router", "Modem"], answer: "Router" },
+        { question: "The process of dividing a large network into smaller, more manageable parts is known as _______.", options: ["Routing", "Switching", "Subnetting", "DHCP"], answer: "Subnetting" },
+        { question: "The three core principles of the CIA Triad are Confidentiality, _______, and Availability.", options: ["Authorization", "Integrity", "Authentication", "Accounting"], answer: "Integrity" },
+        { question: "The method by which an attacker infiltrates a system, such as through a phishing email, is called an attack _______.", options: ["Surface", "Vector", "Layer", "PDU"], answer: "Vector" },
+        { question: "In Linux, the command to change file permissions is _______.", options: ["chown", "mv", "chmod", "ls"], answer: "chmod" },
+        { question: "A _______ is a network security device that monitors and controls network traffic based on security rules.", options: ["Router", "Switch", "Firewall", "Server"], answer: "Firewall" },
+        { question: "The PDU at Layer 2 (Data Link) of the OSI model is called a _______.", options: ["Packet", "Segment", "Bit", "Frame"], answer: "Frame" }
+    ];
+
+    const trueOrFalse = [
+        { question: "A switch operates at Layer 3 (Network) of the OSI model.", answer: false },
+        { question: "IPv6 was created because the world was running out of IPv4 addresses.", answer: true },
+        { question: "In the octal permission system, the number 6 represents read and execute permissions.", answer: false },
+        { question: "The 'ls' command in Linux is equivalent to the 'dir' command in the Windows Command Prompt.", answer: true },
+        { question: "A LAN (Local Area Network) typically covers a larger geographical area than a WAN (Wide Area Network).", answer: false },
+        { question: "The purpose of Availability in the CIA Triad is to ensure data remains unaltered and trustworthy.", answer: false },
+        { question: "DHCP is a protocol used to manually assign permanent IP addresses to servers.", answer: false },
+        { question: "The Physical Layer (Layer 1) of the OSI model is responsible for transmitting the raw bit stream over a medium.", answer: true },
+        { question: "The 'cat' command in Linux is used to create a new directory.", answer: false },
+        { question: "A stateful inspection firewall is less intelligent than a basic packet-filtering firewall.", answer: false }
+    ];
+
+    const multipleChoice = [
+        { question: "Which OSI layer is responsible for routing and logical addressing using IP addresses?", options: ["Layer 2 (Data Link)", "Layer 3 (Network)", "Layer 4 (Transport)", "Layer 7 (Application)"], answer: "Layer 3 (Network)" },
+        { question: "You need to give the owner of a file read, write, and execute permissions, while giving the group and others only read and execute permissions. What is the correct `chmod` command using the octal system?", options: ["chmod 644 file.sh", "chmod 777 file.sh", "chmod 755 file.sh", "chmod 744 file.sh"], answer: "chmod 755 file.sh" },
+        { question: "A user in your office needs to connect their computer to the local network to share files with a colleague in the same room. Which device is primarily responsible for this internal communication?", options: ["Router", "Firewall", "Modem", "Switch"], answer: "Switch" },
+        { question: "Which of the following is an example of a private IPv4 address range?", options: ["8.8.8.8", "208.67.222.222", "192.168.10.5", "151.101.65.121"], answer: "192.168.10.5" },
+        { question: "An attacker sends a fraudulent email to an employee to trick them into revealing their password. This is an example of what?", options: ["Malware", "A Zero-Day Exploit", "Phishing", "An Insider Threat"], answer: "Phishing" },
+        { question: "Which Linux command would you use to create a new, empty file named 'report.txt'?", options: ["mkdir report.txt", "cat report.txt", "touch report.txt", "rm report.txt"], answer: "touch report.txt" },
+        { question: "A firewall rule is set to block all incoming traffic on port 23. What service is being blocked?", options: ["HTTPS (Secure Web)", "SSH (Secure Shell)", "Telnet (Insecure Remote Access)", "DNS (Domain Name System)"], answer: "Telnet (Insecure Remote Access)" },
+        { question: "Which of these is a key advantage of IPv6 over IPv4?", options: ["It is simpler to write and remember.", "It requires NAT to function.", "It has a vastly larger address space.", "It uses MAC addresses instead of IP addresses."], answer: "It has a vastly larger address space." },
+        { question: "What is the PDU (Protocol Data Unit) for the Transport Layer (Layer 4)?", options: ["Frame", "Packet", "Segment/Datagram", "Bit"], answer: "Segment/Datagram" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
