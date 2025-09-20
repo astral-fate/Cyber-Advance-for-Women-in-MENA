@@ -1,1 +1,703 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 6: Vulnerabilities & IOCs</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 6: Vulnerabilities & Indicators of Compromise</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="vulns">Vulnerabilities & Threats</button>
+        <button class="tab-button" data-tab="indicators">Indicators (IOCs & IOAs)</button>
+        <button class="tab-button" data-tab="frameworks">Frameworks & Intelligence</button>
+        <button class="tab-button" data-tab="tools">Assessment & Tools</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">Vulnerability</button><div class="accordion-panel"><p>A weakness or flaw in a system, software, hardware, or process that can be exploited by a threat actor. [cite_start]Examples include software bugs, weak passwords, and unpatched systems. [cite: 17]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Indicator of Compromise (IOC)</button><div class="accordion-panel"><p>A piece of forensic data or an observable artifact that indicates a security breach has likely occurred. [cite_start]IOCs are reactive clues, like a malicious IP address or a known malware file hash. [cite: 325, 327]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Indicator of Attack (IOA)</button><div class="accordion-panel"><p>A pattern of behavior or activity that signals an attack may be in progress. [cite_start]Unlike IOCs, IOAs are proactive and focus on detecting an attacker's actions and intent before a compromise is complete. [cite: 380, 381]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Threat Intelligence</button><div class="accordion-panel"><p>Analyzed information about potential or actual cyber threats that helps an organization protect itself. [cite_start]It provides context on who is attacking, what their motivations are, and what TTPs they use. [cite: 405, 406]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Threat Actor</button><div class="accordion-panel"><p>An individual or group that performs a cyberattack. [cite_start]Categories include cyber criminals, nation-state actors, hacktivists, thrill-seekers, and insider threats. [cite: 419, 422]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Ransomware</button><div class="accordion-panel"><p>A type of malware that encrypts a victim's files and demands a ransom payment to restore access. [cite: 64] [cite_start]A famous example is the WannaCry attack. [cite: 97]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Trojan</button><div class="accordion-panel"><p>Malware disguised as a legitimate program that contains malicious code. [cite_start]It tricks users into installing it, much like the mythological Trojan Horse. [cite: 66, 98]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Worm</button><div class="accordion-panel"><p>A self-replicating malware that spreads rapidly across a network to infect other devices, often without any human interaction. [cite: 68, 117]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Rootkit</button><div class="accordion-panel"><p>Malicious software designed to hide its presence and other malware deep within a system's operating system, making it very difficult to detect and remove. [cite: 191]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Logic Bomb</button><div class="accordion-panel"><p>A piece of malicious code intentionally inserted into a software system that will set off a malicious function when specified conditions are met. [cite: 172]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Phishing</button><div class="accordion-panel"><p>A social engineering attack where an attacker sends fraudulent communications that appear to come from a reputable source, usually to steal sensitive data like login credentials or credit card numbers. [cite: 40, 44]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">DDoS (Distributed Denial-of-Service) Attack</button><div class="accordion-panel"><p>An attack that overwhelms a system, server, or network with a flood of internet traffic from multiple sources, making it unavailable to legitimate users. [cite: 236]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">On-Path Attack</button><div class="accordion-panel"><p>Formerly known as a Man-in-the-Middle (MITM) attack, this occurs when an attacker secretly intercepts and relays communication between two parties who believe they are directly communicating with each other. [cite: 260, 262]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Cyber Kill Chain</button><div class="accordion-panel"><p>A model developed by Lockheed Martin that outlines the seven stages of a cyberattack, from initial reconnaissance to the final action on objectives. [cite_start]It helps defenders understand and disrupt attacks at various phases. [cite: 5539, 2252]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">MITRE ATT&CK Framework</button><div class="accordion-panel"><p>A globally accessible knowledge base of adversary Tactics, Techniques, and common knowledge (ATT&CK) based on real-world observations. [cite_start]It provides a detailed matrix of attacker behaviors. [cite: 5645, 2648]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Advanced Persistent Threat (APT)</button><div class="accordion-panel"><p>A sophisticated, sustained cyberattack where an intruder establishes an undetected presence in a network for a prolonged period to steal sensitive data. [cite_start]APTs are often carried out by well-resourced groups like nation-state actors. [cite: 5596, 2321]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">CVE (Common Vulnerabilities and Exposures)</button><div class="accordion-panel"><p>A standardized system that provides a unique identifier for publicly known cybersecurity vulnerabilities. [cite: 5666]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">NVD (National Vulnerability Database)</button><div class="accordion-panel"><p>A U.S. government repository of standards-based vulnerability management data. [cite_start]It enriches CVE entries with additional details like severity scores (CVSS), impact ratings, and fix information. [cite: 2815, 2820]</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">SIEM (Security Information and Event Management)</button><div class="accordion-panel"><p>A security solution that collects, aggregates, and analyzes log data from various sources to provide a centralized view of security events and detect threats in real-time. [cite: 5717, 3019]</p></div></div>
+        </div>
+    </section>
+
+    <section id="vulns" class="main-content">
+         <h2>Understanding Vulnerabilities & Threats</h2>
+         <div class="process-block">
+            <h3>What is a Vulnerability?</h3>
+            <p>
+                [cite_start]Think of vulnerabilities as hidden weak spots or cracks in the armor of your digital world. [cite: 17] [cite_start]They are the pathways that malicious actors exploit to steal data, disrupt systems, or cause chaos. [cite: 18] These weaknesses can exist in four main areas:
+            </p>
+            <ul>
+                [cite_start]<li><strong>Software Vulnerabilities:</strong> Flaws hiding in the code of your apps, websites, and operating systems. [cite: 20] [cite_start]A famous example is the <strong>Heartbleed</strong> bug in OpenSSL, which exposed sensitive data like passwords and cryptographic keys. [cite: 31, 32]</li>
+                [cite_start]<li><strong>Network Vulnerabilities:</strong> Weaknesses in the digital infrastructure itself, such as misconfigured firewalls or insecure Wi-Fi protocols. [cite: 26]</li>
+                [cite_start]<li><strong>Hardware Vulnerabilities:</strong> Hidden weaknesses in microchips and firmware. [cite: 35] [cite_start]The <strong>Spectre</strong> vulnerability, for example, affected the speculative execution feature in modern processors, allowing attackers to access sensitive memory. [cite: 37, 38]</li>
+                <li><strong>Human-related Vulnerabilities:</strong> The power of human error! [cite_start]Phishing attacks, weak passwords, and social engineering can trick even cautious users into revealing sensitive information. [cite: 39, 40]</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>The Zoo of Malware</h3>
+            <p>Malware is malicious software designed to harm or exploit any programmable device, service, or network. Here are some of the most common types:</p>
+            <ul>
+                [cite_start]<li><strong>Ransomware:</strong> The digital kidnapper that encrypts your files and demands a ransom. [cite: 64] [cite_start]Example: <strong>WannaCry (2017)</strong> exploited a Windows vulnerability to infect hundreds of thousands of computers worldwide. [cite: 97]</li>
+                [cite_start]<li><strong>Trojan:</strong> Disguises itself as a harmless program but contains a malicious payload. [cite: 66] [cite_start]Example: The <strong>Zeus Trojan</strong> targeted online banking systems to steal financial information. [cite: 116]</li>
+                [cite_start]<li><strong>Worm:</strong> A self-replicating plague that spreads across networks to infect other devices. [cite: 68] [cite_start]Example: The <strong>Conficker</strong> worm spread to millions of Windows computers starting in 2008. [cite: 122]</li>
+                [cite_start]<li><strong>Spyware:</strong> A silent observer that secretly gathers your data, such as keystrokes and browsing habits. [cite: 70, 124]</li>
+                [cite_start]<li><strong>Rootkit:</strong> A ninja that hides deep within a system, making it and other malware difficult to detect. [cite: 191] [cite_start]Example: The <strong>Sony BMG rootkit (2005)</strong> was included on music CDs to prevent copying but also created major security risks. [cite: 204]</li>
+                [cite_start]<li><strong>Keylogger:</strong> A hidden microphone that records every keystroke to steal passwords and other sensitive information. [cite: 71, 162]</li>
+                [cite_start]<li><strong>Logic Bomb:</strong> A digital time bomb set to activate a malicious function at a specific time or when a certain condition is met. [cite: 172]</li>
+            </ul>
+         </div>
+         <div class="process-block">
+             <h3>Common Attack Vectors</h3>
+             <p>Beyond malware, attackers use various methods to exploit vulnerabilities:</p>
+             <ul>
+                 [cite_start]<li><strong>Physical Attacks:</strong> Using tangible means like infected USB drives, RFID cloning, or environmental manipulation (e.g., cutting power) to disrupt systems. [cite: 221]</li>
+                 [cite_start]<li><strong>DDoS Attacks:</strong> Overwhelming a website or server with a flood of traffic from many different sources to make it unavailable. [cite: 236]</li>
+                 [cite_start]<li><strong>On-Path Attacks (MITM):</strong> An attacker intercepts communication between two parties to eavesdrop or alter the data being sent. [cite: 260]</li>
+                 [cite_start]<li><strong>Injection Attacks:</strong> Malicious code is inserted into a form or application, allowing an attacker to execute commands or access data. [cite: 50]</li>
+             </ul>
+         </div>
+    </section>
+
+    <section id="indicators" class="main-content">
+        <h2>Indicators of Compromise (IOCs) & Attack (IOAs)</h2>
+        <div class="process-block">
+            <h3>IOC vs. IOA: The Detective and the Guard</h3>
+            <p>Understanding the difference between IOCs and IOAs is key to building both reactive and proactive defenses.</p>
+            <ul>
+                [cite_start]<li><strong>Indicator of Compromise (IOC):</strong> This is the <strong>evidence left behind</strong> after a breach has occurred. [cite: 334, 401] Think of it as a detective finding footprints and broken locks at a crime scene. [cite_start]IOCs are reactive and are used for investigation and remediation. [cite: 381] [cite_start]Examples include known malware file hashes, malicious IP addresses, or suspicious registry keys. [cite: 336]</li>
+                [cite_start]<li><strong>Indicator of Attack (IOA):</strong> This is the <strong>behavioral pattern</strong> that signals an attack is in progress. [cite: 380] Think of it as a security guard noticing someone suspiciously trying every door handle on a building. [cite_start]IOAs are proactive and focus on an attacker's intent and techniques (TTPs) to stop an attack before it succeeds. [cite: 381, 386] [cite_start]Examples include unauthorized privilege escalation, lateral movement between systems, or unusual command execution. [cite: 388, 390, 393]</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Common Examples of Indicators</h3>
+            <p>Security analysts look for many digital clues to detect malicious activity:</p>
+            <ul>
+                [cite_start]<li><strong>Unusual Account Behavior:</strong> Multiple failed login attempts (potential brute force), account lockouts, or logins from geographically "impossible" locations. [cite: 345, 361, 2102, 2106]</li>
+                [cite_start]<li><strong>Anomalous Network Traffic:</strong> Unusual outbound traffic, communication with known malicious domains, or unexpected data flows, especially during off-hours. [cite: 336]</li>
+                [cite_start]<li><strong>High Resource Consumption:</strong> A sudden, unexplained spike in CPU, memory, or disk usage could indicate malware activity or a DDoS attack. [cite: 363, 2107]</li>
+                [cite_start]<li><strong>Suspicious System Changes:</strong> New registry keys, unexpected applications running, disabled security software, or missing/altered log files. [cite: 336, 370]</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>The Pyramid of Pain</h3>
+            [cite_start]<p>Developed by David J. Bianco, this model illustrates how difficult it is for attackers to change different types of indicators, and thus how much "pain" it causes them when defenders block those indicators. [cite: 440, 443] The higher up the pyramid, the more effective the defense.</p>
+            <ul>
+                [cite_start]<li><strong>Trivial:</strong> Hash Values (easy for attackers to recompile malware with a new hash). [cite: 438, 447]</li>
+                [cite_start]<li><strong>Easy:</strong> IP Addresses (attackers can easily switch to new IPs). [cite: 434, 450]</li>
+                [cite_start]<li><strong>Simple:</strong> Domain Names (requires a bit more effort for attackers to register new domains). [cite: 433, 452]</li>
+                [cite_start]<li><strong>Annoying:</strong> Network/Host Artifacts (e.g., specific file paths or user-agent strings that require attackers to change their malware's behavior). [cite: 432, 454]</li>
+                [cite_start]<li><strong>Challenging:</strong> Tools (forcing an attacker to abandon their custom malware and develop a new one). [cite: 431, 460]</li>
+                [cite_start]<li><strong>Tough:</strong> Tactics, Techniques, and Procedures (TTPs) (blocking the attacker's core behavior, forcing them to learn entirely new methods). [cite: 429, 464]</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="frameworks" class="main-content">
+        <h2>Frameworks & Threat Intelligence</h2>
+        <div class="process-block">
+            <h3>Threat Intelligence & Threat Actors</h3>
+            <p>
+                [cite_start]Threat intelligence is analyzed information about cyber threats that helps organizations make better security decisions. [cite: 405] [cite_start]A key part of this is understanding the **threat actors** behind the attacks, as their motivations and capabilities differ greatly. [cite: 419]
+            </p>
+            <ul>
+                [cite_start]<li><strong>Cyber Criminals:</strong> Motivated by financial gain. [cite: 423]</li>
+                <li><strong>Nation-State Actors:</strong> Funded by governments, typically for espionage or strategic disruption. [cite_start]Often behind APTs. [cite: 424]</li>
+                [cite_start]<li><strong>Hacktivists:</strong> Motivated by an ideological or political cause. [cite: 425]</li>
+                [cite_start]<li><strong>Script Kiddies:</strong> Amateurs who use existing tools to experiment or cause disruption, often without a deep understanding. [cite: 426, 5637]</li>
+                [cite_start]<li><strong>Insider Threats:</strong> Current or former employees who misuse their authorized access. [cite: 427]</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Cyber Kill Chain</h3>
+            [cite_start]<p>Developed by Lockheed Martin, the Cyber Kill Chain is a linear, 7-stage model of a cyberattack. [cite: 5539] [cite_start]The goal for defenders is to "break the chain" as early as possible to disrupt the attack. [cite: 5593]</p>
+            <ol>
+                [cite_start]<li><strong>Reconnaissance:</strong> Attacker gathers information on the target. [cite: 5576]</li>
+                [cite_start]<li><strong>Weaponization:</strong> Attacker creates a malicious payload (e.g., malware in a PDF). [cite: 5578]</li>
+                [cite_start]<li><strong>Delivery:</strong> Payload is sent to the target (e.g., via a phishing email). [cite: 5580]</li>
+                [cite_start]<li><strong>Exploitation:</strong> The malicious code is triggered by exploiting a vulnerability. [cite: 5582]</li>
+                [cite_start]<li><strong>Installation:</strong> Malware is installed on the victim's system to establish persistence. [cite: 5585]</li>
+                [cite_start]<li><strong>Command & Control (C2):</strong> The malware creates a channel back to the attacker for remote control. [cite: 5588]</li>
+                [cite_start]<li><strong>Actions on Objectives:</strong> The attacker achieves their goal (e.g., stealing data, encrypting files). [cite: 5590]</li>
+            </ol>
+        </div>
+        <div class="process-block">
+            <h3>Advanced Persistent Threats (APTs)</h3>
+            <p>
+                [cite_start]APTs are highly sophisticated, long-term cyberattacks, usually conducted by nation-state actors. [cite: 5596, 5597] [cite_start]Their goal is not immediate damage but to remain undetected within a network for months or even years to conduct espionage or exfiltrate data. [cite: 5605, 2343] [cite_start]They are characterized by their stealth, persistence, and advanced techniques (TTPs), often using zero-day exploits and custom malware. [cite: 5600, 5601, 2366]
+            </p>
+        </div>
+        <div class="process-block">
+            <h3>MITRE ATT&CK® Framework</h3>
+            <p>
+                [cite_start]While the Kill Chain is a linear model, the MITRE ATT&CK Framework is a comprehensive, globally accessible knowledge base of adversary **Tactics, Techniques, and Procedures (TTPs)** based on real-world observations. [cite: 5645, 2648] It is organized as a matrix where:
+            </p>
+            <ul>
+                [cite_start]<li><strong>Tactics (the "Why"):</strong> Represent the attacker's technical objective (e.g., Initial Access, Privilege Escalation, Lateral Movement, Exfiltration). [cite: 2682]</li>
+                [cite_start]<li><strong>Techniques (the "How"):</strong> Describe the specific methods used to achieve a tactic (e.g., using Phishing to gain Initial Access). [cite: 2697]</li>
+            </ul>
+            [cite_start]<p>Security teams use ATT&CK to assess their defensive coverage, develop detection rules, and emulate adversary behavior to test their controls. [cite: 2701]</p>
+        </div>
+    </section>
+    
+    <section id="tools" class="main-content">
+        <h2>Assessment & Tools</h2>
+        <div class="process-block">
+            <h3>Vulnerability Assessment vs. Analysis</h3>
+            <p>These terms are related but distinct:</p>
+            <ul>
+                [cite_start]<li><strong>Vulnerability Assessment:</strong> A systematic process of <strong>identifying, classifying, and prioritizing</strong> vulnerabilities across a wide range of systems. [cite: 3280] It answers the question, "What weaknesses do we have?"</li>
+                [cite_start]<li><strong>Vulnerability Analysis:</strong> A deeper dive into a <strong>specific vulnerability</strong> to understand its root cause, potential impact, and technical details. [cite: 3263] It answers the question, "How does this specific weakness work and what can it do?"</li>
+            </ul>
+            [cite_start]<p>Scans can be <strong>intrusive</strong> (actively trying to exploit a vulnerability to test it) or <strong>extrusive/non-intrusive</strong> (safely identifying the vulnerability without exploiting it). [cite: 3314, 3318] [cite_start]<strong>Credentialed</strong> scans log into a system to get an insider's view, finding more vulnerabilities than non-credentialed scans. [cite: 3324]</p>
+        </div>
+        <div class="process-block">
+            <h3>Key Tools & Databases</h3>
+            <ul>
+                [cite_start]<li><strong>Vulnerability Scanners:</strong> Tools like <strong>Nessus</strong>, <strong>OpenVAS</strong>, and <strong>Qualys</strong> automate the process of scanning networks and systems for known vulnerabilities and misconfigurations. [cite: 3328]</li>
+                <li><strong>CVE (Common Vulnerabilities and Exposures):</strong> A dictionary of publicly known cybersecurity vulnerabilities. [cite_start]Each vulnerability is given a unique CVE ID (e.g., CVE-2021-34527) to provide a standardized reference. [cite: 2882, 5665]</li>
+                <li><strong>NVD (National Vulnerability Database):</strong> A U.S. government database that builds upon the CVE list. [cite_start]The NVD enriches CVE entries with details like severity scores (CVSS), impact analysis, and links to patches, making the information more actionable for defenders. [cite: 2815, 2820]</li>
+                <li><strong>SIEM (Security Information and Event Management):</strong> Tools like <strong>Splunk</strong>, <strong>Elasticsearch (ELK Stack)</strong>, or <strong>Wazuh</strong> are essential for detecting IOCs. [cite_start]They collect log data from all over the network, correlate events, and generate alerts when suspicious patterns are found. [cite: 5717, 3019]</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Enumeration</h3>
+            <p>
+                [cite_start]Enumeration is a reconnaissance technique where an attacker systematically probes a target to extract detailed information like usernames, network shares, machine names, and running services. [cite: 3536] This information is then used to identify potential attack vectors. [cite_start]Tools like <strong>Nmap</strong> and <strong>Enum4linux</strong> are commonly used for this purpose. [cite: 3543, 3544]
+            </p>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "A piece of forensic evidence that indicates a breach has already occurred is called an Indicator of _______.", options: ["Attack", "Vulnerability", "Compromise", "Threat"], answer: "Compromise" },
+        { question: "The _______ is a 7-stage model of a cyberattack developed by Lockheed Martin.", options: ["MITRE ATT&CK", "Pyramid of Pain", "Cyber Kill Chain", "NVD"], answer: "Cyber Kill Chain" },
+        { question: "Malware that disguises itself as a legitimate program is known as a _______.", options: ["Worm", "Virus", "Rootkit", "Trojan"], answer: "Trojan" },
+        { question: "The _______ is a U.S. government database that enriches CVE entries with severity scores and other details.", options: ["CVE", "NVD", "SIEM", "APT"], answer: "NVD" },
+        { question: "A sophisticated, long-term, and targeted cyberattack, often sponsored by a nation-state, is known as an _______.", options: ["IOC", "DDoS", "APT", "IOA"], answer: "APT" },
+        { question: "According to the Pyramid of Pain, blocking an attacker's _______ causes them the most difficulty.", options: ["IP Addresses", "Hash Values", "Tools", "TTPs"], answer: "TTPs" },
+        { question: "_______ is a reconnaissance technique used to extract information like usernames and network shares from a target.", options: ["Phishing", "Enumeration", "Injection", "Scanning"], answer: "Enumeration" },
+        { question: "A _______ is a security tool that collects and analyzes logs from multiple sources to detect threats.", options: ["Vulnerability Scanner", "SIEM", "Firewall", "Keylogger"], answer: "SIEM" }
+    ];
+
+    const trueOrFalse = [
+        { question: "An Indicator of Attack (IOA) focuses on attacker behavior and intent, aiming for proactive detection.", answer: true },
+        { question: "The Heartbleed bug was a hardware vulnerability found in modern processors.", answer: false },
+        { question: "The Cyber Kill Chain is a matrix of attacker tactics and techniques, while MITRE ATT&CK is a linear model.", answer: false },
+        { question: "A worm requires human interaction, like clicking a link, to spread to other systems.", answer: false },
+        { question: "A credentialed vulnerability scan can typically find more vulnerabilities than a non-credentialed scan.", answer: true },
+        { question: "The 'Weaponization' stage of the Cyber Kill Chain involves the attacker achieving their final goal, like stealing data.", answer: false },
+        { question: "The 'Pyramid of Pain' suggests that blocking malware hash values is one of the most effective long-term defensive strategies.", answer: false },
+        { question: "CVE and NVD are two competing standards for vulnerability identification.", answer: false },
+        { question: "An on-path attack (MITM) involves overwhelming a server with traffic to make it unavailable.", answer: false },
+        { question: "A logic bomb is malware that activates when a specific condition is met, such as a certain date and time.", answer: true }
+    ];
+
+    const multipleChoice = [
+        { question: "A security analyst sees a user account attempting to log in from two cities thousands of miles apart within minutes. What is this indicator of compromise called?", options: ["Concurrent Session Usage", "Account Lockout", "Impossible Travel", "Resource Inaccessibility"], answer: "Impossible Travel" },
+        { question: "Which of the following is an example of a human-related vulnerability?", options: ["A buffer overflow in an application", "The Spectre hardware flaw", "An employee clicking on a phishing link", "An unpatched operating system"], answer: "An employee clicking on a phishing link" },
+        { question: "According to the Cyber Kill Chain, what is the stage immediately following 'Delivery'?", options: ["Reconnaissance", "Installation", "Exploitation", "Command & Control"], answer: "Exploitation" },
+        { question: "A hospital's network is flooded with traffic, making its patient portal inaccessible. What type of attack is this?", options: ["Ransomware", "DDoS", "Phishing", "On-Path Attack"], answer: "DDoS" },
+        { question: "Which framework provides a globally-accessible knowledge base of adversary tactics and techniques organized into a matrix?", options: ["Cyber Kill Chain", "NVD", "Pyramid of Pain", "MITRE ATT&CK"], answer: "MITRE ATT&CK" },
+        { question: "The WannaCry attack in 2017 spread rapidly by exploiting a vulnerability in Microsoft Windows. What kind of malware was it?", options: ["Trojan", "Spyware", "Ransomware Worm", "Rootkit"], answer: "Ransomware Worm" },
+        { question: "A security team wants to find detailed severity scoring (CVSS) for a newly discovered vulnerability, CVE-2025-12345. Which resource is the best place to look for this enriched information?", options: ["The Cyber Kill Chain website", "The Pyramid of Pain diagram", "The National Vulnerability Database (NVD)", "A threat actor's forum"], answer: "The National Vulnerability Database (NVD)" },
+        { question: "Which type of indicator is the easiest for an attacker to change, offering the least 'pain' to them when blocked?", options: ["Domain Name", "Hash Value", "Tool", "TTP"], answer: "Hash Value" },
+        { question: "An attacker alters data packets as they travel between a user and their online bank. This is an example of what type of attack?", options: ["Injection Attack", "On-Path Attack", "DDoS Attack", "Password Spraying"], answer: "On-Path Attack" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
