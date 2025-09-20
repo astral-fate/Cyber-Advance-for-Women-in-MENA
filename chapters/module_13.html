@@ -1,10 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cybersecurity - Module 14: Automation & Orchestration</title>
+<title>Cybersecurity - Module 13: IAM & Enterprise Security</title>
 <style>
     body {
         font-family: Arial, sans-serif;
@@ -279,11 +278,11 @@
 </head>
 <body>
 <div class="container">
-<h1>Module 14: Automation & Orchestration in Security</h1>
+<h1>Module 13: IAM & Enterprise Security Management</h1>
     <div class="main-tabs">
         <button class="tab-button active" data-tab="glossary">Glossary</button>
-        <button class="tab-button" data-tab="concepts">Concepts & Best Practices</button>
-        <button class="tab-button" data-tab="scripting">Scripting Languages</button>
+        <button class="tab-button" data-tab="iam">Identity & Access Management</button>
+        <button class="tab-button" data-tab="enterprise">Enterprise Security Controls</button>
         <button class="tab-button" data-tab="fill">Fill in the Blank</button>
         <button class="tab-button" data-tab="tf">True/False</button>
         <button class="tab-button" data-tab="mc">Multiple Choice</button>
@@ -292,183 +291,80 @@
     <section id="glossary" class="main-content active">
         <h2>Glossary of Terms</h2>
         <div class="glossary-accordion">
-            <div class="accordion-item">
-                <button class="accordion-header">Security Automation</button>
-                <div class="accordion-panel">
-                    <p>Leveraging technology to perform repetitive security tasks without human intervention. Its focus is on individual tasks to increase efficiency, speed, and consistency.</p>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-header">Security Orchestration</button>
-                <div class="accordion-panel">
-                    <p>The process of connecting and coordinating diverse security tools and processes into a unified workflow. It focuses on the bigger picture, making multiple automated tasks and tools work together seamlessly.</p>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-header">SOAR (Security Orchestration, Automation, and Response)</button>
-                <div class="accordion-panel">
-                    <p>A platform that combines orchestration, automation, and response capabilities to allow organizations to manage and respond to security incidents from a single interface. Palo Alto Networks Cortex XSOAR is a prime example.</p>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-header">SIEM (Security Information and Event Management)</button>
-                <div class="accordion-panel">
-                    <p>A solution that aggregates and analyzes activity from many different resources across your entire IT infrastructure. It collects security data from network devices, servers, and domain controllers, analyzes it to spot trends, and sends alerts. IBM QRadar is an example.</p>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-header">API (Application Programming Interface)</button>
-                <div class="accordion-panel">
-                    <p>A set of rules and protocols that allows different software applications to communicate with each other. APIs are crucial for security orchestration to integrate various tools.</p>
-                </div>
-            </div>
-             <div class="accordion-item">
-                <button class="accordion-header">Technical Debt</button>
-                <div class="accordion-panel">
-                    <p>The implied cost of rework caused by choosing an easy, short-term solution now instead of using a better approach that would take longer. In automation, it can lead to systems that are hard to maintain and update.</p>
-                </div>
-            </div>
-             <div class="accordion-item">
-                <button class="accordion-header">Single Point of Failure</button>
-                <div class="accordion-panel">
-                    <p>A part of a system that, if it fails, will stop the entire system from working. Identifying and mitigating these is critical for reliable automation.</p>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-header">Explainable AI (XAI)</button>
-                <div class="accordion-panel">
-                    <p>Artificial intelligence models and systems that can explain their decisions in a way that is understandable to humans. This is important for ensuring transparency and fairness in automated security decisions.</p>
-                </div>
-            </div>
-            <div class="accordion-item">
-                <button class="accordion-header">PowerShell</button>
-                <div class="accordion-panel">
-                    <p>A task automation and configuration management framework from Microsoft, consisting of a command-line shell and the associated scripting language. It's heavily used for managing Windows environments.</p>
-                </div>
-            </div>
-             <div class="accordion-item">
-                <button class="accordion-header">Python</button>
-                <div class="accordion-panel">
-                    <p>A versatile, high-level programming language known for its readability and extensive libraries, making it extremely popular for security scripting, penetration testing, and tool development.</p>
-                </div>
-            </div>
-             <div class="accordion-item">
-                <button class="accordion-header">Bash</button>
-                <div class="accordion-panel">
-                    <p>A command processor and scripting language for Unix-based systems (like Linux and macOS). It is excellent for automating system administration tasks and managing files.</p>
-                </div>
-            </div>
+            <div class="accordion-item"><button class="accordion-header">IAM (Identity and Access Management)</button><div class="accordion-panel"><p>A framework of policies and technologies to ensure the right individuals have the right access to the right resources at the right times for the right reasons.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Identity Proofing</button><div class="accordion-panel"><p>The process of verifying a user's claimed identity to establish trust. Methods include document verification, biometrics, and knowledge-based authentication (KBA).</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Federation</button><div class="accordion-panel"><p>A system of trust between two parties (organizations) to authenticate users and authorize their access to resources, enabling concepts like Single Sign-On (SSO).</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">SSO (Single Sign-On)</button><div class="accordion-panel"><p>An authentication scheme that allows a user to log in with a single set of credentials to multiple independent software systems.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">SAML (Security Assertion Markup Language)</button><div class="accordion-panel"><p>An open standard for exchanging authentication and authorization data between an identity provider (IdP) and a service provider (SP). It is a key protocol for enabling web-based SSO.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">OAuth (Open Authorization)</button><div class="accordion-panel"><p>An open standard for access delegation, commonly used to grant websites or applications access to information on other websites without giving them the passwords.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">LDAP (Lightweight Directory Access Protocol)</button><div class="accordion-panel"><p>A vendor-neutral application protocol for accessing and maintaining distributed directory information services over an IP network. Active Directory is a common example of a directory service that uses LDAP.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">PAM (Privileged Access Management)</button><div class="accordion-panel"><p>Solutions that help secure, control, and monitor access to an organization's critical assets. Features include password vaulting and just-in-time permissions.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Access Control</button><div class="accordion-panel"><p>The selective restriction of access to a place or other resource. Models include MAC, DAC, RBAC, and ABAC.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Least Privilege Principle</button><div class="accordion-panel"><p>A security concept requiring that a user be given only the minimum levels of access – or permissions – needed to perform their job functions.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">DLP (Data Loss Prevention)</button><div class="accordion-panel"><p>A set of tools and processes used to ensure that sensitive data is not lost, misused, or accessed by unauthorized users.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">EDR/XDR (Endpoint/Extended Detection and Response)</button><div class="accordion-panel"><p>Advanced security solutions that provide continuous monitoring and response to advanced threats on endpoints (EDR) and across multiple security layers like network, email, and cloud (XDR).</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">IDS/IPS (Intrusion Detection/Prevention System)</button><div class="accordion-panel"><p>Network security tools that monitor network or system activities for malicious activity. An IDS only detects and alerts, while an IPS can actively block or prevent the detected intrusions.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">FIM (File Integrity Monitoring)</button><div class="accordion-panel"><p>A security process that tests and checks operating system, database, and application software files to determine whether or not they have been tampered with or corrupted.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">UBA (User Behavior Analytics)</button><div class="accordion-panel"><p>A cybersecurity process that analyzes user activity data to detect anomalies and potential threats, such as insider threats or compromised accounts.</p></div></div>
         </div>
     </section>
 
-    <section id="concepts" class="main-content">
-         <h2>Concepts & Best Practices</h2>
-         <h3>Automation vs. Orchestration: A Comparison</h3>
+    <section id="iam" class="main-content">
+         <h2>Identity & Access Management (IAM)</h2>
          <div class="process-block">
-            <h4>Individual Tasks vs. Unified Workflows</h4>
-            <p>While often used together, automation and orchestration serve different purposes. Understanding the distinction is key to building an effective security strategy.</p>
+            <h3>The Core Components of IAM</h3>
+            <p>IAM is built on three fundamental pillars that govern who can access what within a system.</p>
             <ul>
-                <li><strong>Automation Focuses on "The How":</strong> It's about making a *single task* run automatically.
-                    <ul>
-                        <li><strong>Example:</strong> An automation script that automatically applies a security patch to a server whenever a new vulnerability is announced.</li>
-                    </ul>
-                </li>
-                <li><strong>Orchestration Focuses on "The What":</strong> It's about connecting *multiple automated tasks* into a cohesive process.
-                     <ul>
-                        <li><strong>Example:</strong> An orchestration workflow for a phishing attack that uses automation to: 1) isolate the infected machine, 2) reset the user's password, 3) scan the user's inbox for similar emails, and 4) create a ticket for the security team.</li>
-                    </ul>
-                </li>
+                <li><strong>Identification:</strong> The process of a user claiming an identity. This is typically the username or email address.</li>
+                <li><strong>Authentication:</strong> The process of verifying that claimed identity. This is done through authentication factors like passwords (something you know), security keys (something you have), or biometrics (something you are).</li>
+                <li><strong>Authorization:</strong> The process of granting the now-authenticated user specific permissions to access resources. This is where access control models and the principle of least privilege come into play.</li>
             </ul>
-             <div class="example">
-                <p><strong>Analogy: Building a Car</strong></p>
-                <div class="solution">
-                    <p><strong>Automation</strong> is like a robotic arm on an assembly line that is programmed to perform one specific job, such as tightening the bolts on a wheel, over and over again with precision and speed.</p>
-                    <p><strong>Orchestration</strong> is the entire assembly line's control system. It tells the bolt-tightening robot when to activate, coordinates it with the robot that mounts the tire, and ensures the entire process from chassis to finished car happens in the correct, most efficient order.</p>
-                </div>
-             </div>
          </div>
-
-         <h3>Benefits of Automation & Orchestration</h3>
          <div class="process-block">
-             <h4>Why Automate Security Operations?</h4>
-             <p>Integrating automation and orchestration into security operations provides numerous advantages that help organizations keep pace with the evolving threat landscape.</p>
-             <ul>
-                 <li><strong>Improved Reaction Time:</strong> Automated systems can respond to threats in seconds or minutes, far faster than a human, significantly reducing the potential damage of an attack.</li>
-                 <li><strong>Reduced Alert Fatigue & Burnout:</strong> By automatically handling low-level alerts and false positives, automation allows security analysts to focus their expertise on genuine, complex threats, improving job satisfaction.</li>
-                 <li><strong>Increased Efficiency and Scalability:</strong> Automation handles repetitive tasks, acting as a "workforce multiplier" that allows security teams to manage a growing infrastructure without a proportional increase in staff.</li>
-                 <li><strong>Consistency and Reliability:</strong> Automated processes follow the exact same steps every time, enforcing security baselines and standard configurations, which eliminates the risk of human error.</li>
-             </ul>
+            <h3>Federation & Single Sign-On (SSO)</h3>
+            <p>Federation establishes a trust relationship between different organizations, allowing a user from one to access resources in another. This is the foundation for Single Sign-On (SSO).</p>
+            <ul>
+                <li><strong>Protocols:</strong> Secure communication is managed by protocols like SAML (for enterprise web SSO) and OAuth/OpenID Connect (common in consumer applications and APIs).</li>
+                <li><strong>SSO Pros:</strong> Greatly improves user experience, reduces password fatigue, and centralizes access control.</li>
+                <li><strong>SSO Cons:</strong> Creates a single point of failure. If the identity provider is compromised or unavailable, access to all connected applications is at risk.</li>
+            </ul>
          </div>
-
-        <h3>Challenges and Considerations</h3>
          <div class="process-block">
-             <h4>Navigating the Path to Automation</h4>
-             <p>Implementing automation is not without its challenges. A careful, strategic approach is required to avoid common pitfalls.</p>
-             <ul>
-                 <li><strong>Integration Complexity:</strong> Modern security environments use dozens of tools from different vendors. Integrating them so they can communicate effectively requires careful planning and often relies on robust APIs.</li>
-                 <li><strong>Cost and Resource Allocation:</strong> There is an upfront investment in tools, training, and skilled personnel. Organizations must balance this cost against the expected long-term benefits.</li>
-                 <li><strong>Risk of Over-Automation:</strong> Not every task should be automated. Critical decisions often require human intuition, context, and judgment. Striking the right balance is key.</li>
-                 <li><strong>Maintaining the Automation Tools:</strong> Automation systems themselves can be targeted by attackers. They must be secured, maintained, and updated just like any other critical infrastructure.</li>
-             </ul>
-         </div>
-
-        <h3>Best Practices for Implementation</h3>
-         <div class="process-block">
-             <h4>A Roadmap for Success</h4>
-             <p>Adopting these best practices can lead to a smoother and more effective integration of automation into your security operations.</p>
-             <ul>
-                 <li><strong>Start Small and Scale:</strong> Begin by identifying simple, high-volume, repetitive tasks. Automate one of these first as a prototype to learn from the process before tackling more complex workflows.</li>
-                 <li><strong>Continuous Evaluation:</strong> Automation is not "set it and forget it." Regularly review automated processes, monitor their performance with comprehensive logging, and establish feedback loops to make quick adjustments.</li>
-                 <li><strong>Invest in Training and Development:</strong> Your team is your greatest asset. Provide them with the time and resources to learn new tools, scripting languages (like Python and PowerShell), and automation methodologies.</li>
-                 <li><strong>Foster Collaboration:</strong> Break down silos between IT, security, and development teams. An "Automation Center of Excellence" can help standardize practices and share knowledge across the organization.</li>
-                 <li><strong>Ensure Human Oversight:</strong> Always maintain human control over critical processes. Automation is a tool to empower experts, not replace them. Use features like Explainable AI (XAI) to ensure transparency in automated decisions.</li>
-             </ul>
+            <h3>Access Control Models</h3>
+            <p>Different models are used to enforce authorization rules based on security needs.</p>
+            <ul>
+                <li><strong>Discretionary Access Control (DAC):</strong> The owner of a resource can decide who gets to access it. Common in standard file systems (e.g., Windows, Linux).</li>
+                <li><strong>Mandatory Access Control (MAC):</strong> Access is decided by a central authority based on security labels (e.g., Confidential, Secret). Used in high-security environments like military systems. SELinux is an example.</li>
+                <li><strong>Role-Based Access Control (RBAC):</strong> Permissions are assigned to roles, and users are assigned to roles. This simplifies administration in large organizations.</li>
+                <li><strong>Attribute-Based Access Control (ABAC):</strong> The most dynamic model. Access decisions can be based on a combination of user attributes (role, location), resource attributes (data classification), and environmental attributes (time of day).</li>
+            </ul>
          </div>
     </section>
 
-    <section id="scripting" class="main-content">
-        <h2>Scripting Languages for Security</h2>
+    <section id="enterprise" class="main-content">
+        <h2>Enterprise Security Controls</h2>
         <div class="process-block">
-            <h3>PowerShell</h3>
-            <p>A powerful scripting language and shell framework from Microsoft, essential for automating tasks in Windows environments.</p>
+            <h3>Operating System Security (Hardening)</h3>
+            <p>Securing the underlying operating system is a fundamental step in protecting an enterprise.</p>
             <ul>
-                <li><strong>Use Cases:</strong> User account management in Active Directory, parsing Windows Event Logs, automating incident response actions (e.g., isolating a machine), and configuring system security settings.</li>
+                <li><strong>Windows Group Policy (GPO):</strong> A feature in Windows Active Directory that allows administrators to centrally manage and enforce security settings for users and computers across the network. This can be used to enforce strong password policies, restrict software installation, and configure firewall rules.</li>
+                <li><strong>SELinux (Security-Enhanced Linux):</strong> A Linux kernel security module that provides a mechanism for supporting access control security policies, including Mandatory Access Control (MAC). It operates on a "default deny" principle, meaning any action not explicitly allowed is denied.</li>
             </ul>
-            <pre><code># Example: PowerShell script to get recent successful logon events
-Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4624} -MaxEvents 10</code></pre>
         </div>
         <div class="process-block">
-            <h3>Python</h3>
-            <p>A versatile and easy-to-read language with a massive collection of libraries, making it the go-to choice for many security professionals.</p>
+            <h3>Email & Web Security</h3>
+            <p>Email and web browsing are the most common vectors for cyberattacks. Strong filtering and authentication are essential.</p>
             <ul>
-                <li><strong>Use Cases:</strong> Building custom security tools, automating penetration testing tasks, gathering and analyzing threat intelligence, and scripting interactions with SIEMs and other security APIs.</li>
+                <li><strong>Email Authentication (SPF, DKIM, DMARC):</strong> These three protocols work together to prevent email spoofing and phishing. SPF checks if an email comes from an authorized server, DKIM verifies the message wasn't altered in transit, and DMARC tells receiving servers what to do if those checks fail.</li>
+                <li><strong>Web Filtering:</strong> Controls and monitors employee web browsing to block access to malicious or inappropriate websites, often using URL scanning, content categorization, and reputation-based filtering.</li>
             </ul>
-            <pre><code># Example: Python script to check the status of a website
-import requests
-try:
-    response = requests.get("https://example.com", timeout=5)
-    if response.status_code == 200:
-        print("Website is online.")
-    else:
-        print(f"Website returned status code: {response.status_code}")
-except requests.ConnectionError:
-    print("Website is offline.")</code></pre>
         </div>
         <div class="process-block">
-            <h3>Bash</h3>
-            <p>The standard scripting language for Unix-based systems like Linux. It's perfect for automating command-line tasks and managing system administration duties.</p>
+            <h3>Data and Endpoint Protection</h3>
+            <p>Protecting sensitive data and the devices (endpoints) that access it is critical.</p>
             <ul>
-                <li><strong>Use Cases:</strong> Parsing log files (e.g., system logs, web server logs), managing file permissions, automating system updates, and scripting workflows that involve multiple command-line security tools.</li>
-            </ul>
-            <pre><code># Example: Bash script to find all log entries for "Failed password"
-grep "Failed password" /var/log/auth.log</code></pre>
-        </div>
-         <div class="process-block">
-            <h3>Perl & Ruby</h3>
-            <p>Two other powerful, object-oriented scripting languages with strong communities and useful frameworks for security.</p>
-            <ul>
-                <li><strong>Perl:</strong> Excellent for text-processing and log analysis. Widely used for network security analysis and web security testing.</li>
-                <li><strong>Ruby:</strong> Known for its clean syntax. It's the language behind the popular Metasploit Framework, making it valuable for penetration testing and exploit development.</li>
+                <li><strong>Data Loss Prevention (DLP):</strong> Tools that discover, classify, monitor, and protect sensitive data at rest, in use, and in transit. For example, a DLP policy might block an email from being sent if it contains credit card numbers.</li>
+                <li><strong>Endpoint Detection and Response (EDR/XDR):</strong> EDR focuses on detecting and investigating threats on individual endpoints (laptops, servers). XDR extends this visibility by correlating data from endpoints, networks, email, and cloud environments to provide a more complete picture of an attack.</li>
             </ul>
         </div>
     </section>
@@ -492,137 +388,39 @@ grep "Failed password" /var/log/auth.log</code></pre>
 <script>
     // --- START OF QUIZ DATA ---
     const fillInTheBlank = [
-        {
-            question: "Connecting and coordinating diverse security tools into a unified, multi-step process is known as security _______.",
-            options: ["Automation", "Scripting", "Orchestration", "Monitoring"],
-            answer: "Orchestration"
-        },
-        {
-            question: "Using a script to automatically apply security patches to servers is an example of security _______.",
-            options: ["Orchestration", "Automation", "Integration", "Compliance"],
-            answer: "Automation"
-        },
-        {
-            question: "The implied cost of rework caused by choosing an easy solution now instead of a better, more sustainable approach is called _______ debt.",
-            options: ["Financial", "Security", "Technical", "Automation"],
-            answer: "Technical"
-        },
-        {
-            question: "A _______ is a command-line shell and scripting language from Microsoft used for managing Windows environments.",
-            options: ["Python", "Bash", "Ruby", "PowerShell"],
-            answer: "PowerShell"
-        },
-        {
-            question: "The scripting language behind the popular Metasploit Framework is _______.",
-            options: ["Perl", "Ruby", "Python", "Bash"],
-            answer: "Ruby"
-        },
-        {
-            question: "To ensure transparency in automated decisions, organizations can adopt _______ AI solutions.",
-            options: ["Ethical", "Explainable", "Secure", "Complex"],
-            answer: "Explainable"
-        },
-        {
-            question: "A best practice for implementing automation is to start _______ and then scale up.",
-            options: ["Big", "Fast", "Small", "Cheaply"],
-            answer: "Small"
-        },
-        {
-            question: "One of the major benefits of automation is reducing _______ fatigue among security analysts.",
-            options: ["Alert", "Decision", "System", "Network"],
-            answer: "Alert"
-        }
+        { question: "The access control model where permissions are assigned to jobs or functions within an organization is called _______-Based Access Control.", options: ["Attribute", "Role", "Mandatory", "Discretionary"], answer: "Role" },
+        { question: "_______ is a protocol primarily used for authorization, allowing apps limited access to user data without sharing passwords.", options: ["SAML", "LDAP", "OAuth", "Kerberos"], answer: "OAuth" },
+        { question: "The principle of giving users only the permissions essential to perform their job duties is known as the principle of _______.", options: ["Least Privilege", "Zero Trust", "Full Access", "Need to Know"], answer: "Least Privilege" },
+        { question: "A _______ system detects malicious activity and alerts administrators, whereas a _______ system can actively block the malicious activity.", options: ["IPS, IDS", "IDS, IPS", "Firewall, Router", "EDR, DLP"], answer: "IDS, IPS" },
+        { question: "In Windows environments, _______ _______ is used for centralized configuration and management of user and computer settings.", options: ["SELinux", "Active Directory", "Group Policy", "PowerShell"], answer: "Group Policy" },
+        { question: "DMARC, DKIM, and SPF are all mechanisms used to secure _______.", options: ["Web traffic", "Databases", "Email", "Endpoints"], answer: "Email" },
+        { question: "A solution that monitors and protects sensitive data from being lost, stolen, or misused is known as _______.", options: ["FIM", "XDR", "DLP", "UBA"], answer: "DLP" },
+        { question: "_______ is a security module in the Linux kernel that provides Mandatory Access Control (MAC).", options: ["GPO", "Snort", "Active Directory", "SELinux"], answer: "SELinux" }
     ];
 
     const trueOrFalse = [
-        {
-            question: "Security automation and security orchestration are the exact same concept.",
-            answer: false
-        },
-        {
-            question: "Automation focuses on individual tasks, while orchestration focuses on coordinating multiple tasks into a workflow.",
-            answer: true
-        },
-        {
-            question: "One of the main goals of automation is to eliminate the need for human security experts entirely.",
-            answer: false
-        },
-        {
-            question: "Python is a popular language for security scripting due to its large number of libraries and readability.",
-            answer: true
-        },
-        {
-            question: "Implementing security automation has no upfront costs or resource requirements.",
-            answer: false
-        },
-        {
-            question: "Automation can help enforce security baselines and standard configurations, reducing human error.",
-            answer: true
-        },
-        {
-            question: "Bash is the primary scripting language for managing Windows systems.",
-            answer: false
-        },
-        {
-            question: "A 'single point of failure' is a desirable feature in a robust automation system.",
-            answer: false
-        },
-        {
-            question: "Continuously evaluating the effectiveness of automated processes is a key best practice.",
-            answer: true
-        },
-        {
-            question: "APIs are crucial for enabling different security tools to communicate with each other in an orchestration workflow.",
-            answer: true
-        }
+        { question: "Discretionary Access Control (DAC) is when the resource owner determines who has access.", answer: true },
+        { question: "Single Sign-On (SSO) eliminates all security risks associated with user credentials.", answer: false },
+        { question: "LDAP is a protocol for accessing and maintaining directory information services.", answer: true },
+        { question: "An IPS (Intrusion Prevention System) only monitors traffic and sends alerts; it cannot block threats.", answer: false },
+        { question: "The 'Least Privilege Principle' suggests giving users maximum permissions to make their jobs easier.", answer: false },
+        { question: "OAuth is primarily an authentication protocol, while SAML is for authorization.", answer: false },
+        { question: "File Integrity Monitoring (FIM) is used to detect unauthorized changes to critical files.", answer: true },
+        { question: "XDR provides less visibility into threats than EDR.", answer: false },
+        { question: "Identity Proofing is the process of granting permissions to a user after they have been authenticated.", answer: false },
+        { question: "A password vault is a feature of Privileged Access Management (PAM).", answer: true }
     ];
 
     const multipleChoice = [
-        {
-            question: "Which of the following best describes security orchestration?",
-            options: ["Automating a single, repetitive task.", "A scripting language for Linux.", "Connecting multiple tools and automated tasks into a coordinated workflow.", "A type of firewall."],
-            answer: "Connecting multiple tools and automated tasks into a coordinated workflow."
-        },
-        {
-            question: "A security team uses a tool that automatically isolates a compromised machine, resets the user's password, and notifies the IT team. This is an example of:",
-            options: ["Automation", "Orchestration", "Manual Response", "Compliance"],
-            answer: "Orchestration"
-        },
-        {
-            question: "Which of the following is a primary benefit of security automation?",
-            options: ["It increases the number of false positive alerts.", "It makes the IT environment more complex.", "It allows analysts to focus on more strategic tasks.", "It replaces the need for a SIEM."],
-            answer: "It allows analysts to focus on more strategic tasks."
-        },
-        {
-            question: "Which scripting language would be the best choice for automating administrative tasks within a Windows Active Directory environment?",
-            options: ["Bash", "Python", "PowerShell", "Ruby"],
-            answer: "PowerShell"
-        },
-        {
-            question: "What is a major challenge when implementing security orchestration?",
-            options: ["Lack of repetitive tasks to automate.", "Security tools are too simple.", "Integrating disparate tools from different vendors.", "Analysts have too much free time."],
-            answer: "Integrating disparate tools from different vendors."
-        },
-        {
-            question: "According to best practices, what is the recommended first step when starting to implement automation?",
-            options: ["Automate the most complex process first.", "Purchase the most expensive SOAR platform available.", "Identify and automate a simple, repetitive task.", "Fire the entire junior analyst team."],
-            answer: "Identify and automate a simple, repetitive task."
-        },
-        {
-            question: "What does 'XAI' stand for in the context of responsible automation?",
-            options: ["Extra Automated Intelligence", "Explainable Artificial Intelligence", "External API Integration", "Expanded Access Infrastructure"],
-            answer: "Explainable Artificial Intelligence"
-        },
-        {
-            question: "Which company was mentioned as using its Cortex XSOAR platform for Security Orchestration, Automation, and Response (SOAR)?",
-            options: ["IBM", "Rapid7", "Huntress", "Palo Alto Networks"],
-            answer: "Palo Alto Networks"
-        },
-        {
-            question: "The Stuxnet worm was a real-world example of malware notable for its ability to:",
-            options: ["Steal credit card information.", "Send spam emails.", "Physically damage industrial hardware.", "Encrypt personal files for ransom."],
-            answer: "Physically damage industrial hardware."
-        }
+        { question: "Which of the following is NOT one of the three main components of IAM?", options: ["Identification", "Authentication", "Authorization", "Encryption"], answer: "Encryption" },
+        { question: "A user logs into their corporate portal and can then access multiple applications like email and HR software without logging in again. This is an example of:", options: ["Multi-Factor Authentication", "Federation", "Single Sign-On (SSO)", "Identity Proofing"], answer: "Single Sign-On (SSO)" },
+        { question: "Which access control model would be most appropriate for a top-secret military network where access is determined by security clearance levels?", options: ["Discretionary Access Control (DAC)", "Role-Based Access Control (RBAC)", "Mandatory Access Control (MAC)", "Attribute-Based Access Control (ABAC)"], answer: "Mandatory Access Control (MAC)" },
+        { question: "What is the primary purpose of DMARC in email security?", options: ["To encrypt the content of emails.", "To tell receiving servers what to do with emails that fail SPF or DKIM checks.", "To scan attachments for malware.", "To compress large emails."], answer: "To tell receiving servers what to do with emails that fail SPF or DKIM checks." },
+        { question: "A security analyst is investigating a threat that has moved from an employee's laptop to a file server and then to a cloud application. Which technology would provide the most comprehensive visibility across these different environments?", options: ["EDR", "DLP", "XDR", "FIM"], answer: "XDR" },
+        { question: "A bank wants to implement a control that requires two separate managers to approve any wire transfer over $10,000. This is an example of:", options: ["Segregation of Duties", "Least Privilege", "Single Sign-On", "Federation"], answer: "Segregation of Duties" },
+        { question: "Which of the following is considered an 'Inherence' factor of authentication?", options: ["A password", "A smart card", "A fingerprint scan", "A one-time code from an app"], answer: "A fingerprint scan" },
+        { question: "What is the main function of an email gateway?", options: ["To store sent and received emails.", "To provide users with a web-based email client.", "To filter incoming and outgoing email for threats like spam and malware.", "To create new email accounts for users."], answer: "To filter incoming and outgoing email for threats like spam and malware." },
+        { question: "A cloud engineer gets fired but their access is not immediately revoked, allowing them to log in and delete company data. This security failure is primarily related to a lapse in:", options: ["User Provisioning/Deprovisioning", "Data Encryption", "Network Segmentation", "Web Filtering"], answer: "User Provisioning/Deprovisioning" }
     ];
     // --- END OF QUIZ DATA ---
 
