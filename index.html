@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cybersecurity Course Module Summary</title>
+    <style>
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 25px 40px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #0056b3; /* Cairo Uni Blue */
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        h2 {
+            color: #007bff; /* Lighter Blue */
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #e9ecef;
+            font-weight: bold;
+            color: #495057;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+        tbody tr:hover {
+            background-color: #e2e6ea;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        /* Adjust column widths for desktop */
+        th:nth-child(1), td:nth-child(1) { width: 10%; }
+        th:nth-child(2), td:nth-child(2) { width: 50%; }
+        th:nth-child(3), td:nth-child(3) { width: 40%; }
+
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        li {
+             margin-bottom: 5px;
+        }
+        strong {
+            color: #28a745;
+        }
+        .course-desc {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 992px) { /* Larger tablets */
+            .container {
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 768px) { /* Tablets and Mobile */
+            .container {
+                width: 95%;
+                padding: 20px 15px;
+            }
+
+            h1 {
+                font-size: 1.6em;
+            }
+            h2 {
+                font-size: 1.3em;
+            }
+
+            table {
+                border: 0;
+            }
+
+            table thead {
+                display: none; /* Hide original table headers */
+            }
+
+            table tr {
+                display: block;
+                margin-bottom: 25px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                background-color: #fff;
+            }
+            tbody tr:nth-child(odd) { /* Reset alternating bg for stacked cards */
+                background-color: #fff;
+            }
+            tbody tr:hover { /* Subtle hover for cards */
+                background-color: #f9f9f9;
+            }
+
+            table td {
+                display: block;
+                padding: 10px 15px 10px 35%; /* Default padding, space for label */
+                position: relative;
+                border-bottom: 1px dashed #eee; /* Separator between "fields" */
+                text-align: left; /* Content aligns left */
+                width: 100% !important; /* Override inline widths from desktop */
+            }
+
+            table td:last-child {
+                border-bottom: none;
+            }
+
+            /* Card Header: First cell (Unit link) */
+            table td:first-child {
+                background-color: #e9ecef;
+                color: #0056b3;
+                font-weight: bold;
+                font-size: 1.1em;
+                padding: 12px 15px;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                border-bottom: 1px solid #ddd;
+            }
+            table td:first-child a, table td:first-child strong a { /* Ensure link color */
+                color: #0056b3 !important;
+            }
+            table td:first-child::before { /* No label for the card header */
+                display: none;
+            }
+
+            /* Labels for other cells */
+            table td::before {
+                content: ""; /* Placeholder, set below */
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: calc(35% - 25px); /* Label area width */
+                font-weight: bold;
+                color: #555;
+                text-align: left;
+                white-space: normal; /* Allow labels to wrap */
+                font-size: 0.9em;
+            }
+
+            table td:nth-of-type(2)::before { content: "Main Ideas/Topics:"; }
+            table td:nth-of-type(3)::before { content: "Technologies/Tools:"; }
+
+            table td ul {
+                padding-left: 15px;
+                margin-top: 5px;
+                margin-bottom: 5px;
+            }
+             table td ul li {
+                margin-bottom: 3px;
+            }
+
+            .container > ul { /* General lists outside table */
+                padding-left: 20px;
+            }
+        }
+
+        @media screen and (max-width: 480px) { /* Smaller Mobile */
+            h1 {
+                font-size: 1.4em;
+            }
+            h2 {
+                font-size: 1.2em;
+            }
+            .container {
+                padding: 15px 10px;
+            }
+            table td { /* Adjust padding for labels on very small screens */
+                padding: 8px 10px 8px 40%;
+            }
+            table td::before { /* Adjust label width */
+                width: calc(40% - 20px);
+                font-size: 0.85em;
+            }
+            table td:first-child { /* Card header padding */
+                padding: 10px 10px;
+                font-size: 1em;
+            }
+             .course-desc {
+                font-size: 1em;
+            }
+        }
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        [cite_start]<h1>Cybersecurity Course Module Summary [cite: 1]</h1>
+        <p class="course-desc">
+             This document provides a summary of the modules covered in the cybersecurity course, outlining the main topics, ideas, and technologies for each section.
+        </p>
+
+        <h2>Course Syllabus</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Module</th>
+                    [cite_start]<th>Main Ideas/Topics [cite: 3]</th>
+                    [cite_start]<th>Technologies/Tools [cite: 3]</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong><a href="chapters/module_1.html">Module 1</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>CIA Triad (Confidentiality, Integrity, Availability) [cite: 3]</li>
+                            [cite_start]<li>Difference between IT, Information Security, and Cybersecurity [cite: 3]</li>
+                            [cite_start]<li>Basic security concepts and terminology [cite: 3]</li>
+                            [cite_start]<li>Introduction to BigTek case study [cite: 3]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>None [cite: 3]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_2.html">Module 2</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Computing basics (CPU, RAM, storage, I/O) [cite: 3]</li>
+                            [cite_start]<li>Operating systems (Windows, Linux, MacOS, Unix) [cite: 3]</li>
+                            [cite_start]<li>Network fundamentals (switches, routers, LANS, WANS) [cite: 3]</li>
+                            [cite_start]<li>Cloud computing and virtualization [cite: 3]</li>
+                            [cite_start]<li>File management and permissions [cite: 3]</li>
+                            [cite_start]<li>OSI model [cite: 3]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Cloud models (IaaS, PaaS, SaaS) [cite: 3]</li>
+                            [cite_start]<li>Networking devices (routers, switches, firewalls) [cite: 3]</li>
+                            [cite_start]<li>Command line tools (bash, nano, vim, top, htop, df, du, TCP Dump, NetStat, Netcat, Dig) [cite: 3]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_3.html">Module 3</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Security fundamentals, CIA Triad, AAA Model, Zero Trust, Morris Worm case study [cite: 3]</li>
+                            [cite_start]<li>Deception and disruption [cite: 3]</li>
+                            [cite_start]<li>Honeypots, honeynets, honeytokens, honeyfiles [cite: 3]</li>
+                            [cite_start]<li>Network security principles [cite: 3]</li>
+                            [cite_start]<li>Ethics in cybersecurity [cite: 3]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Honeypot systems [cite: 3]</li>
+                            [cite_start]<li>Network monitoring tools [cite: 3]</li>
+                            [cite_start]<li>Deception technologies [cite: 3]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_4.html">Module 4</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Types of security controls (technical, physical, administrative) [cite: 3]</li>
+                            [cite_start]<li>Preventive, detective, and corrective controls [cite: 3]</li>
+                            [cite_start]<li>Security control implementation and assessment [cite: 3]</li>
+                            [cite_start]<li>CCTV and motion detection systems [cite: 3]</li>
+                            [cite_start]<li>Risk mitigation strategies [cite: 3]</li>
+                            [cite_start]<li>Layered security approach [cite: 3]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Firewalls, encryption, IDS, security policies [cite: 3]</li>
+                            [cite_start]<li>CCTV systems [cite: 3]</li>
+                            [cite_start]<li>Motion sensors [cite: 3]</li>
+                            [cite_start]<li>Access control systems [cite: 3]</li>
+                            [cite_start]<li>RFID technology [cite: 3]</li>
+                            [cite_start]<li>Encryption tools [cite: 3]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_5.html">Module 5</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Definition and types of threat actors [cite: 3]</li>
+                            [cite_start]<li>Nation-states, hacktivists, insider threats, organized crime [cite: 3]</li>
+                            [cite_start]<li>Threat actor attributes (internal/external, resources, sophistication) [cite: 3]</li>
+                            [cite_start]<li>Motivations (financial gain, espionage, revenge, disruption) [cite: 3]</li>
+                            [cite_start]<li>Real-world examples (WannaCry, NotPetya) [cite: 3]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Attack vector analysis tools [cite: 3]</li>
+                            [cite_start]<li>Threat intelligence platforms [cite: 3]</li>
+                            [cite_start]<li>Social engineering tools [cite: 3]</li>
+                            [cite_start]<li>Malware analysis systems [cite: 3]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_6.html">Module 6</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Threat vectors and attack surfaces [cite: 6]</li>
+                            [cite_start]<li>IoCs (Indicators of Compromise) [cite: 6]</li>
+                            [cite_start]<li>Basic malware analysis techniques [cite: 6]</li>
+                            [cite_start]<li>MITRE ATT&CK Framework navigation [cite: 6]</li>
+                            [cite_start]<li>Threat intelligence and VirusTotal [cite: 6]</li>
+                            [cite_start]<li>File type analysis and hash calculation [cite: 6]</li>
+                            [cite_start]<li>Packer detection (UPX) [cite: 6]</li>
+                            [cite_start]<li>CVE database and vulnerability scoring [cite: 6]</li>
+                            [cite_start]<li>Cyber Kill Chain [cite: 6]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>VirusTotal [cite: 6]</li>
+                            [cite_start]<li>MITRE ATT&CK Navigator [cite: 6]</li>
+                            [cite_start]<li>Linux command line (file, sha256sum) [cite: 6]</li>
+                            [cite_start]<li>UPX packer [cite: 6]</li>
+                            [cite_start]<li>ELF file analysis [cite: 6]</li>
+                            [cite_start]<li>CVE databases [cite: 6]</li>
+                            [cite_start]<li>National Vulnerability Database (NVD) [cite: 6]</li>
+                            [cite_start]<li>EDR solutions [cite: 6]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_7.html">Module 7</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Reactive vs proactive threat mitigation [cite: 6]</li>
+                            [cite_start]<li>Enterprise security posture [cite: 6]</li>
+                            [cite_start]<li>Access controls and identity management [cite: 6]</li>
+                            [cite_start]<li>Incident response planning [cite: 6]</li>
+                            [cite_start]<li>Business continuity and compliance [cite: 6]</li>
+                            [cite_start]<li>Security awareness training [cite: 6]</li>
+                            [cite_start]<li>Network segmentation and Zero Trust [cite: 6]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Access control systems [cite: 6]</li>
+                            [cite_start]<li>Identity management platforms [cite: 6]</li>
+                            [cite_start]<li>Incident response tools [cite: 6]</li>
+                            [cite_start]<li>Security monitoring systems [cite: 6]</li>
+                            [cite_start]<li>Compliance frameworks [cite: 6]</li>
+                            [cite_start]<li>EDR (Endpoint Detection and Response) [cite: 6]</li>
+                            [cite_start]<li>iptables [cite: 6]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_8.html">Module 8</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Infrastructure design considerations [cite: 6]</li>
+                            [cite_start]<li>Network connectivity and security zones [cite: 6]</li>
+                            [cite_start]<li>Device placement and segmentation [cite: 6]</li>
+                            [cite_start]<li>Secure network protocols and encryption [cite: 6]</li>
+                            [cite_start]<li>Zero Trust architecture [cite: 6]</li>
+                            [cite_start]<li>ROI in cybersecurity investments [cite: 6]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Firewalls [cite: 6]</li>
+                            [cite_start]<li>IDS/IPS systems [cite: 6]</li>
+                            [cite_start]<li>Port security (802.1X) [cite: 6]</li>
+                            [cite_start]<li>TLS encryption [cite: 6]</li>
+                            [cite_start]<li>Network segmentation tools [cite: 6]</li>
+                            [cite_start]<li>SNMP monitoring [cite: 6]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_9.html">Module 9</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Data protection principles and methods [cite: 6]</li>
+                            [cite_start]<li>Backup strategies and best practices [cite: 6]</li>
+                            [cite_start]<li>Onsite/offsite backup storage [cite: 6]</li>
+                            [cite_start]<li>Disaster recovery planning [cite: 6]</li>
+                            [cite_start]<li>Testing methods (tabletop, failover, simulation) [cite: 6]</li>
+                            [cite_start]<li>Data encryption and access controls [cite: 6]</li>
+                            [cite_start]<li>Recovery objectives (RTO/RPO) [cite: 6]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Backup systems [cite: 6]</li>
+                            [cite_start]<li>Cloud storage services [cite: 6]</li>
+                            [cite_start]<li>Encryption tools [cite: 6]</li>
+                            [cite_start]<li>Disaster recovery platforms [cite: 6]</li>
+                            [cite_start]<li>Data replication systems [cite: 6]</li>
+                            [cite_start]<li>Journaling systems [cite: 6]</li>
+                            [cite_start]<li>Data loss prevention (DLP) tools [cite: 6]</li>
+                        </ul>
+                    </td>
+                </tr>
+                 <tr>
+                    <td><strong><a href="chapters/module_10.html">Module 10</a></strong></td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>Review [cite: 6]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>(Not specified in summary)</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_11.html">Module 11</a></strong></td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Secure baselines and hardening [cite: 6]</li>
+                           [cite_start]<li>Mobile device management (MDM) [cite: 6]</li>
+                           [cite_start]<li>Asset lifecycle management [cite: 6]</li>
+                           [cite_start]<li>Hardware and software security [cite: 6]</li>
+                           [cite_start]<li>Network device hardening [cite: 6]</li>
+                           [cite_start]<li>Wireless security protocols [cite: 6]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                            [cite_start]<li>MDM solutions [cite: 6]</li>
+                            [cite_start]<li>Mobile device encryption [cite: 6]</li>
+                            [cite_start]<li>Network devices (switches, routers) [cite: 6]</li>
+                            [cite_start]<li>WPA3 wireless security [cite: 6]</li>
+                            [cite_start]<li>Asset management systems [cite: 6]</li>
+                        </ul>
+                    </td>
+                </tr>
+                 <tr>
+                    <td><strong><a href="chapters/module_12.html">Module 12</a></strong></td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Vulnerability identification and assessment [cite: 6]</li>
+                           [cite_start]<li>Vulnerability management lifecycle [cite: 8]</li>
+                           [cite_start]<li>Patch management vs vulnerability management [cite: 8]</li>
+                           [cite_start]<li>Asset discovery and inventory [cite: 8]</li>
+                           [cite_start]<li>Zero-day vulnerabilities [cite: 8]</li>
+                           [cite_start]<li>Log4Shell case study [cite: 8]</li>
+                           [cite_start]<li>Penetration testing and threat intelligence [cite: 8]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Vulnerability scanners [cite: 6]</li>
+                           [cite_start]<li>Patch management systems [cite: 8]</li>
+                           [cite_start]<li>SIEM platforms [cite: 8]</li>
+                           [cite_start]<li>Penetration testing tools [cite: 8]</li>
+                           [cite_start]<li>Threat intelligence platforms [cite: 8]</li>
+                           [cite_start]<li>Configuration management tools [cite: 8]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_13.html">Module 13</a></strong></td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Authentication methods and factors [cite: 8]</li>
+                           [cite_start]<li>IAM components (identification, authentication, authorization) [cite: 8]</li>
+                           [cite_start]<li>Multi-factor authentication [cite: 8]</li>
+                           [cite_start]<li>Network intrusion detection [cite: 8]</li>
+                           [cite_start]<li>Promiscuous mode networking [cite: 8]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Snort IDS [cite: 8]</li>
+                           [cite_start]<li>Ubuntu Linux [cite: 8]</li>
+                           [cite_start]<li>Network monitoring tools [cite: 8]</li>
+                           [cite_start]<li>Authentication systems [cite: 8]</li>
+                           [cite_start]<li>Biometric systems [cite: 8]</li>
+                           [cite_start]<li>MFA solutions [cite: 8]</li>
+                           [cite_start]<li>IAM platforms [cite: 8]</li>
+                        </ul>
+                    </td>
+                </tr>
+                 <tr>
+                    <td><strong><a href="chapters/module_14.html">Module 14</a></strong></td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Security automation principles [cite: 8]</li>
+                           [cite_start]<li>Scripting languages for security [cite: 8]</li>
+                           [cite_start]<li>User and resource provisioning [cite: 8]</li>
+                           [cite_start]<li>Continuous integration and testing [cite: 8]</li>
+                           [cite_start]<li>Ticket creation and escalation [cite: 8]</li>
+                           [cite_start]<li>Guard rails and security groups [cite: 8]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Python [cite: 8]</li>
+                           [cite_start]<li>PowerShell [cite: 8]</li>
+                           [cite_start]<li>Bash [cite: 8]</li>
+                           [cite_start]<li>Perl [cite: 8]</li>
+                           [cite_start]<li>Ruby [cite: 8]</li>
+                           [cite_start]<li>Metasploit [cite: 8]</li>
+                           [cite_start]<li>SIEM tools [cite: 8]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_15.html">Module 15</a></strong></td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Incident response process [cite: 8]</li>
+                           [cite_start]<li>Digital forensics fundamentals [cite: 8]</li>
+                           [cite_start]<li>Chain of custody and legal hold [cite: 8]</li>
+                           [cite_start]<li>E-discovery processes [cite: 8]</li>
+                           [cite_start]<li>Data collection and analysis [cite: 8]</li>
+                           [cite_start]<li>Incident reporting [cite: 8]</li>
+                           [cite_start]<li>Recovery and mitigation [cite: 8]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Forensics tools [cite: 8]</li>
+                           [cite_start]<li>Log analysis systems [cite: 8]</li>
+                           [cite_start]<li>Incident response platforms [cite: 8]</li>
+                           [cite_start]<li>Data recovery tools [cite: 8]</li>
+                           [cite_start]<li>Legal hold systems [cite: 8]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_16.html">Module 16</a></strong></td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Risk mitigation strategies (accept, transfer, reduce, avoid) [cite: 8]</li>
+                           [cite_start]<li>Risk management frameworks (COSO, COBIT, NIST) [cite: 8]</li>
+                           [cite_start]<li>Standards and regulations (CIS Controls, NIST) [cite: 8]</li>
+                           [cite_start]<li>Risk assessment and identification [cite: 8]</li>
+                           [cite_start]<li>Compliance requirements [cite: 8]</li>
+                           [cite_start]<li>NIST Cybersecurity Framework [cite: 8]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>NIST SP 800-53 [cite: 8]</li>
+                           [cite_start]<li>ISO/IEC 27001:2022 [cite: 8]</li>
+                           [cite_start]<li>CIS Controls [cite: 8]</li>
+                           [cite_start]<li>NIST Cybersecurity Framework [cite: 8]</li>
+                           [cite_start]<li>COSO framework [cite: 8]</li>
+                           [cite_start]<li>COBIT framework [cite: 8]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_17.html">Module 17</a></strong></td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Types of regulations (legislation vs executive orders) [cite: 8]</li>
+                           [cite_start]<li>US regulations (HIPAA, CDA, COPPA, Gramm-Leach-Bliley) [cite: 8]</li>
+                           [cite_start]<li>International regulations (GDPR, CCPA, Digital Personal Data Protection Act) [cite: 8]</li>
+                           [cite_start]<li>Government data regulations (FISMA, DFARS, ITAR) [cite: 8]</li>
+                           [cite_start]<li>Compliance strategies and risk management [cite: 8]</li>
+                           [cite_start]<li>Regulatory risk assessment [cite: 11]</li>
+                           [cite_start]<li>Security clearances and data residency [cite: 11]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Compliance management tools [cite: 8]</li>
+                           [cite_start]<li>Data protection platforms [cite: 8]</li>
+                           [cite_start]<li>Security clearance systems [cite: 8]</li>
+                           [cite_start]<li>Government compliance frameworks [cite: 8]</li>
+                           [cite_start]<li>International regulatory frameworks [cite: 8]</li>
+                           [cite_start]<li>Compliance monitoring systems [cite: 8]</li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong><a href="chapters/module_18.html">Module 18</a></strong></td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>AI and machine learning in security [cite: 11]</li>
+                           [cite_start]<li>Blockchain technology applications [cite: 11]</li>
+                           [cite_start]<li>IoT security challenges [cite: 11]</li>
+                           [cite_start]<li>Quantum computing threats [cite: 11]</li>
+                           [cite_start]<li>Deepfakes and AI-powered attacks [cite: 11]</li>
+                           [cite_start]<li>5G security implications [cite: 11]</li>
+                           [cite_start]<li>Edge computing security [cite: 11]</li>
+                        </ul>
+                    </td>
+                    <td>
+                        <ul>
+                           [cite_start]<li>Configuration management tools [cite: 11]</li>
+                           [cite_start]<li>Mobile device encryption [cite: 11]</li>
+                           [cite_start]<li>Hardening tools [cite: 11]</li>
+                           [cite_start]<li>Compliance monitoring systems [cite: 11]</li>
+                           [cite_start]<li>Automated security tools [cite: 11]</li>
+                           [cite_start]<li>Risk assessment platforms [cite: 11]</li>
+                           [cite_start]<li>AI/ML security analytics [cite: 11]</li>
+                           [cite_start]<li>Quantum-resistant encryption [cite: 11]</li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
