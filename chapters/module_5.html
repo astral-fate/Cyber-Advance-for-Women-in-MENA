@@ -1,1 +1,678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 5: Threat Vectors & Attack Surfaces</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
 
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 5: Threat Vectors & Attack Surfaces</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="concepts">Core Concepts</button>
+        <button class="tab-button" data-tab="digital">Digital Vectors</button>
+        <button class="tab-button" data-tab="system">System & Network Vectors</button>
+        <button class="tab-button" data-tab="human">Human-Centric Vectors</button>
+        <button class="tab-button" data-tab="surfaces">Attack Surfaces</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">Threat Vector</button><div class="accordion-panel"><p>The path or method an attacker uses to gain access to a target system or network. Examples include phishing emails, malicious websites, and infected USB drives. [cite: 4236, 4237, 4238]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Attack Surface</button><div class="accordion-panel"><p>The sum of all possible points (vulnerabilities and entry points) where an attacker could potentially launch an attack against a system. [cite: 4238, 4454] Reducing the attack surface is a key defensive principle. [cite: 4456]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Social Engineering</button><div class="accordion-panel"><p>A manipulative technique that exploits human psychology to trick individuals into divulging confidential information or performing actions that compromise security. [cite: 4268, 4485]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Phishing</button><div class="accordion-panel"><p>A social engineering attack that uses fraudulent emails, messages, or websites to trick individuals into revealing sensitive information like passwords or financial details. [cite: 4260]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Smishing</button><div class="accordion-panel"><p>A type of phishing that uses SMS (text messages) as the threat vector to deliver malicious links. </p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Vishing</button><div class="accordion-panel"><p>A type of phishing that uses voice calls to deceive victims into revealing sensitive information.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Spear Phishing</button><div class="accordion-panel"><p>A highly targeted form of phishing that focuses on a specific individual or group, using personalized information to make the attack more convincing. [cite: 4504, 4505]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Whaling</button><div class="accordion-panel"><p>A specialized form of spear phishing that targets high-level executives (the "big phish" or "whales") to steal sensitive corporate information or initiate fraudulent fund transfers. [cite: 4507]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Zero-Day Vulnerability</button><div class="accordion-panel"><p>A vulnerability in software or hardware that is unknown to the vendor and has not been patched. Attackers can exploit it before a fix is available. [cite: 4272, 4346]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Supply Chain Attack</button><div class="accordion-panel"><p>An attack that targets vulnerabilities in an organization's supply chain, such as compromising a software vendor to distribute malware through legitimate updates. [cite: 4281, 4473, 4478]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Insider Threat</button><div class="accordion-panel"><p>A threat originating from within an organization, such as an employee or contractor who intentionally or unintentionally misuses their authorized access. [cite: 4278]</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Steganography</button><div class="accordion-panel"><p>The technique of hiding malicious code or secret data within an ordinary, non-secret file or message (like an image) to avoid detection. [cite: 4318]</p></div></div>
+        </div>
+    </section>
+
+    <section id="concepts" class="main-content">
+         <h2>Core Concepts: Vectors and Surfaces</h2>
+         <div class="process-block">
+            <h3>The Fortress Analogy</h3>
+            <p>
+                Imagine your computer system is a fortress holding valuable assets. [cite: 4236] An attacker wants to get inside.
+            </p>
+            <ul>
+                <li>A <strong>Threat Vector</strong> is the **path or method** the attacker uses to breach the fortress walls. It's the "how" of the attack—like using a grappling hook, a battering ram, or a secret tunnel.</li>
+                <li>The <strong>Attack Surface</strong> is the **sum of all possible entry points and weaknesses** in the fortress. It's every door, window, weak spot in the wall, and unguarded gate combined.</li>
+            </ul>
+            <p>The relationship is dynamic: a threat vector is used to exploit a vulnerability within the attack surface. [cite: 4481] The goal of a defender is to understand the potential vectors and minimize the attack surface as much as possible.</p>
+         </div>
+         <div class="process-block">
+            <h3>Threat Actor Motivations</h3>
+            <p>The type of threat vector used often depends on the attacker's motivation. [cite: 4232] The cyber threat spectrum includes:</p>
+            <ul>
+                <li><strong>Hacktivism:</strong> Using cyberattacks to advance a political or social cause. [cite: 4245]</li>
+                <li><strong>Crime:</strong> Stealing personal information or extorting victims for financial gain. [cite: 4247]</li>
+                <li><strong>Insider Threats:</strong> Misusing legitimate access for personal, financial, or ideological reasons. [cite: 4248, 4278]</li>
+                <li><strong>Espionage:</strong> Nation-state actors stealing sensitive state secrets or intellectual property. [cite: 4250]</li>
+                <li><strong>Terrorism & Warfare:</strong> Sabotaging critical infrastructure or military systems. [cite: 4251, 4252]</li>
+            </ul>
+         </div>
+    </section>
+
+    <section id="digital" class="main-content">
+        <h2>Digital Threat Vectors</h2>
+        <div class="process-block">
+            <h3>Message-Based Vectors</h3>
+            <p>Messages are a primary way attackers deliver malicious content because they exploit a user's trust and curiosity. [cite: 4294]</p>
+            <ul>
+                <li><strong>Email:</strong> This is one of the most common vectors. Attackers use phishing emails designed to look legitimate to trick users into clicking malicious links or downloading infected attachments. [cite: 4295, 4296]
+                    <div class="example"><strong>Case Study:</strong> The DNC email hack, a sophisticated attack, still relied on the cost-effectiveness and high success rate of phishing emails to gain initial access. [cite: 4301]</div>
+                </li>
+                <li><strong>SMS (Smishing):</strong> Attackers send text messages with malicious links, pretending to be from a reputable source like a bank or delivery service. [cite: 4302]
+                    <div class="example"><strong>Case Study:</strong> The threat group "Scattered Spider" used smishing as part of their strategy to carry out data breaches against companies like MGM and Okta. [cite: 4306, 4307]</div>
+                </li>
+                 <li><strong>Instant Messaging (IM):</strong> Platforms like WhatsApp, Signal, and social media DMs are now common vectors for delivering phishing links or impersonating contacts to steal information. [cite: 4309, 4312]</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>File, Image, and Voice Vectors</h3>
+            <ul>
+                <li><strong>File-Based:</strong> Malicious code is hidden within seemingly harmless files like PDFs, Word documents (using macros), or executables disguised as legitimate software. [cite: 4325, 4327, 4328]</li>
+                <li><strong>Image-Based (Steganography):</strong> Malicious code is embedded within an image file in a way that is invisible to the naked eye. [cite: 4318] The code is executed when the image is opened by vulnerable software. [cite: 4319]</li>
+                <li><strong>Voice-Based (Vishing):</strong> Attackers use phone calls to socially engineer victims into revealing sensitive information. [cite: 4334] They may also exploit vulnerabilities in Voice over IP (VoIP) systems to eavesdrop on calls. [cite: 4335]</li>
+                <li><strong>Removable Media:</strong> A classic vector where malware is spread through infected USB drives or external hard drives. The malware can be programmed to run automatically when the device is plugged in. [cite: 4338, 4340]</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="system" class="main-content">
+        <h2>System & Network Vectors</h2>
+        <div class="process-block">
+            <h3>Software & System Vulnerabilities</h3>
+            <p>Attackers exploit flaws in the software and systems that organizations rely on.</p>
+            <ul>
+                <li><strong>Unpatched Vulnerabilities:</strong> Even when a security patch is available, many systems remain unpatched, leaving them open to known exploits. [cite: 4348]</li>
+                <li><strong>Zero-Day Vulnerabilities:</strong> These are flaws unknown to the software vendor, meaning no patch exists. [cite: 4346] They are particularly dangerous because defenders have no direct way to fix them. [cite: 4347]</li>
+                <li><strong>Unsupported Systems:</strong> Legacy systems and applications that no longer receive security updates from the vendor are permanently vulnerable to any new threats discovered. [cite: 4350]</li>
+                <li><strong>Default Credentials:</strong> Many devices and applications ship with default usernames and passwords (like `admin`/`password`). [cite: 4371] Attackers often scan for these as an easy way to gain access. [cite: 4373]</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Unsecure Networks & Open Ports</h3>
+            <ul>
+                <li><strong>Unsecured Wireless Networks:</strong> Public Wi-Fi is notoriously insecure, allowing attackers to intercept data using on-path attacks or packet sniffing. [cite: 4354, 4356]</li>
+                <li><strong>Bluetooth:</strong> Leaving Bluetooth enabled when not in use can allow attackers to connect to your device and steal data through techniques like Bluesnarfing. [cite: 4359, 4360]</li>
+                <li><strong>Open Service Ports:</strong> Every open port on a server is a potential door for an attacker. [cite: 4362] Services that use unencrypted protocols are especially risky:
+                    <ul>
+                        <li><strong>Telnet (Port 23):</strong> Unencrypted remote access. Should be replaced with SSH. [cite: 4364]</li>
+                        <li><strong>FTP (Port 21):</strong> Transmits data and credentials in clear text. Should be replaced with SFTP or FTPS. [cite: 4366]</li>
+                        <li><strong>HTTP (Port 80):</strong> Unencrypted web traffic. Should always be redirected to HTTPS. [cite: 4368]</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="human" class="main-content">
+        <h2>Human-Centric Vectors: Social Engineering</h2>
+        <div class="process-block">
+            <h3>The Art of Deception</h3>
+            <p>
+                Social engineering is the use of psychological manipulation to trick people into making security mistakes or giving away sensitive information. It preys on human vulnerabilities like trust, urgency, and fear.
+            </p>
+        </div>
+        <div class="process-block">
+            <h3>Phishing in its Many Forms</h3>
+            <p>Phishing is the most common form of social engineering. While standard phishing casts a wide net, there are more targeted and sophisticated variants:</p>
+            <ul>
+                <li><strong>Spear Phishing:</strong> A targeted attack against a specific individual or group. The attacker uses personal information (gathered from social media or data breaches) to craft a highly convincing and personalized message.</li>
+                <li><strong>Whaling:</strong> A type of spear phishing aimed at high-profile targets like CEOs and CFOs. The goal is often to trick them into authorizing large fraudulent wire transfers. 
+                    <div class="example"><strong>Case Study:</strong> The Bangladesh Bank heist involved threat actors using social engineering to attempt the fraudulent transfer of nearly \$1 billion, successfully stealing \$81 million. </div>
+                </li>
+                <li><strong>Business Email Compromise (BEC):</strong> An attack where a criminal compromises or impersonates a business email account to trick employees or partners into making unauthorized financial transactions. </li>
+                <li><strong>Impersonation & Misinformation:</strong> Attackers may pretend to be someone else (like a support technician) or spread false information to manipulate a target's actions.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="surfaces" class="main-content">
+        <h2>Understanding Attack Surfaces</h2>
+        <div class="process-block">
+            <h3>What Makes Up the Attack Surface?</h3>
+            <p>
+                An attack surface is the sum of all points where an attacker could potentially exploit vulnerabilities. The goal for defenders is to reduce this surface as much as possible. Examples include:
+            </p>
+            <ul>
+                <li><strong>Network Interfaces:</strong> Every connection point, like Wi-Fi, Ethernet, and Bluetooth.</li>
+                <li><strong>Software Interfaces:</strong> APIs, libraries, and any other channels that allow software to interact.</li>
+                <li><strong>User Inputs:</strong> Web forms, login screens, and file upload fields. </li>
+                <li><strong>Physical Access:</strong> Unlocked server rooms or unprotected hardware.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>The Supply Chain Attack Surface</h3>
+            <p>
+                The supply chain includes all third-party vendors, suppliers, and software that an organization uses. A supply chain attack occurs when an attacker compromises a trusted third party to gain access to the final target. [cite: 4281] This is a particularly dangerous attack surface because it bypasses the target's direct defenses.
+            </p>
+            <div class="example">
+                <strong>Case Study - SolarWinds:</strong> In one of the most significant supply chain attacks, Russian state-sponsored actors compromised the software company SolarWinds. They injected malicious code into a legitimate software update for the Orion IT management tool. This trojanized update was then sent out to thousands of SolarWinds customers, including U.S. government agencies, giving the attackers a backdoor into their networks. [cite: 4473]
+            </div>
+            <div class="example">
+                <strong>Case Study - Bit9:</strong> Bit9, a security company, was compromised by attackers who then used the company's own systems to try and authorize malware on their customers' machines. This highlights how an attack on a vendor can undermine the very security product its customers rely on. [cite: 4475, 4477]
+            </div>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "The path or method an attacker uses to access a target is called a _______.", options: ["Attack Surface", "Vulnerability", "Threat Vector", "Zero-Day"], answer: "Threat Vector" },
+        { question: "A phishing attack that uses SMS text messages as its vector is known as _______.", options: ["Vishing", "Pharming", "Smishing", "Whaling"], answer: "Smishing" },
+        { question: "The sum of all possible entry points and vulnerabilities in a system is its _______.", options: ["Threat Vector", "Attack Surface", "Security Posture", "Threat Landscape"], answer: "Attack Surface" },
+        { question: "The technique of hiding malicious code inside an ordinary file, like an image, is called _______.", options: ["Encryption", "Obfuscation", "Steganography", "Compression"], answer: "Steganography" },
+        { question: "A highly targeted phishing attack aimed at a CEO or other high-level executive is known as _______.", options: ["Spear Phishing", "Smishing", "Vishing", "Whaling"], answer: "Whaling" },
+        { question: "A vulnerability that is unknown to the software vendor and has no available patch is called a _______.", options: ["Unpatched Vulnerability", "Legacy Vulnerability", "Zero-Day Vulnerability", "Client-Side Vulnerability"], answer: "Zero-Day Vulnerability" },
+        { question: "An attack that targets a trusted third-party vendor to compromise the final target is called a _______ attack.", options: ["Insider", "Social Engineering", "Supply Chain", "Physical"], answer: "Supply Chain" },
+        { question: "_______ is the use of psychological manipulation to trick individuals into divulging confidential information.", options: ["Brute Force", "Social Engineering", "Malware", "DoS Attack"], answer: "Social Engineering" }
+    ];
+
+    const trueOrFalse = [
+        { question: "A threat vector and an attack surface are the same thing.", answer: false },
+        { question: "Phishing is a type of malware.", answer: false },
+        { question: "The SolarWinds incident was a classic example of a supply chain attack.", answer: true },
+        { question: "Vishing attacks are conducted through email.", answer: false },
+        { question: "Reducing the attack surface is a key goal of cybersecurity defense.", answer: true },
+        { question: "Default credentials like 'admin'/'password' are secure because they are well-known.", answer: false },
+        { question: "Spear phishing is less targeted than general phishing.", answer: false },
+        { question: "Leaving network ports like Telnet (23) and FTP (21) open to the internet is considered a security best practice.", answer: false },
+        { question: "An insider threat originates from outside the organization's network.", answer: false },
+        { question: "Business Email Compromise (BEC) is a type of attack where criminals compromise email accounts to conduct fraud.", answer: true }
+    ];
+
+    const multipleChoice = [
+        { question: "An employee receives a text message pretending to be from their bank, asking them to click a link to verify their account. What is this type of attack called?", options: ["Vishing", "Smishing", "Pharming", "Whaling"], answer: "Smishing" },
+        { question: "The DNC email hack and the Scattered Spider group's attacks on MGM both heavily utilized which threat vector?", options: ["Infected USB drives", "Zero-day exploits", "Message-based vectors (email and SMS)", "Physical attacks"], answer: "Message-based vectors (email and SMS)" },
+        { question: "An attacker compromises a software vendor and injects malicious code into a legitimate software update that is then distributed to customers. What is this an example of?", options: ["A brute force attack", "A supply chain attack", "A denial-of-service attack", "A physical attack"], answer: "A supply chain attack" },
+        { question: "Which of the following is NOT considered part of an organization's attack surface?", options: ["An open FTP port on a server", "A web application's login form", "A company's well-publicized quarterly earnings report", "An unpatched software library used by developers"], answer: "A company's well-publicized quarterly earnings report" },
+        { question: "A company's new smart thermostats are shipped with the username 'root' and password 'root'. This is an example of what kind of vulnerability?", options: ["Zero-day vulnerability", "Default credentials", "Unsecure wireless network", "Social engineering"], answer: "Default credentials" },
+        { question: "An attacker calls an employee pretending to be an IT help desk technician and convinces them to reveal their password. This is a classic example of:", options: ["Malware", "A supply chain attack", "Social engineering", "A zero-day exploit"], answer: "Social engineering" },
+        { question: "Which of the following attack vectors uses voice calls to deceive victims?", options: ["Phishing", "Smishing", "Vishing", "Whaling"], answer: "Vishing" },
+        { question: "The NSA and CISA recommend mitigating risks from misconfigurations by removing default credentials, disabling unnecessary services, and _______.", options: ["Opening more ports", "Hiring more staff", "Regularly patching software", "Increasing the attack surface"], answer: "Regularly patching software" },
+        { question: "What is the primary goal of a 'Whaling' attack?", options: ["To infect as many computers as possible with a worm", "To target a high-level executive to steal sensitive data or authorize fraudulent transactions", "To shut down a website with a DDoS attack", "To steal Wi-Fi passwords from a public network"], answer: "To target a high-level executive to steal sensitive data or authorize fraudulent transactions" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
