@@ -1,1 +1,625 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 9: Data Protection & Recovery</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 9: Data Protection & Recovery</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="protection">Data Protection & Resilience</button>
+        <button class="tab-button" data-tab="recovery">Backup & Recovery</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">Data Protection</button><div class="accordion-panel"><p>A comprehensive approach to securing information from corruption, compromise, or loss, ensuring its confidentiality, integrity, and availability.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Data States</button><div class="accordion-panel"><p>The different forms data can be in. <strong>Data at Rest</strong> is stored data, <strong>Data in Transit</strong> is data moving across a network, and <strong>Data in Use</strong> is data being processed by an application.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Encryption</button><div class="accordion-panel"><p>The process of converting data into a coded format (ciphertext) that can only be read with a specific key. <strong>Symmetric encryption</strong> uses one key for both encryption and decryption, while <strong>Asymmetric encryption</strong> uses a public key to encrypt and a private key to decrypt.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Hashing</button><div class="accordion-panel"><p>A one-way process that transforms data into a fixed-size string of characters. It's used to verify data integrity and store passwords securely.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Tokenization</button><div class="accordion-panel"><p>The process of replacing sensitive data with a non-sensitive equivalent, referred to as a "token," that has no extrinsic or exploitable meaning or value.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Data Sovereignty</button><div class="accordion-panel"><p>The concept that digital data is subject to the laws of the country in which it is physically located.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Cyber Resilience</button><div class="accordion-panel"><p>The ability to anticipate, withstand, recover from, and adapt to adverse cyber events and disruptions.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">High Availability (HA)</button><div class="accordion-panel"><p>A system design approach that ensures a high level of operational performance, usually uptime, for a higher than normal period. It relies on redundancy to eliminate single points of failure.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Load Balancing</button><div class="accordion-panel"><p>Distributing network or application traffic across multiple servers to ensure no single server becomes a bottleneck, improving responsiveness and availability.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Clustering</button><div class="accordion-panel"><p>A group of servers that work together as a single system to provide high availability. If one server fails, another in the cluster takes over its workload.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Backup</button><div class="accordion-panel"><p>The process of creating a copy of data that can be recovered in the event of a primary data failure. Types include <strong>Full</strong>, <strong>Incremental</strong>, and <strong>Differential</strong>.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Disaster Recovery (DR) Plan</button><div class="accordion-panel"><p>A documented, structured approach with instructions for responding to unplanned incidents. It focuses on restoring IT systems and data.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">RTO (Recovery Time Objective)</button><div class="accordion-panel"><p>The maximum acceptable length of time that a system can be down after a failure or disaster occurs. It answers the question: "How quickly do we need to be back up?"</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">RPO (Recovery Point Objective)</button><div class="accordion-panel"><p>The maximum acceptable amount of data loss an organization can tolerate. It answers the question: "How much data can we afford to lose?"</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">RAID (Redundant Array of Independent Disks)</button><div class="accordion-panel"><p>A data storage virtualization technology that combines multiple physical disk drive components into one or more logical units for the purposes of data redundancy, performance improvement, or both.</p></div></div>
+        </div>
+    </section>
+
+    <section id="protection" class="main-content">
+         <h2>Data Protection & Resilience</h2>
+         <div class="process-block">
+            <h3>The Pillars of Data Protection</h3>
+            <p>Effective data protection is built upon ensuring three core principles, often called the CIA Triad.</p>
+            <ul>
+                <li><strong>Confidentiality:</strong> Preventing the unauthorized disclosure of information. Key tools include encryption and access controls.</li>
+                <li><strong>Integrity:</strong> Maintaining the accuracy and consistency of data over its entire lifecycle. Key tools include hashing and file integrity monitoring.</li>
+                <li><strong>Availability:</strong> Ensuring that data is accessible and usable upon demand by an authorized user. Key tools include redundancy, backups, and high-availability systems.</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Data Classification & Types</h3>
+            <p>Not all data is created equal. To protect it properly, you must first understand what you have. Data is classified based on its sensitivity.</p>
+            <ul>
+                <li><strong>Public:</strong> Information intended for public consumption.</li>
+                <li><strong>Confidential/Restricted:</strong> Information that would cause harm to the organization if disclosed.</li>
+                <li><strong>Sensitive/Private:</strong> Highly sensitive personal data (PII, PHI) protected by regulations like GDPR and HIPAA.</li>
+                <li><strong>Critical:</strong> Data essential for the survival and operation of the organization.</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Building Cyber Resilience</h3>
+            <p>Resilience is about more than just preventing attacks; it's about being able to withstand and recover from them. This is built into the security architecture.</p>
+            <ul>
+                <li><strong>High Availability (HA):</strong> Uses redundancy to eliminate single points of failure. This is often achieved through:
+                    <ul>
+                        <li><strong>Load Balancing:</strong> Spreads traffic across multiple servers. If one server fails, the load balancer redirects its traffic to healthy servers.</li>
+                        <li><strong>Clustering:</strong> Groups servers together to act as a single system. If one "node" in the cluster fails, another takes over its processes seamlessly.</li>
+                    </ul>
+                </li>
+                 <li><strong>Platform Diversity:</strong> Using different hardware or software platforms for primary and backup systems to prevent a single vulnerability from affecting both.</li>
+                 <li><strong>Multi-Cloud Systems:</strong> Distributing applications across multiple cloud providers to avoid a single point of failure if one provider has an outage.</li>
+            </ul>
+         </div>
+    </section>
+
+    <section id="recovery" class="main-content">
+        <h2>Backup & Recovery</h2>
+        <div class="process-block">
+            <h3>Backup Strategies</h3>
+            <p>A robust backup strategy is the foundation of data recovery. Key strategies include:</p>
+            <ul>
+                <li><strong>Backup Types:</strong>
+                    <ul>
+                       <li><strong>Full Backup:</strong> A complete copy of all data. It is the most complete but also the most time and storage-intensive.</li>
+                       <li><strong>Incremental Backup:</strong> Backs up only the data that has changed since the *last backup* (of any type). Restores require the last full backup plus all subsequent incremental backups.</li>
+                       <li><strong>Differential Backup:</strong> Backs up only the data that has changed since the *last full backup*. Restores are faster than incremental, requiring only the last full backup and the last differential backup.</li>
+                    </ul>
+                </li>
+                <li><strong>The 3-2-1 Rule:</strong> A widely accepted best practice.
+                    <ul>
+                        <li>Keep at least <strong>3</strong> copies of your data.</li>
+                        <li>Store the copies on <strong>2</strong> different media.</li>
+                        <li>Keep <strong>1</strong> copy offsite.</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Disaster Recovery (DR) Planning</h3>
+            <p>A Disaster Recovery Plan (DRP) is the detailed playbook for how to restore IT operations after a major disruption.</p>
+            <ul>
+                <li><strong>RTO and RPO:</strong> These two metrics define the goals of the DRP. RTO (Recovery Time Objective) dictates the maximum acceptable downtime. RPO (Recovery Point Objective) dictates the maximum acceptable data loss.</li>
+                <li><strong>Recovery Sites:</strong>
+                    <ul>
+                        <li><strong>Hot Site:</strong> A fully equipped and operational duplicate of the primary site, ready for immediate failover. (RTO in minutes/hours).</li>
+                        <li><strong>Warm Site:</strong> Partially equipped with some infrastructure, but requires data to be restored. (RTO in hours/days).</li>
+                        <li><strong>Cold Site:</strong> A basic facility with power and cooling, but no equipment. Requires full setup. (RTO in days/weeks).</li>
+                    </ul>
+                </li>
+                <li><strong>Testing:</strong> A plan that isn't tested is just a document. Regular testing (e.g., tabletop exercises, failover tests) is essential to ensure the DRP actually works.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "The concept that data is subject to the laws of the country where it is stored is known as data _______.", options: ["Resilience", "Sovereignty", "Classification", "Geolocation"], answer: "Sovereignty" },
+        { question: "The ability to anticipate, withstand, and recover from cyber attacks is known as cyber _______.", options: ["Security", "Defense", "Resilience", "Recovery"], answer: "Resilience" },
+        { question: "A _______ backup only copies data that has changed since the last full backup.", options: ["Full", "Incremental", "Differential", "Partial"], answer: "Differential" },
+        { question: "_______ encryption uses two different keys: one public and one private.", options: ["Symmetric", "Asymmetric", "Homomorphic", "Standard"], answer: "Asymmetric" },
+        { question: "The maximum acceptable amount of data loss after an incident is defined by the _______.", options: ["RTO", "SLA", "RPO", "BCP"], answer: "RPO" },
+        { question: "A _______ site is a disaster recovery facility that is fully equipped and ready for immediate use.", options: ["Warm", "Cold", "Backup", "Hot"], answer: "Hot" },
+        { question: "The _______ rule is a best practice stating you should have 3 copies of your data on 2 different media, with 1 copy offsite.", options: ["3-2-1", "ABC", "CIA", "DRP"], answer: "3-2-1" },
+        { question: "_______ combines multiple physical disks into a single logical unit to provide redundancy and performance benefits.", options: ["Clustering", "RAID", "Load Balancing", "Replication"], answer: "RAID" }
+    ];
+
+    const trueOrFalse = [
+        { question: "Hashing is a reversible process, meaning you can easily retrieve the original data from its hash.", answer: false },
+        { question: "A load balancer's primary purpose is to provide fault tolerance through data mirroring.", answer: false },
+        { question: "RTO (Recovery Time Objective) measures the maximum acceptable downtime.", answer: true },
+        { question: "An incremental backup is typically larger than a differential backup.", answer: false },
+        { question: "A cold site offers the fastest recovery time among disaster recovery sites.", answer: false },
+        { question: "The 'Integrity' part of the CIA Triad ensures that data is only accessible to authorized users.", answer: false },
+        { question: "Data in transit refers to data that is being processed by a CPU.", answer: false },
+        { question: "The 3-2-1 backup rule suggests keeping one of your backup copies in an offsite location.", answer: true },
+        { question: "In a failover cluster, if one server fails, another automatically takes over its workload.", answer: true },
+        { question: "Data classification is the process of creating copies of data for recovery purposes.", answer: false }
+    ];
+
+    const multipleChoice = [
+        { question: "Which of the following best describes the purpose of data tokenization?", options: ["To encrypt data so it cannot be read.", "To replace sensitive data with a non-sensitive equivalent.", "To create a one-way hash of the data.", "To move data to an offsite location."], answer: "To replace sensitive data with a non-sensitive equivalent." },
+        { question: "An organization determines it cannot afford to lose more than 4 hours of transaction data. This metric is its:", options: ["Recovery Time Objective (RTO)", "Recovery Point Objective (RPO)", "Maximum Tolerable Downtime (MTD)", "Service Level Agreement (SLA)"], answer: "Recovery Point Objective (RPO)" },
+        { question: "Which RAID level provides mirroring for redundancy but does not improve performance through striping?", options: ["RAID 0", "RAID 1", "RAID 5", "RAID 10"], answer: "RAID 1" },
+        { question: "A discussion-based drill where a team walks through a disaster scenario without touching any actual systems is called a:", options: ["Failover Test", "Simulation", "Tabletop Exercise", "Parallel Processing Test"], answer: "Tabletop Exercise" },
+        { question: "Which of the following is a primary benefit of using a multi-cloud strategy for resilience?", options: ["It simplifies security management.", "It reduces costs by using only one vendor.", "It mitigates the risk of a single cloud provider's outage.", "It guarantees compliance with all international data laws."], answer: "It mitigates the risk of a single cloud provider's outage." },
+        { question: "What is the key difference between load balancing and clustering for high availability?", options: ["Load balancing uses multiple sites, clustering uses one.", "Load balancing distributes traffic; clustering makes multiple servers act as one system for failover.", "Clustering is for web traffic, load balancing is for databases.", "There is no significant difference."], answer: "Load balancing distributes traffic; clustering makes multiple servers act as one system for failover." },
+        { question: "Your last full backup was on Sunday. On Wednesday, you run a backup that saves all changes made since Sunday. What type of backup did you perform?", options: ["Full", "Incremental", "Differential", "Snapshot"], answer: "Differential" },
+        { question: "Protecting data while it is being sent over the internet is known as protecting data _______.", options: ["at rest", "in use", "in motion", "in storage"], answer: "in motion" },
+        { question: "Which phase of the incident response process focuses on isolating affected systems to prevent an attack from spreading?", options: ["Identification", "Eradication", "Containment", "Recovery"], answer: "Containment" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
