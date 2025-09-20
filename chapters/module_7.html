@@ -1,1 +1,650 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 7: Enterprise Threat Mitigation</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 7: Enterprise Threat Mitigation</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="posture">Security Posture</button>
+        <button class="tab-button" data-tab="proactive">Proactive Controls</button>
+        <button class="tab-button" data-tab="reactive">Reactive Strategies</button>
+        <button class="tab-button" data-tab="monitoring">Monitoring</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Security Posture</button><div class="accordion-panel"><p>An organization's overall cybersecurity strength and resilience against cyber threats[cite: 5, 1503]. [cite_start]It's a holistic view of security readiness, including systems, policies, and controls[cite: 8].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Proactive Mitigation</button><div class="accordion-panel"><p>A preventative approach to cybersecurity that focuses on identifying and addressing vulnerabilities before an incident occurs[cite: 143, 1537].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Reactive Mitigation</button><div class="accordion-panel"><p>An approach that involves responding to security incidents after they have occurred, with a focus on damage control and recovery[cite: 138, 1525].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Access Control</button><div class="accordion-panel"><p>Security measures that regulate who or what can view, use, or access resources in a computing environment[cite: 237, 1564].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Least Privilege</button><div class="accordion-panel"><p>A principle where users are given only the minimum levels of access—or permissions—necessary to perform their job functions[cite: 1622, 1653].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Zero Trust</button><div class="accordion-panel"><p>A security model based on the principle of "never trust, always verify," which requires strict authentication for every user and device trying to access resources, regardless of their location[cite: 386, 1632].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Multi-Factor Authentication (MFA)</button><div class="accordion-panel"><p>A security system requiring two or more verification factors to gain access, such as something you know (password), something you have (phone), and something you are (biometric)[cite: 344, 1604].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Application Allow List</button><div class="accordion-panel"><p>A security practice that only permits pre-approved applications to run on a system, blocking all others by default to prevent unauthorized software and malware[cite: 520, 1662].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Network Segmentation</button><div class="accordion-panel"><p>The practice of dividing a network into smaller, isolated segments to improve security and contain the spread of threats[cite: 567, 1685]. [cite_start]This is often compared to a ship's watertight compartments[cite: 1105].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Patch Management</button><div class="accordion-panel"><p>The process of identifying, acquiring, testing, and deploying software patches to address security vulnerabilities[cite: 758, 1765].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">IT Asset Decommissioning</button><div class="accordion-panel"><p>The process of securely retiring and removing outdated systems and equipment from the network to prevent them from becoming security liabilities[cite: 835, 1773]. [cite_start]This includes secure data sanitization[cite: 881].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Endpoint Protection</button><div class="accordion-panel"><p>Security solutions that safeguard end-user devices like laptops, servers, and mobile phones from cyber threats[cite: 895, 1785]. [cite_start]Modern solutions include Endpoint Detection and Response (EDR)[cite: 1541, 1798].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Incident Response (IR)</button><div class="accordion-panel"><p>A structured approach to managing the aftermath of a security breach to limit damage and reduce recovery time[cite: 1178, 1820].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Disaster Recovery (DR)</button><div class="accordion-panel"><p>A plan focused on restoring IT systems and data after a disruptive incident[cite: 1270, 1855].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">Business Continuity (BC)</button><div class="accordion-panel"><p>A broader strategic plan to ensure an organization can maintain essential functions during and after a disaster[cite: 1352, 1871].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">RTO & RPO</button><div class="accordion-panel"><p><b>Recovery Time Objective (RTO)</b> is the maximum acceptable downtime for a system after a disaster[cite: 1311]. [cite_start]<b>Recovery Point Objective (RPO)</b> is the maximum acceptable amount of data loss, measured in time[cite: 1313].</p></div></div>
+            [cite_start]<div class="accordion-item"><button class="accordion-header">SIEM (Security Information and Event Management)</button><div class="accordion-panel"><p>A solution that collects and analyzes security data from various sources to provide a centralized view of security events and detect threats in real-time[cite: 1448, 1897].</p></div></div>
+        </div>
+    </section>
+
+    <section id="posture" class="main-content">
+         <h2>Understanding Security Posture</h2>
+         <div class="process-block">
+            <h3>What is Security Posture?</h3>
+            <p>
+                [cite_start]An organization's security posture is its overall cybersecurity strength and readiness to handle cyber threats[cite: 5, 1503]. [cite_start]It's a comprehensive view of all security components, including hardware, software, policies, and employee training[cite: 34, 1499]. [cite_start]A strong security posture is crucial for protecting sensitive data, maintaining business operations, and complying with regulations[cite: 83, 85, 87, 1506, 1508, 1510].
+            </p>
+         </div>
+         <div class="process-block">
+            <h3>Proactive vs. Reactive Mitigation</h3>
+            <p>Organizations use two main approaches to mitigate threats. A mature strategy requires a balance of both.</p>
+            <ul>
+                [cite_start]<li><strong>Proactive (Prevention-First):</strong> This approach focuses on preventing incidents before they happen[cite: 150, 1537]. [cite_start]It involves strategic planning, such as implementing security policies, conducting regular vulnerability assessments, and training employees[cite: 161, 162, 163, 164]. [cite_start]The goal is to strengthen defenses and reduce the risk of an attack succeeding[cite: 170, 1534].</li>
+                [cite_start]<li><strong>Reactive (Damage Control):</strong> This approach focuses on responding to an incident after it has occurred[cite: 138, 1525]. [cite_start]It includes having an incident response plan, disaster recovery procedures, and business continuity plans to minimize damage, data loss, and downtime[cite: 146, 166].</li>
+            </ul>
+            <div class="example">
+                <strong>Analogy:</strong> A <strong>proactive</strong> approach is like installing smoke detectors, having fire extinguishers, and using fire-retardant building materials. A <strong>reactive</strong> approach is the fire department's plan to put out the fire once it starts.
+            </div>
+         </div>
+    </section>
+
+    <section id="proactive" class="main-content">
+        <h2>Proactive Controls & Hardening</h2>
+        <div class="process-block">
+            <h3>Access Control</h3>
+            [cite_start]<p>Access control is a foundational security measure that determines who can access what resources[cite: 237, 1564].</p>
+            <ul>
+                [cite_start]<li><strong>Least Privilege:</strong> This principle ensures that users and systems are only granted the absolute minimum permissions required to perform their tasks[cite: 1622, 1653]. [cite_start]For example, marketing staff should have access to marketing files but not sensitive financial records[cite: 499, 1654].</li>
+                [cite_start]<li><strong>Zero Trust:</strong> This modern framework operates on the principle "never trust, always verify"[cite: 386]. It eliminates implicit trust based on network location and requires continuous, strict verification for every access request. [cite_start]This helps prevent lateral movement if an attacker breaches the network[cite: 395, 1635].</li>
+                [cite_start]<li><strong>Multi-Factor Authentication (MFA):</strong> MFA adds a critical layer of security by requiring two or more verification factors, making it much harder for an attacker with a stolen password to gain access[cite: 344, 1604]. [cite_start]The 2021 Colonial Pipeline attack was enabled by a compromised VPN password on an account that lacked MFA[cite: 364].</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>System & Network Security</h3>
+            <ul>
+                <li><strong>Application Allow Lists:</strong> This technique prevents unauthorized software from running by maintaining a list of approved applications. [cite_start]Anything not on the list is blocked by default[cite: 520, 1663].
+                    [cite_start]<br><em>Case Study:</em> The Bit9 hack showed the limits of this approach, as attackers stole the company's code-signing keys to make their malware appear as trusted, legitimate software[cite: 539, 540, 1670].
+                </li>
+                [cite_start]<li><strong>Network Segmentation:</strong> This involves dividing a network into smaller, isolated zones to contain threats[cite: 567]. [cite_start]Like watertight compartments on a ship, if one segment is breached, the damage is contained and cannot easily spread to the entire network[cite: 1105, 1691].</li>
+                [cite_start]<li><strong>Patch Management:</strong> This is the critical process of applying updates to software to fix known vulnerabilities[cite: 1765].
+                    [cite_start]<br><em>Case Study:</em> The 2017 Equifax data breach, which affected 147 million people, was caused by the company's failure to patch a known vulnerability in its web application framework for two months[cite: 800, 801, 802].
+                </li>
+                 <li><strong>IT Asset Decommissioning:</strong> Securely retiring old hardware and software is crucial. [cite_start]Abandoned systems can become unpatched, unmonitored entry points for attackers[cite: 1123].
+                    [cite_start]<br><em>Case Study:</em> A former Cisco employee deleted over 450 virtual machines after resigning because their access was not properly decommissioned, costing the company \$2.4 million[cite: 889, 891].
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="reactive" class="main-content">
+        <h2>Reactive Strategies: Response & Recovery</h2>
+        <div class="process-block">
+            <h3>Incident Response (IR)</h3>
+            <p>An Incident Response (IR) plan is a structured set of procedures for handling a security breach. [cite_start]The goal is to limit damage and recover quickly[cite: 1178]. The process generally follows these phases:</p>
+            <ol>
+                [cite_start]<li><strong>Preparation:</strong> Establishing an IR team, tools, and a plan before an incident occurs[cite: 1218, 1823].</li>
+                [cite_start]<li><strong>Identification / Detection & Analysis:</strong> Confirming that an incident has occurred and determining its scope and impact[cite: 1220, 1826].</li>
+                [cite_start]<li><strong>Containment:</strong> Isolating affected systems to prevent the threat from spreading further[cite: 1227, 1829].</li>
+                [cite_start]<li><strong>Eradication:</strong> Removing the threat and any related vulnerabilities from the environment[cite: 1227, 1829].</li>
+                [cite_start]<li><strong>Recovery:</strong> Restoring systems to normal operation from clean backups[cite: 1232, 1832].</li>
+                [cite_start]<li><strong>Lessons Learned:</strong> Analyzing the incident and the response to improve future security[cite: 1236, 1835].</li>
+            </ol>
+            <div class="example">
+                <strong>Case Study - Failed IR:</strong> In 2016, Uber suffered a breach affecting 57 million users. [cite_start]Instead of disclosing it, they paid the hackers \$100,000 as a "bug bounty" to delete the data, leading to massive fines and reputational damage when the cover-up was revealed[cite: 1264, 1265, 1266].
+            </div>
+        </div>
+        <div class="process-block">
+            <h3>Disaster Recovery (DR) & Business Continuity (BC)</h3>
+            <p>While often related, these are two distinct concepts:</p>
+            <ul>
+                [cite_start]<li><strong>Disaster Recovery (DR):</strong> This is a subset of BC focused specifically on restoring IT infrastructure and data after a disaster[cite: 1270, 1855]. [cite_start]It is guided by metrics like RTO (how quickly you need to be back up) and RPO (how much data you can afford to lose)[cite: 1272].</li>
+                [cite_start]<li><strong>Business Continuity (BC):</strong> This is a holistic, organization-wide strategy for maintaining essential business functions during and after a disruption[cite: 1352, 1871]. It covers not just IT, but also personnel, facilities, and supply chains.</li>
+            </ul>
+             <div class="example">
+                <strong>Case Study - The Importance of Offline Backups:</strong> In 2017, the shipping giant Maersk was completely crippled by the NotPetya wiper malware. They were only able to recover because a single, critical domain controller in their Ghana office happened to be offline due to a power outage. [cite_start]This one offline backup became the key to rebuilding their entire global network[cite: 1304, 1305, 1306].
+            </div>
+        </div>
+    </section>
+
+    <section id="monitoring" class="main-content">
+        <h2>Continuous Monitoring & Intelligence</h2>
+        <div class="process-block">
+            <h3>The Vigilant Watch</h3>
+            <p>You can't protect against what you can't see. [cite_start]Continuous monitoring involves the real-time surveillance of all systems, networks, and logs to detect signs of suspicious activity[cite: 1895].</p>
+            <ul>
+                <li><strong>Security Information and Event Management (SIEM):</strong> SIEM systems are a core technology for monitoring. [cite_start]They collect, aggregate, and correlate log data from countless sources (firewalls, servers, applications) into a single centralized platform[cite: 1448]. [cite_start]This allows security analysts to detect complex attack patterns that would be invisible in isolated logs[cite: 1460].</li>
+                [cite_start]<li><strong>Threat Intelligence:</strong> This involves using data on emerging threats, new malware, and attacker tactics to proactively strengthen defenses[cite: 1899]. [cite_start]A threat intelligence feed can warn you about a new ransomware strain, allowing you to update your defenses before you are targeted[cite: 1903].</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Case Study: Monitoring in Action</h3>
+            <p>
+                [cite_start]In December 2023, the IT and security team at the gaming company Ubisoft detected an ongoing cyberattack[cite: 1470, 1909]. [cite_start]Threat actors had gained access and were attempting to exfiltrate 900GB of data, including user data for the game Rainbow Six Siege[cite: 1470, 1916]. [cite_start]Because of their effective continuous monitoring and rapid incident response, the Ubisoft team was able to revoke the attacker's access before the data could be stolen, preventing a massive data breach[cite: 1470, 1472, 1910].
+            </p>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "An organization's overall cybersecurity strength and readiness is known as its security _______.", options: ["Framework", "Posture", "Policy", "Baseline"], answer: "Posture" },
+        { question: "The security principle of granting users only the minimum permissions necessary to do their jobs is called _______.", options: ["Zero Trust", "Role-Based Access Control", "Need to Know", "Least Privilege"], answer: "Least Privilege" },
+        { question: "A _______ plan focuses on restoring IT infrastructure after a major disruption.", options: ["Business Continuity", "Incident Response", "Disaster Recovery", "Risk Assessment"], answer: "Disaster Recovery" },
+        { question: "A _______ is a security technology that aggregates and analyzes log data from multiple sources to detect threats.", options: ["Firewall", "EDR", "SIEM", "VPN"], answer: "SIEM" },
+        { question: "The security model based on the principle 'never trust, always verify' is known as _______.", options: ["MFA", "Least Privilege", "Zero Trust", "Proactive Defense"], answer: "Zero Trust" },
+        { question: "_______ is the process of applying software updates to fix known security vulnerabilities.", options: ["Hardening", "Decommissioning", "Patch Management", "Configuration"], answer: "Patch Management" },
+        { question: "Dividing a network into smaller, isolated sub-networks to contain breaches is called network _______.", options: ["Hardening", "Isolation", "Segmentation", "Clustering"], answer: "Segmentation" },
+        { question: "A _______ approach to security focuses on prevention, while a reactive approach focuses on response.", options: ["Passive", "Proactive", "Dynamic", "Static"], answer: "Proactive" }
+    ];
+
+    const trueOrFalse = [
+        { question: "A proactive threat mitigation strategy involves responding to security incidents only after they occur.", answer: false },
+        { question: "The Colonial Pipeline attack was successful because the compromised VPN account was protected by MFA.", answer: false },
+        { question: "Business Continuity Planning is a broader concept than Disaster Recovery, covering all essential business functions, not just IT.", answer: true },
+        { question: "An Application Allow List works by blocking a list of known malicious applications.", answer: false },
+        { question: "The 'Recovery' phase of incident response involves analyzing the incident to improve future security.", answer: false },
+        { question: "The Maersk company's recovery from the NotPetya attack was made possible by a single online, real-time backup.", answer: false },
+        { question: "Zero Trust architecture grants implicit trust to users and devices that are inside the corporate network.", answer: false },
+        { question: "Properly decommissioning IT assets is important to prevent them from becoming security vulnerabilities.", answer: true },
+        { question: "The Equifax breach was caused by an unknown, zero-day vulnerability for which no patch was available.", answer: false },
+        { question: "Recovery Time Objective (RTO) defines the maximum acceptable amount of data loss.", answer: false }
+    ];
+
+    const multipleChoice = [
+        { question: "The 2017 Equifax data breach, which exposed the data of 147 million people, was a direct result of a failure in which security process?", options: ["Incident Response", "Access Control", "Patch Management", "IT Asset Decommissioning"], answer: "Patch Management" },
+        { question: "Which of the following best describes the lesson from the Maersk NotPetya attack?", options: ["MFA is essential for all remote access.", "Network segmentation can prevent all attacks.", "Offline, off-site backups are critical for disaster recovery.", "Application allow lists are foolproof."], answer: "Offline, off-site backups are critical for disaster recovery." },
+        { question: "A university isolates its student Wi-Fi network from its administrative network to prevent malware from spreading. This is an example of:", options: ["Zero Trust", "Multi-Factor Authentication", "Patch Management", "Network Segmentation"], answer: "Network Segmentation" },
+        { question: "An employee's account is compromised with a stolen password, but the attacker cannot log in because they are prompted for a code from the employee's phone. This is an example of:", options: ["Application Allow List", "Least Privilege", "Multi-Factor Authentication (MFA)", "Incident Response"], answer: "Multi-Factor Authentication (MFA)" },
+        { question: "What is the primary difference between a proactive and a reactive approach to threat mitigation?", options: ["Proactive is more expensive than reactive.", "Proactive focuses on prevention before an incident, while reactive focuses on response after an incident.", "Reactive is only for physical threats, while proactive is for digital threats.", "There is no difference; the terms are interchangeable."], answer: "Proactive focuses on prevention before an incident, while reactive focuses on response after an incident." },
+        { question: "The incident where a former Cisco employee deleted hundreds of virtual machines highlights a failure in which process?", options: ["Patch Management", "IT Asset Decommissioning and Access Revocation", "Disaster Recovery", "Network Segmentation"], answer: "IT Asset Decommissioning and Access Revocation" },
+        { question: "Which phase of the SANS Incident Response Process involves isolating affected systems to prevent an attack from spreading?", options: ["Preparation", "Identification", "Containment", "Lessons Learned"], answer: "Containment" },
+        { question: "The Bit9 hack, where attackers stole signing keys to make their malware appear trusted, is a powerful example of what type of attack?", options: ["A ransomware attack", "A denial-of-service attack", "A supply chain attack", "A phishing attack"], answer: "A supply chain attack" },
+        { question: "An organization determines that its critical database cannot be down for more than one hour. This one-hour metric is the:", options: ["Recovery Point Objective (RPO)", "Recovery Time Objective (RTO)", "Business Impact Analysis (BIA)", "Maximum Tolerable Downtime (MTD)"], answer: "Recovery Time Objective (RTO)" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
