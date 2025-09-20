@@ -1,1 +1,810 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 14: Automation & Orchestration</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 14: Automation & Orchestration in Security</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="concepts">Concepts & Best Practices</button>
+        <button class="tab-button" data-tab="scripting">Scripting Languages</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item">
+                <button class="accordion-header">Security Automation</button>
+                <div class="accordion-panel">
+                    <p>Leveraging technology to perform repetitive security tasks without human intervention. Its focus is on individual tasks to increase efficiency, speed, and consistency.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Security Orchestration</button>
+                <div class="accordion-panel">
+                    <p>The process of connecting and coordinating diverse security tools and processes into a unified workflow. It focuses on the bigger picture, making multiple automated tasks and tools work together seamlessly.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">SOAR (Security Orchestration, Automation, and Response)</button>
+                <div class="accordion-panel">
+                    <p>A platform that combines orchestration, automation, and response capabilities to allow organizations to manage and respond to security incidents from a single interface. Palo Alto Networks Cortex XSOAR is a prime example.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">SIEM (Security Information and Event Management)</button>
+                <div class="accordion-panel">
+                    <p>A solution that aggregates and analyzes activity from many different resources across your entire IT infrastructure. It collects security data from network devices, servers, and domain controllers, analyzes it to spot trends, and sends alerts. IBM QRadar is an example.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">API (Application Programming Interface)</button>
+                <div class="accordion-panel">
+                    <p>A set of rules and protocols that allows different software applications to communicate with each other. APIs are crucial for security orchestration to integrate various tools.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Technical Debt</button>
+                <div class="accordion-panel">
+                    <p>The implied cost of rework caused by choosing an easy, short-term solution now instead of using a better approach that would take longer. In automation, it can lead to systems that are hard to maintain and update.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Single Point of Failure</button>
+                <div class="accordion-panel">
+                    <p>A part of a system that, if it fails, will stop the entire system from working. Identifying and mitigating these is critical for reliable automation.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Explainable AI (XAI)</button>
+                <div class="accordion-panel">
+                    <p>Artificial intelligence models and systems that can explain their decisions in a way that is understandable to humans. This is important for ensuring transparency and fairness in automated security decisions.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">PowerShell</button>
+                <div class="accordion-panel">
+                    <p>A task automation and configuration management framework from Microsoft, consisting of a command-line shell and the associated scripting language. It's heavily used for managing Windows environments.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Python</button>
+                <div class="accordion-panel">
+                    <p>A versatile, high-level programming language known for its readability and extensive libraries, making it extremely popular for security scripting, penetration testing, and tool development.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Bash</button>
+                <div class="accordion-panel">
+                    <p>A command processor and scripting language for Unix-based systems (like Linux and macOS). It is excellent for automating system administration tasks and managing files.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="concepts" class="main-content">
+         <h2>Concepts & Best Practices</h2>
+         <h3>Automation vs. Orchestration: A Comparison</h3>
+         <div class="process-block">
+            <h4>Individual Tasks vs. Unified Workflows</h4>
+            <p>While often used together, automation and orchestration serve different purposes. Understanding the distinction is key to building an effective security strategy.</p>
+            <ul>
+                <li><strong>Automation Focuses on "The How":</strong> It's about making a *single task* run automatically.
+                    <ul>
+                        <li><strong>Example:</strong> An automation script that automatically applies a security patch to a server whenever a new vulnerability is announced.</li>
+                    </ul>
+                </li>
+                <li><strong>Orchestration Focuses on "The What":</strong> It's about connecting *multiple automated tasks* into a cohesive process.
+                     <ul>
+                        <li><strong>Example:</strong> An orchestration workflow for a phishing attack that uses automation to: 1) isolate the infected machine, 2) reset the user's password, 3) scan the user's inbox for similar emails, and 4) create a ticket for the security team.</li>
+                    </ul>
+                </li>
+            </ul>
+             <div class="example">
+                <p><strong>Analogy: Building a Car</strong></p>
+                <div class="solution">
+                    <p><strong>Automation</strong> is like a robotic arm on an assembly line that is programmed to perform one specific job, such as tightening the bolts on a wheel, over and over again with precision and speed.</p>
+                    <p><strong>Orchestration</strong> is the entire assembly line's control system. It tells the bolt-tightening robot when to activate, coordinates it with the robot that mounts the tire, and ensures the entire process from chassis to finished car happens in the correct, most efficient order.</p>
+                </div>
+             </div>
+         </div>
+
+         <h3>Benefits of Automation & Orchestration</h3>
+         <div class="process-block">
+             <h4>Why Automate Security Operations?</h4>
+             <p>Integrating automation and orchestration into security operations provides numerous advantages that help organizations keep pace with the evolving threat landscape.</p>
+             <ul>
+                 <li><strong>Improved Reaction Time:</strong> Automated systems can respond to threats in seconds or minutes, far faster than a human, significantly reducing the potential damage of an attack.</li>
+                 <li><strong>Reduced Alert Fatigue & Burnout:</strong> By automatically handling low-level alerts and false positives, automation allows security analysts to focus their expertise on genuine, complex threats, improving job satisfaction.</li>
+                 <li><strong>Increased Efficiency and Scalability:</strong> Automation handles repetitive tasks, acting as a "workforce multiplier" that allows security teams to manage a growing infrastructure without a proportional increase in staff.</li>
+                 <li><strong>Consistency and Reliability:</strong> Automated processes follow the exact same steps every time, enforcing security baselines and standard configurations, which eliminates the risk of human error.</li>
+             </ul>
+         </div>
+
+        <h3>Challenges and Considerations</h3>
+         <div class="process-block">
+             <h4>Navigating the Path to Automation</h4>
+             <p>Implementing automation is not without its challenges. A careful, strategic approach is required to avoid common pitfalls.</p>
+             <ul>
+                 <li><strong>Integration Complexity:</strong> Modern security environments use dozens of tools from different vendors. Integrating them so they can communicate effectively requires careful planning and often relies on robust APIs.</li>
+                 <li><strong>Cost and Resource Allocation:</strong> There is an upfront investment in tools, training, and skilled personnel. Organizations must balance this cost against the expected long-term benefits.</li>
+                 <li><strong>Risk of Over-Automation:</strong> Not every task should be automated. Critical decisions often require human intuition, context, and judgment. Striking the right balance is key.</li>
+                 <li><strong>Maintaining the Automation Tools:</strong> Automation systems themselves can be targeted by attackers. They must be secured, maintained, and updated just like any other critical infrastructure.</li>
+             </ul>
+         </div>
+
+        <h3>Best Practices for Implementation</h3>
+         <div class="process-block">
+             <h4>A Roadmap for Success</h4>
+             <p>Adopting these best practices can lead to a smoother and more effective integration of automation into your security operations.</p>
+             <ul>
+                 <li><strong>Start Small and Scale:</strong> Begin by identifying simple, high-volume, repetitive tasks. Automate one of these first as a prototype to learn from the process before tackling more complex workflows.</li>
+                 <li><strong>Continuous Evaluation:</strong> Automation is not "set it and forget it." Regularly review automated processes, monitor their performance with comprehensive logging, and establish feedback loops to make quick adjustments.</li>
+                 <li><strong>Invest in Training and Development:</strong> Your team is your greatest asset. Provide them with the time and resources to learn new tools, scripting languages (like Python and PowerShell), and automation methodologies.</li>
+                 <li><strong>Foster Collaboration:</strong> Break down silos between IT, security, and development teams. An "Automation Center of Excellence" can help standardize practices and share knowledge across the organization.</li>
+                 <li><strong>Ensure Human Oversight:</strong> Always maintain human control over critical processes. Automation is a tool to empower experts, not replace them. Use features like Explainable AI (XAI) to ensure transparency in automated decisions.</li>
+             </ul>
+         </div>
+    </section>
+
+    <section id="scripting" class="main-content">
+        <h2>Scripting Languages for Security</h2>
+        <div class="process-block">
+            <h3>PowerShell</h3>
+            <p>A powerful scripting language and shell framework from Microsoft, essential for automating tasks in Windows environments.</p>
+            <ul>
+                <li><strong>Use Cases:</strong> User account management in Active Directory, parsing Windows Event Logs, automating incident response actions (e.g., isolating a machine), and configuring system security settings.</li>
+            </ul>
+            <pre><code># Example: PowerShell script to get recent successful logon events
+Get-WinEvent -FilterHashtable @{LogName='Security'; ID=4624} -MaxEvents 10</code></pre>
+        </div>
+        <div class="process-block">
+            <h3>Python</h3>
+            <p>A versatile and easy-to-read language with a massive collection of libraries, making it the go-to choice for many security professionals.</p>
+            <ul>
+                <li><strong>Use Cases:</strong> Building custom security tools, automating penetration testing tasks, gathering and analyzing threat intelligence, and scripting interactions with SIEMs and other security APIs.</li>
+            </ul>
+            <pre><code># Example: Python script to check the status of a website
+import requests
+try:
+    response = requests.get("https://example.com", timeout=5)
+    if response.status_code == 200:
+        print("Website is online.")
+    else:
+        print(f"Website returned status code: {response.status_code}")
+except requests.ConnectionError:
+    print("Website is offline.")</code></pre>
+        </div>
+        <div class="process-block">
+            <h3>Bash</h3>
+            <p>The standard scripting language for Unix-based systems like Linux. It's perfect for automating command-line tasks and managing system administration duties.</p>
+            <ul>
+                <li><strong>Use Cases:</strong> Parsing log files (e.g., system logs, web server logs), managing file permissions, automating system updates, and scripting workflows that involve multiple command-line security tools.</li>
+            </ul>
+            <pre><code># Example: Bash script to find all log entries for "Failed password"
+grep "Failed password" /var/log/auth.log</code></pre>
+        </div>
+         <div class="process-block">
+            <h3>Perl & Ruby</h3>
+            <p>Two other powerful, object-oriented scripting languages with strong communities and useful frameworks for security.</p>
+            <ul>
+                <li><strong>Perl:</strong> Excellent for text-processing and log analysis. Widely used for network security analysis and web security testing.</li>
+                <li><strong>Ruby:</strong> Known for its clean syntax. It's the language behind the popular Metasploit Framework, making it valuable for penetration testing and exploit development.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        {
+            question: "Connecting and coordinating diverse security tools into a unified, multi-step process is known as security _______.",
+            options: ["Automation", "Scripting", "Orchestration", "Monitoring"],
+            answer: "Orchestration"
+        },
+        {
+            question: "Using a script to automatically apply security patches to servers is an example of security _______.",
+            options: ["Orchestration", "Automation", "Integration", "Compliance"],
+            answer: "Automation"
+        },
+        {
+            question: "The implied cost of rework caused by choosing an easy solution now instead of a better, more sustainable approach is called _______ debt.",
+            options: ["Financial", "Security", "Technical", "Automation"],
+            answer: "Technical"
+        },
+        {
+            question: "A _______ is a command-line shell and scripting language from Microsoft used for managing Windows environments.",
+            options: ["Python", "Bash", "Ruby", "PowerShell"],
+            answer: "PowerShell"
+        },
+        {
+            question: "The scripting language behind the popular Metasploit Framework is _______.",
+            options: ["Perl", "Ruby", "Python", "Bash"],
+            answer: "Ruby"
+        },
+        {
+            question: "To ensure transparency in automated decisions, organizations can adopt _______ AI solutions.",
+            options: ["Ethical", "Explainable", "Secure", "Complex"],
+            answer: "Explainable"
+        },
+        {
+            question: "A best practice for implementing automation is to start _______ and then scale up.",
+            options: ["Big", "Fast", "Small", "Cheaply"],
+            answer: "Small"
+        },
+        {
+            question: "One of the major benefits of automation is reducing _______ fatigue among security analysts.",
+            options: ["Alert", "Decision", "System", "Network"],
+            answer: "Alert"
+        }
+    ];
+
+    const trueOrFalse = [
+        {
+            question: "Security automation and security orchestration are the exact same concept.",
+            answer: false
+        },
+        {
+            question: "Automation focuses on individual tasks, while orchestration focuses on coordinating multiple tasks into a workflow.",
+            answer: true
+        },
+        {
+            question: "One of the main goals of automation is to eliminate the need for human security experts entirely.",
+            answer: false
+        },
+        {
+            question: "Python is a popular language for security scripting due to its large number of libraries and readability.",
+            answer: true
+        },
+        {
+            question: "Implementing security automation has no upfront costs or resource requirements.",
+            answer: false
+        },
+        {
+            question: "Automation can help enforce security baselines and standard configurations, reducing human error.",
+            answer: true
+        },
+        {
+            question: "Bash is the primary scripting language for managing Windows systems.",
+            answer: false
+        },
+        {
+            question: "A 'single point of failure' is a desirable feature in a robust automation system.",
+            answer: false
+        },
+        {
+            question: "Continuously evaluating the effectiveness of automated processes is a key best practice.",
+            answer: true
+        },
+        {
+            question: "APIs are crucial for enabling different security tools to communicate with each other in an orchestration workflow.",
+            answer: true
+        }
+    ];
+
+    const multipleChoice = [
+        {
+            question: "Which of the following best describes security orchestration?",
+            options: ["Automating a single, repetitive task.", "A scripting language for Linux.", "Connecting multiple tools and automated tasks into a coordinated workflow.", "A type of firewall."],
+            answer: "Connecting multiple tools and automated tasks into a coordinated workflow."
+        },
+        {
+            question: "A security team uses a tool that automatically isolates a compromised machine, resets the user's password, and notifies the IT team. This is an example of:",
+            options: ["Automation", "Orchestration", "Manual Response", "Compliance"],
+            answer: "Orchestration"
+        },
+        {
+            question: "Which of the following is a primary benefit of security automation?",
+            options: ["It increases the number of false positive alerts.", "It makes the IT environment more complex.", "It allows analysts to focus on more strategic tasks.", "It replaces the need for a SIEM."],
+            answer: "It allows analysts to focus on more strategic tasks."
+        },
+        {
+            question: "Which scripting language would be the best choice for automating administrative tasks within a Windows Active Directory environment?",
+            options: ["Bash", "Python", "PowerShell", "Ruby"],
+            answer: "PowerShell"
+        },
+        {
+            question: "What is a major challenge when implementing security orchestration?",
+            options: ["Lack of repetitive tasks to automate.", "Security tools are too simple.", "Integrating disparate tools from different vendors.", "Analysts have too much free time."],
+            answer: "Integrating disparate tools from different vendors."
+        },
+        {
+            question: "According to best practices, what is the recommended first step when starting to implement automation?",
+            options: ["Automate the most complex process first.", "Purchase the most expensive SOAR platform available.", "Identify and automate a simple, repetitive task.", "Fire the entire junior analyst team."],
+            answer: "Identify and automate a simple, repetitive task."
+        },
+        {
+            question: "What does 'XAI' stand for in the context of responsible automation?",
+            options: ["Extra Automated Intelligence", "Explainable Artificial Intelligence", "External API Integration", "Expanded Access Infrastructure"],
+            answer: "Explainable Artificial Intelligence"
+        },
+        {
+            question: "Which company was mentioned as using its Cortex XSOAR platform for Security Orchestration, Automation, and Response (SOAR)?",
+            options: ["IBM", "Rapid7", "Huntress", "Palo Alto Networks"],
+            answer: "Palo Alto Networks"
+        },
+        {
+            question: "The Stuxnet worm was a real-world example of malware notable for its ability to:",
+            options: ["Steal credit card information.", "Send spam emails.", "Physically damage industrial hardware.", "Encrypt personal files for ransom."],
+            answer: "Physically damage industrial hardware."
+        }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
