@@ -1,1 +1,705 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 8: Security Architecture</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 8: Security Architecture</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="principles">Core Principles</button>
+        <button class="tab-button" data-tab="models">Architectural Models</button>
+        <button class="tab-button" data-tab="network">Network Design</button>
+        <button class="tab-button" data-tab="appliances">Appliances & Services</button>
+        <button class="tab-button" data-tab="access">Secure Access</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">Cybersecurity Architecture</button><div class="accordion-panel"><p>The design and framework of systems, networks, and technologies implemented to protect an organization's digital assets from cyber threats. It encompasses the strategic planning and management of security measures.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Secure by Design</button><div class="accordion-panel"><p>A proactive approach where security is integrated into every phase of a system's lifecycle, from initial design to deployment and maintenance, rather than being added as an afterthought.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Attack Surface</button><div class="accordion-panel"><p>The sum of all possible points (attack vectors) where an unauthorized user can try to enter or extract data from an environment. Minimizing this is a key security principle.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Defense in Depth</button><div class="accordion-panel"><p>A strategy that implements multiple layers of security controls throughout an IT infrastructure. If one layer fails, another layer is already in place to defend against an attack.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Zero Trust Architecture</button><div class="accordion-panel"><p>A security model centered on the belief that organizations should not automatically trust anything inside or outside their perimeters. It requires verification of every user and device before granting access.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Infrastructure as Code (IaC)</button><div class="accordion-panel"><p>The practice of managing and provisioning IT infrastructure through code and automation rather than manual processes. This allows security controls to be codified and applied consistently.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Serverless Computing</button><div class="accordion-panel"><p>A cloud computing model where the cloud provider dynamically manages the allocation of server resources, allowing developers to focus on code without managing the underlying infrastructure.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Microservices</button><div class="accordion-panel"><p>An architectural approach where applications are composed of small, independent services that communicate via APIs. Each service can be developed, deployed, and scaled independently.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Containerization</button><div class="accordion-panel"><p>A lightweight form of virtualization that packages an application and its dependencies into a single "container." Containers share the host system's kernel, making them efficient but introducing shared vulnerabilities.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Virtualization</button><div class="accordion-panel"><p>The process of creating a virtual instance of physical hardware, allowing multiple operating systems and applications to run on a single physical machine, isolated from one another.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Demilitarized Zone (DMZ)</button><div class="accordion-panel"><p>A perimeter network or buffer zone that separates an organization's internal, trusted network from an untrusted external network, like the internet. It is used to host public-facing services (e.g., web servers).</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Network Segmentation</button><div class="accordion-panel"><p>The practice of dividing a computer network into smaller, isolated segments or subnetworks. This helps contain breaches and prevent the lateral movement of threats.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Firewall</button><div class="accordion-panel"><p>A network security device that monitors and controls incoming and outgoing network traffic based on predetermined security rules. Types include Packet-Filtering, Stateful, Proxy, Next-Generation (NGFW), and Web Application (WAF).</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">IDS (Intrusion Detection System)</button><div class="accordion-panel"><p>A passive security tool that monitors network or system activities for malicious actions or policy violations and generates alerts when it detects them.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">IPS (Intrusion Prevention System)</button><div class="accordion-panel"><p>An active security tool that monitors a network for malicious activity and takes automated actions to block or prevent the detected threat.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">SD-WAN (Software-Defined WAN)</button><div class="accordion-panel"><p>A virtual WAN architecture that uses software to control and optimize traffic across multiple types of transport services (e.g., broadband, MPLS), often with integrated security features.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">SASE (Secure Access Service Edge)</button><div class="accordion-panel"><p>A cloud-native framework that converges networking (like SD-WAN) and security functions (like firewalls, ZTNA) into a single, unified service delivered from the cloud.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">VPN (Virtual Private Network)</button><div class="accordion-panel"><p>Creates a secure, encrypted connection (a "tunnel") over a less secure network, such as the internet, to allow for secure remote access.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">TLS (Transport Layer Security)</button><div class="accordion-panel"><p>A cryptographic protocol that provides secure communication over a network. It is the successor to SSL and is fundamental to HTTPS, ensuring encryption, authentication, and data integrity.</p></div></div>
+        </div>
+    </section>
+
+    <section id="principles" class="main-content">
+         <h2>Core Architectural Principles</h2>
+         <div class="process-block">
+            <h3>Security by Design</h3>
+            <p>Security cannot be an afterthought; it must be a fundamental part of the system design from the very beginning. This proactive approach ensures security is woven into every layer of the architecture.</p>
+            <ul>
+                <li><strong>Prevents Costly Retrofits:</strong> Building security in from the start is cheaper and more effective than trying to add it to an existing system.</li>
+                <li><strong>Enhances Resilience:</strong> A system designed with security in mind is better equipped to withstand and recover from attacks.</li>
+                <li><strong>Mitigates Risks Early:</strong> Potential risks and vulnerabilities can be identified and addressed during the development process, not after deployment.</li>
+                <li><strong>Supports Compliance:</strong> Integrating security from the outset makes it easier to meet regulatory and industry standards like GDPR or HIPAA.</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Balancing Architectural Factors</h3>
+            <p>A good security architecture is not just about being impenetrable; it's about finding the right balance between competing business and operational needs.</p>
+            <ul>
+                <li><strong>Availability & Resilience:</strong> The system must be accessible to authorized users and able to recover quickly from incidents. This is achieved through redundancy, disaster recovery plans, and regular testing.</li>
+                <li><strong>Cost:</strong> Security measures must provide a good return on investment (ROI) by balancing the cost of implementation against the potential cost of a breach.</li>
+                <li><strong>Scalability & Responsiveness:</strong> The architecture must be able to grow with the organization and adapt quickly to new technologies and emerging threats.</li>
+                <li><strong>Ease of Deployment & Recovery:</strong> Security solutions should be straightforward to implement and manage. Complex systems can lead to misconfigurations and longer downtimes.</li>
+            </ul>
+         </div>
+    </section>
+
+    <section id="models" class="main-content">
+        <h2>Architectural Models & Paradigms</h2>
+        <div class="process-block">
+            <h3>Infrastructure Models</h3>
+            <ul>
+                <li><strong>On-Premises:</strong> The organization's data and applications run on servers physically located on its property.
+                    <ul>
+                        <li><strong>Pros:</strong> Complete control over infrastructure and data.</li>
+                        <li><strong>Cons:</strong> High capital investment, requires skilled personnel for management.</li>
+                    </ul>
+                </li>
+                <li><strong>Cloud:</strong> Data and applications are stored on servers managed by a third-party provider (e.g., AWS, Azure, GCP).
+                    <ul>
+                        <li><strong>Pros:</strong> Scalability, flexibility, cost-effective.</li>
+                        <li><strong>Cons:</strong> Relies on the provider's security, potential data sovereignty concerns.</li>
+                    </ul>
+                </li>
+                 <li><strong>Hybrid:</strong> A combination of on-premises infrastructure with public or private cloud services, offering a balance of control and flexibility.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Modern Application Architectures</h3>
+            <ul>
+                <li><strong>Microservices:</strong> Applications are built as a collection of small, independent services. This improves agility and fault isolation but adds complexity to securing inter-service communication.</li>
+                <li><strong>Serverless Computing:</strong> The cloud provider manages all server infrastructure. This reduces operational overhead but introduces new security challenges, such as securing function code and managing access controls in a distributed environment.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Virtualization & Containerization</h3>
+            <ul>
+                <li><strong>Virtualization:</strong> Creates virtual instances of physical hardware (virtual machines or VMs). This maximizes resource use and isolates environments, which can improve security if the hypervisor (the software that runs the VMs) is properly secured.</li>
+                <li><strong>Containerization:</strong> Packages an application and its dependencies into a lightweight, portable container. Containers are more efficient than VMs because they share the host OS kernel, but this shared kernel can become a single point of failure if a vulnerability is exploited.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="network" class="main-content">
+        <h2>Network Design & Segmentation</h2>
+        <div class="process-block">
+            <h3>Security Zones</h3>
+            <p>Network segmentation divides a network into zones based on security requirements and trust levels. This is a core principle of Defense in Depth.</p>
+            <ul>
+                <li><strong>Demilitarized Zone (DMZ):</strong> A buffer network between your internal network and the untrusted internet. It's where you place public-facing servers (like web or email servers) to prevent a compromise of those servers from directly affecting your internal network.</li>
+                <li><strong>Internal Zones:</strong> The trusted network is further segmented based on department or data sensitivity. For example, the Finance department's network segment would have stricter access controls than the Marketing segment.</li>
+                <li><strong>Restricted/Critical Zones:</strong> High-risk systems, such as industrial control systems (ICS) or databases with critical data, are placed in highly isolated zones with the most stringent security controls.</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Isolation Techniques</h3>
+            <ul>
+                <li><strong>Physical Isolation:</strong> Physically separating sensitive systems from all other networks. The hardware is not connected to any other network.</li>
+                <li><strong>Air-Gapped Systems:</strong> An extreme form of physical isolation where a computer or network has no connections to the internet or any other network, including wireless interfaces. Data is transferred via physical media (like a USB drive), which itself is a vector for attack (e.g., Stuxnet).</li>
+                <li><strong>Logical Segmentation:</strong> Creating virtual boundaries within a single physical network using technologies like VLANs (Virtual Local Area Networks) and firewall rules. This is more flexible and cost-effective than physical isolation.</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Minimizing the Attack Surface</h3>
+            <p>This is the practice of reducing the number of potential entry points for attackers.</p>
+            <ul>
+                <li><strong>Disable Unnecessary Services:</strong> Every running service or open port is a potential vulnerability.</li>
+                <li><strong>Enforce Least Privilege:</strong> Users and applications should only have the minimum permissions necessary to perform their functions.</li>
+                <li><strong>Keep Systems Patched:</strong> Regularly apply security updates to close known vulnerabilities.</li>
+                <li><strong>Secure Configurations:</strong> Harden systems by changing default passwords and disabling insecure features.</li>
+            </ul>
+         </div>
+    </section>
+    
+    <section id="appliances" class="main-content">
+        <h2>Security Appliances & Services</h2>
+        <div class="process-block">
+            <h3>Firewalls</h3>
+            <p>Firewalls are the primary tool for creating security zones and controlling network traffic.</p>
+            <ul>
+                <li><strong>Packet-Filtering (Layer 3/4):</strong> The most basic type. Makes decisions based on IP addresses and port numbers. Fast but offers limited security.</li>
+                <li><strong>Stateful Inspection (Layer 4):</strong> Tracks the state of active connections, making it more secure than simple packet filtering because it understands the context of the traffic.</li>
+                <li><strong>Proxy / Application-Level Gateway (Layer 7):</strong> Acts as an intermediary for requests. It provides deep content inspection but can introduce latency.</li>
+                <li><strong>Next-Generation Firewall (NGFW):</strong> A modern firewall that combines stateful inspection with application awareness, deep packet inspection (DPI), and an integrated Intrusion Prevention System (IPS).</li>
+                <li><strong>Web Application Firewall (WAF):</strong> A specialized firewall that protects web applications from common attacks like SQL injection and cross-site scripting (XSS).</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Intrusion Detection & Prevention Systems (IDS/IPS)</h3>
+            <ul>
+                <li><strong>IDS (Intrusion Detection System):</strong> A passive system that monitors the network for signs of malicious activity and sends an alert if a threat is detected. It's like a security camera that alerts a guard.</li>
+                <li><strong>IPS (Intrusion Prevention System):</strong> An active system that is placed inline with traffic. It not only detects threats but also automatically takes action to block them. It's like a security guard who can tackle an intruder.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Modern Networking Services</h3>
+            <ul>
+                <li><strong>SD-WAN (Software-Defined Wide Area Network):</strong> A technology that uses software to manage and optimize traffic across a wide area network (WAN). It simplifies management, reduces costs, and often includes integrated security features like encryption and firewalls.</li>
+                <li><strong>SASE (Secure Access Service Edge):</strong> A modern, cloud-native architecture that combines networking capabilities (like SD-WAN) with a full suite of security services (like firewalls, secure web gateways, and Zero Trust access). It provides consistent security for all users and devices, regardless of their location.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="access" class="main-content">
+        <h2>Secure Communication & Access</h2>
+        <div class="process-block">
+            <h3>Virtual Private Networks (VPNs)</h3>
+            <p>A VPN creates an encrypted "tunnel" over a public network (like the internet), allowing for secure communication and remote access to private resources.</p>
+            <ul>
+                <li><strong>Remote Access VPN:</strong> Allows individual users (e.g., a remote employee) to connect securely to a corporate network.</li>
+                <li><strong>Site-to-Site VPN:</strong> Connects two entire networks together, such as linking a branch office network to the main headquarters network.</li>
+                <li><strong>Clientless VPN:</strong> A browser-based VPN that provides secure access to specific web applications without requiring special client software.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Key Protocols for Secure Access</h3>
+            <ul>
+                <li><strong>TLS (Transport Layer Security):</strong> The standard protocol for encrypting web traffic (HTTPS). It ensures confidentiality, integrity, and authentication through a process called the TLS handshake, which uses digital certificates to verify server identity.</li>
+                <li><strong>SSH (Secure Shell):</strong> A protocol used for secure remote command-line access, file transfers, and tunneling other network protocols.</li>
+                <li><strong>RDP (Remote Desktop Protocol):</strong> A Microsoft protocol that allows a user to connect to another computer with a full graphical interface.</li>
+                <li><strong>IPSec (Internet Protocol Security):</strong> A suite of protocols used to secure IP communications, often used in conjunction with VPNs, especially for site-to-site connections.</li>
+            </ul>
+        </div>
+         <div class="process-block">
+            <h3>Port Security & Authentication</h3>
+            <ul>
+                <li><strong>Port Security:</strong> A feature on network switches that restricts access to a port based on the MAC address of the device. This prevents unauthorized devices from simply plugging into an open network jack.</li>
+                <li><strong>802.1X Authentication:</strong> A standard for Port-Based Network Access Control (PNAC). Before a device is granted access to the network, it must authenticate against a central server (like RADIUS). This provides a much stronger layer of security than static port security.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "The proactive approach of integrating security into every phase of the system lifecycle is known as _______.", options: ["Secure by Default", "Defense in Depth", "Secure by Design", "Least Privilege"], answer: "Secure by Design" },
+        { question: "A _______ is a buffer network that sits between an organization's internal network and the external internet.", options: ["VLAN", "Firewall", "DMZ", "Honeypot"], answer: "DMZ" },
+        { question: "_______ is a security model that does not trust any user or device by default, requiring strict verification for every access request.", options: ["Defense in Depth", "Zero Trust", "SASE", "Secure by Design"], answer: "Zero Trust" },
+        { question: "A _______ firewall is a specialized type that protects web applications from attacks like SQL injection and XSS.", options: ["Stateful", "Proxy", "NGFW", "WAF"], answer: "WAF" },
+        { question: "The practice of managing infrastructure through automated scripts and configuration files is called _______.", options: ["DevOps", "Virtualization", "Infrastructure as Code", "Containerization"], answer: "Infrastructure as Code" },
+        { question: "The standard for port-based network access control that requires devices to authenticate before gaining access is known as _______.", options: ["Port Security", "802.1X", "IPSec", "TLS"], answer: "802.1X" },
+        { question: "An _______ system is a security tool that passively monitors a network and sends an alert when it detects malicious activity.", options: ["IPS", "IDS", "SD-WAN", "Firewall"], answer: "IDS" },
+        { question: "A _______ VPN is used to connect two separate networks, such as a branch office and a main headquarters.", options: ["Remote Access", "Clientless", "Site-to-Site", "SSL/TLS"], answer: "Site-to-Site" }
+    ];
+
+    const trueOrFalse = [
+        { question: "An air-gapped system is completely immune to cyber attacks because it is not connected to any network.", answer: false },
+        { question: "Logical segmentation uses physically separate hardware to create network boundaries.", answer: false },
+        { question: "A Next-Generation Firewall (NGFW) operates only at Layer 3 (the Network Layer).", answer: false },
+        { question: "In the cloud shared responsibility model, the customer is always responsible for securing their own data and applications.", answer: true },
+        { question: "Serverless computing means that no servers are involved in running the application code.", answer: false },
+        { question: "SASE (Secure Access Service Edge) is a framework that converges networking and security into a cloud-delivered service.", answer: true },
+        { question: "Containerization is more resource-intensive than traditional virtualization because each container requires a full guest OS.", answer: false },
+        { question: "Minimizing the attack surface involves increasing the number of services and open ports to confuse attackers.", answer: false },
+        { question: "An IPS (Intrusion Prevention System) can automatically block detected threats without human intervention.", answer: true },
+        { question: "TLS (Transport Layer Security) is primarily used to secure data at rest on a storage device.", answer: false }
+    ];
+
+    const multipleChoice = [
+        { question: "Which of the following best describes a key difference between Layer 4 and Layer 7 firewalls?", options: ["Layer 4 is faster, while Layer 7 is more secure.", "Layer 4 inspects packet payloads, while Layer 7 only inspects headers.", "Layer 4 operates on IP addresses, while Layer 7 operates on MAC addresses.", "There is no difference; the terms are interchangeable."], answer: "Layer 4 is faster, while Layer 7 is more secure." },
+        { question: "An organization wants to allow remote employees to securely access the internal network from their laptops. Which type of VPN is most appropriate?", options: ["Site-to-Site VPN", "Remote Access VPN", "Clientless VPN", "IPSec Tunnel"], answer: "Remote Access VPN" },
+        { question: "What is the primary security benefit of network segmentation?", options: ["It improves network performance by reducing traffic.", "It prevents the lateral movement of threats by containing a breach to one segment.", "It makes the network easier to manage.", "It encrypts all traffic between segments by default."], answer: "It prevents the lateral movement of threats by containing a breach to one segment." },
+        { question: "Which architectural model packages an application with its dependencies but shares the host operating system kernel?", options: ["Virtualization", "Serverless", "On-Premises", "Containerization"], answer: "Containerization" },
+        { question: "A security administrator notices that an attacker has compromised a public-facing web server. Thanks to the network design, the attacker cannot access the internal database server. Where was the web server most likely located?", options: ["In a restricted internal zone", "On the same segment as the database", "In the DMZ", "In a physically air-gapped network"], answer: "In the DMZ" },
+        { question: "Which of the following is NOT a core component of SASE?", options: ["SD-WAN", "Firewall-as-a-Service (FWaaS)", "On-premises hardware management", "Zero Trust Network Access (ZTNA)"], answer: "On-premises hardware management" },
+        { question: "The Stuxnet worm famously compromised Iran's nuclear facilities by using infected USB drives. This is an example of a threat to what type of system?", options: ["A cloud-based system", "A DMZ", "An air-gapped system", "A microservices architecture"], answer: "An air-gapped system" },
+        { question: "Which protocol is the successor to SSL and is essential for securing HTTPS connections?", options: ["SSH", "IPSec", "TLS", "RDP"], answer: "TLS" },
+        { question: "An administrator wants to prevent unauthorized laptops from being plugged into the conference room's network jacks. Which feature would be most effective?", options: ["A Web Application Firewall (WAF)", "Port Security based on MAC addresses", "A site-to-site VPN", "Logical Segmentation with VLANs"], answer: "Port Security based on MAC addresses" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
