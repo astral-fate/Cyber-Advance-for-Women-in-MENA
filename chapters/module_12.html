@@ -1,1 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 12: Vulnerability Management & Monitoring</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 12: Vulnerability Management & Monitoring</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="vulnerability">Vulnerability Management</button>
+        <button class="tab-button" data-tab="monitoring">Security Monitoring & Alerting</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">Vulnerability</button><div class="accordion-panel"><p>A weakness in an information system, security procedures, internal controls, or implementation that could be exploited by a threat source.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Vulnerability Management</button><div class="accordion-panel"><p>The continuous process of identifying, classifying, prioritizing, remediating, and mitigating vulnerabilities in systems and software.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Zero-Day Vulnerability</button><div class="accordion-panel"><p>A vulnerability that has been disclosed but is not yet patched, leaving systems susceptible to a zero-day exploit. Attackers have "zero days" to exploit it before a fix is released.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">CVE (Common Vulnerabilities and Exposures)</button><div class="accordion-panel"><p>A standardized system for identifying and naming publicly disclosed cybersecurity vulnerabilities. Each vulnerability gets a unique CVE ID.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">CVSS (Common Vulnerability Scoring System)</button><div class="accordion-panel"><p>An open industry standard for assessing the severity of computer system security vulnerabilities. It provides a numerical score (0-10) to reflect severity.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Patch Management</button><div class="accordion-panel"><p>The process of distributing and applying updates to software. It is a component of vulnerability management focused on remediation.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Penetration Testing (Pen Test)</button><div class="accordion-panel"><p>A simulated cyber attack against your computer system to check for exploitable vulnerabilities. It is a depth-over-breadth approach.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Security Monitoring</button><div class="accordion-panel"><p>The process of continuously observing and analyzing activity on a network to detect and respond to potential threats or malicious behavior.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Log</button><div class="accordion-panel"><p>A computer-generated file that captures activity within an operating system or software application, including messages, errors, and file transfers.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">SIEM (Security Information and Event Management)</button><div class="accordion-panel"><p>A solution that gives security teams a central place to collect, aggregate, and analyze log data from across an enterprise to detect incidents.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">IDS (Intrusion Detection System)</button><div class="accordion-panel"><p>A passive monitoring tool that analyzes network traffic for signs of potential threats and generates alerts when suspicious activity is detected.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">IPS (Intrusion Prevention System)</button><div class="accordion-panel"><p>An active security tool that monitors network traffic and takes immediate action to block or prevent potential threats in real time.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">EPP (Endpoint Protection Platform)</button><div class="accordion-panel"><p>An integrated security solution that combines anti-malware, personal firewall, and other controls to provide preventative security on endpoint devices like laptops and servers.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Incident Response</button><div class="accordion-panel"><p>A structured approach used by organizations to manage and mitigate security incidents. The lifecycle includes phases like Preparation, Identification, Containment, Eradication, Recovery, and Lessons Learned.</p></div></div>
+        </div>
+    </section>
+
+    <section id="vulnerability" class="main-content">
+         <h2>Vulnerability Management</h2>
+         <div class="process-block">
+            <h3>The Vulnerability Management Lifecycle</h3>
+            <p>This is a continuous, six-phase cycle designed to systematically reduce an organization's risk exposure.</p>
+            <ul>
+                <li><strong>1. Discover:</strong> Create a comprehensive inventory of all assets (devices, software, etc.) on the network.</li>
+                <li><strong>2. Prioritize Assets:</strong> Assign a value or criticality level to each asset group. Not all systems are equally important.</li>
+                <li><strong>3. Assess:</strong> Use vulnerability scanners to perform automated scans on assets to identify weaknesses.</li>
+                <li><strong>4. Report:</strong> Analyze the scan results and document the findings. Use systems like CVSS to understand the severity of each vulnerability and report the risk to stakeholders.</li>
+                <li><strong>5. Remediate:</strong> Fix the identified vulnerabilities, starting with the highest-risk ones. This often involves patch management but can also include configuration changes.</li>
+                <li><strong>6. Verify:</strong> Conduct follow-up scans to confirm that the vulnerabilities have been successfully remediated and the fixes have not introduced new issues.</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Vulnerability Scanning vs. Penetration Testing</h3>
+            <p>Though both are used to find weaknesses, they have different goals and approaches.</p>
+            <ul>
+                <li><strong>Vulnerability Scanning:</strong>
+                    <ul>
+                        <li><strong>Approach:</strong> Largely automated, breadth-over-depth.</li>
+                        <li><strong>Goal:</strong> To identify and list as many known vulnerabilities as possible across a wide range of systems.</li>
+                        <li><strong>Frequency:</strong> Should be performed regularly (e.g., weekly, monthly) to maintain security hygiene.</li>
+                    </ul>
+                </li>
+                <li><strong>Penetration Testing:</strong>
+                     <ul>
+                        <li><strong>Approach:</strong> A combination of automated and manual techniques, depth-over-breadth.</li>
+                        <li><strong>Goal:</strong> To simulate a real-world attack by actively trying to exploit vulnerabilities to see how far an attacker could get.</li>
+                        <li><strong>Frequency:</strong> Performed less frequently (e.g., annually or after major system changes).</li>
+                    </ul>
+                </li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>CVE and CVSS</h3>
+            <p>These two systems are the common language of vulnerability management.</p>
+            <ul>
+                <li><strong>CVE (Common Vulnerabilities and Exposures):</strong> A list of publicly disclosed security vulnerabilities. Each vulnerability is given a unique ID (e.g., CVE-2021-44228 for Log4Shell) to ensure everyone is talking about the same issue.</li>
+                <li><strong>CVSS (Common Vulnerability Scoring System):</strong> A standardized scoring system (from 0.0 to 10.0) that rates the severity of a vulnerability. A higher score means a more critical vulnerability. This helps organizations prioritize which issues to fix first.</li>
+            </ul>
+         </div>
+    </section>
+
+    <section id="monitoring" class="main-content">
+        <h2>Security Monitoring & Alerting</h2>
+        <div class="process-block">
+            <h3>The Importance of Monitoring</h3>
+            <p>Traditional defenses like firewalls are not enough. Continuous monitoring is essential for detecting threats that bypass preventative controls. The main purposes of monitoring are:</p>
+            <ul>
+                <li><strong>Threat Detection:</strong> To serve as the last line of defense, identifying attacks in progress.</li>
+                <li><strong>Verification of Controls:</strong> To ensure that security policies (like blocking certain traffic) are actually working as intended.</li>
+                - <strong>Forensics:</strong> To provide a legal record of activity that can be used to investigate an incident after it has occurred.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Log Analysis and SIEM</h3>
+            <p>At the heart of security monitoring is the collection and analysis of logs.</p>
+            <ul>
+                <li><strong>Logs:</strong> These are records of events that happen on systems and networks. They can come from operating systems, applications, firewalls, and more.</li>
+                <li><strong>SIEM (Security Information and Event Management):</strong> Since manual log review is impossible at scale, SIEM systems are used to collect logs from thousands of sources into one central place. The SIEM can then correlate events from different sources to identify patterns that might indicate an attack and generate alerts.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>IDS vs. IPS</h3>
+            <p>These network security tools are critical for monitoring and responding to threats in real time.</p>
+            <ul>
+                <li><strong>IDS (Intrusion Detection System):</strong> A passive system. It's like a security camera that watches network traffic. If it sees something suspicious that matches a known attack signature, it sends an alert, but it doesn't stop the traffic.</li>
+                <li><strong>IPS (Intrusion Prevention System):</strong> An active system. It's like a security guard at a gate. It sits "inline" with network traffic and can actively block or drop packets that it identifies as malicious, preventing the attack from reaching its target.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "A vulnerability that is known to the public but for which a patch is not yet available is called a _______-day vulnerability.", options: ["First", "Known", "Zero", "Last"], answer: "Zero" },
+        { question: "The industry standard for scoring the severity of a vulnerability is _______.", options: ["CVE", "NIST", "CVSS", "SLA"], answer: "CVSS" },
+        { question: "A _______ is a passive security tool that monitors network traffic and sends alerts for suspicious activity.", options: ["Firewall", "IPS", "Proxy", "IDS"], answer: "IDS" },
+        { question: "A _______ platform provides a centralized place to collect, aggregate, and analyze log data from across an organization.", options: ["EPP", "SIEM", "VAPT", "CVE"], answer: "SIEM" },
+        { question: "The first phase of the vulnerability management lifecycle is _______, which involves creating an asset inventory.", options: ["Remediation", "Assessment", "Discovery", "Reporting"], answer: "Discovery" },
+        { question: "A _______ actively blocks malicious traffic in real time, rather than just sending an alert.", options: ["IDS", "SIEM", "IPS", "Logger"], answer: "IPS" },
+        { question: "A _______ test is a depth-over-breadth approach that simulates a real-world attack.", options: ["Vulnerability", "Penetration", "Compliance", "Network"], answer: "Penetration" },
+        { question: "The _______ _______ _______ is an integrated security solution that provides preventative security on devices like laptops and servers.", options: ["Intrusion Detection System", "Endpoint Protection Platform", "Security Information and Event Management", "Vulnerability Assessment Tool"], answer: "Endpoint Protection Platform" }
+    ];
+
+    const trueOrFalse = [
+        { question: "Vulnerability scanning and penetration testing serve the exact same purpose.", answer: false },
+        { question: "An IPS (Intrusion Prevention System) is a passive monitoring tool.", answer: false },
+        { question: "The CVSS score for a vulnerability indicates its severity on a scale of 0.0 to 10.0.", answer: true },
+        { question: "The final step in the vulnerability management lifecycle is Remediation.", answer: false },
+        { question: "Logs are crucial for forensic analysis after a security incident.", answer: true },
+        { question: "Patch Management is a broader process that governs Vulnerability Management.", answer: false },
+        { question: "An IDS can stop an attack in progress by blocking network packets.", answer: false },
+        { question: "The Log4j vulnerability was an example of a critical, widespread zero-day vulnerability.", answer: true },
+        { question: "A high CVSS score (e.g., 9.8) indicates a low-severity vulnerability.", answer: false },
+        { question: "The main goal of security monitoring is to verify that the firewall is turned on.", answer: false }
+    ];
+
+    const multipleChoice = [
+        { question: "What does CVE stand for?", options: ["Critical Vulnerability Engine", "Common Vulnerabilities and Exposures", "Cybersecurity Verification Entry", "Common Vector of Exploitation"], answer: "Common Vulnerabilities and Exposures" },
+        { question: "Which of these is considered a 'depth-over-breadth' security assessment?", options: ["Automated Vulnerability Scan", "Asset Discovery", "Penetration Testing", "Log Review"], answer: "Penetration Testing" },
+        { question: "A security analyst needs to investigate an attack by looking at events from a firewall, a web server, and an endpoint. Which tool would be most helpful?", options: ["Vulnerability Scanner", "IDS", "SIEM", "EPP"], answer: "SIEM" },
+        { question: "Which phase of the vulnerability management lifecycle involves fixing a discovered weakness?", options: ["Discover", "Assess", "Report", "Remediate"], answer: "Remediate" },
+        { question: "What is the key difference between an IDS and an IPS?", options: ["An IDS is for networks, an IPS is for hosts.", "An IDS is active, while an IPS is passive.", "An IPS can block threats, while an IDS can only alert.", "An IPS uses signatures, while an IDS uses behavior analysis."], answer: "An IPS can block threats, while an IDS can only alert." },
+        { question: "The Log4j vulnerability involved a flaw in which feature?", options: ["SQL Injection", "File Upload", "JNDI Lookup", "Password Hashing"], answer: "JNDI Lookup" },
+        { question: "What is the primary function of an Endpoint Protection Platform (EPP)?", options: ["To analyze logs from servers.", "To provide preventative security on devices like laptops.", "To scan websites for vulnerabilities.", "To manage user identities."], answer: "To provide preventative security on devices like laptops." },
+        { question: "Which of the following is NOT a phase in the Incident Response Lifecycle?", options: ["Preparation", "Containment", "Vulnerability Scanning", "Lessons Learned"], answer: "Vulnerability Scanning" },
+        { question: "An organization sets a policy that all critical vulnerabilities must be patched within 15 days of discovery. This timeline is an example of a:", options: ["Service Level Agreement (SLA)", "Rollback Plan", "Risk Appetite", "Compensating Control"], answer: "Service Level Agreement (SLA)" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
 
