@@ -1,1 +1,602 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 11: Asset Management & Security Operations</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 11: Asset Management & Security Operations</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="asset-management">Asset Management</button>
+        <button class="tab-button" data-tab="appsec">Application Security</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">Asset</button><div class="accordion-panel"><p>Anything that has value to an organization, including tangible items like hardware and intangible items like data and intellectual property.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Asset Management</button><div class="accordion-panel"><p>The process of accounting for, deploying, maintaining, upgrading, and disposing of an organization's assets throughout their lifecycle.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Asset Classification</button><div class="accordion-panel"><p>The process of categorizing assets based on their value, sensitivity, and criticality to the organization to determine the appropriate level of protection.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Data Sanitization</button><div class="accordion-panel"><p>The process of deliberately, permanently, and irreversibly removing or destroying the data stored on a memory device to make it unrecoverable. Methods include software-based wiping and physical destruction.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Decommissioning</button><div class="accordion-panel"><p>The formal process of taking an asset out of service, which includes data sanitization and secure disposal or recycling.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">AAA Framework</button><div class="accordion-panel"><p>Stands for Authentication, Authorization, and Accounting. It's a security framework for controlling access to resources, enforcing policies, and auditing usage.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">RADIUS (Remote Authentication Dial-In User Service)</button><div class="accordion-panel"><p>A networking protocol that provides centralized Authentication, Authorization, and Accounting (AAA) management for users who connect to and use a network service.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Application Security (AppSec)</button><div class="accordion-panel"><p>The process of finding, fixing, and preventing security vulnerabilities at the application level, throughout the entire application lifecycle.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Input Validation</button><div class="accordion-panel"><p>A technique to prevent malicious data from entering a system. It involves checking data to ensure it meets specific criteria (e.g., correct type, length, format) before processing.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Static Code Analysis (SAST)</button><div class="accordion-panel"><p>The analysis of an application's source code or binary code for security vulnerabilities without executing the program.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Code Signing</button><div class="accordion-panel"><p>The process of using a digital signature to confirm the identity of the software author and guarantee that the code has not been altered or corrupted since it was signed.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Sandboxing</button><div class="accordion-panel"><p>A security mechanism for separating running programs in a tightly controlled environment to limit the harm they can cause to the host system.</p></div></div>
+             <div class="accordion-item"><button class="accordion-header">Secure Cookies</button><div class="accordion-panel"><p>HTTP cookies with security attributes like `Secure` (to ensure they are only sent over HTTPS) and `HttpOnly` (to prevent access from client-side scripts) to protect user session data.</p></div></div>
+        </div>
+    </section>
+
+    <section id="asset-management" class="main-content">
+         <h2>Asset Management</h2>
+         <div class="process-block">
+            <h3>The Asset Management Lifecycle</h3>
+            <p>Effective security requires managing assets through every stage of their life, from initial planning to final disposal.</p>
+            <ul>
+                <li><strong>1. Acquisition & Procurement:</strong> Security must be a primary consideration when purchasing new hardware or software. This includes vendor risk assessments and ensuring new assets meet security standards *before* they are bought.</li>
+                <li><strong>2. Assignment & Accounting:</strong> Once acquired, every asset must be assigned a clear owner (an individual or department) and classified based on its criticality and the sensitivity of the data it handles. This establishes accountability.</li>
+                <li><strong>3. Monitoring & Tracking:</strong> Organizations must maintain a continuous, up-to-date inventory of all assets. Automated discovery tools are essential for tracking where assets are, who is using them, and their current security status (e.g., patch level).</li>
+                <li><strong>4. Disposal & Decommissioning:</strong> When an asset reaches the end of its life, it must be retired securely. This is crucial for preventing data breaches from discarded hardware. The process involves secure data sanitization (wiping or physical destruction) and obtaining a certificate of destruction.</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Security Implications of Asset Management</h3>
+            <p>Proper asset management directly strengthens an organization's security posture in several key areas.</p>
+            <ul>
+                <li><strong>Hardware Security:</strong> A complete hardware inventory allows security teams to identify unauthorized "rogue" devices on the network and ensures all devices are securely configured and patched.</li>
+                <li><strong>Software Security:</strong> An accurate software inventory is the foundation of patch management. It allows organizations to quickly identify systems running vulnerable software (like the out-of-date Plex server in the LastPass breach) and prevent the use of unauthorized, potentially malicious applications.</li>
+                <li><strong>Data Security:</strong> By classifying data and mapping it to the assets where it is stored and processed, organizations can apply the correct security controls (like encryption and access restrictions) to protect their most sensitive information.</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>Network Security: AAA and RADIUS</h3>
+            <p>Controlling access to the network is a core part of securing assets.</p>
+            <ul>
+                <li><strong>AAA Framework:</strong> This stands for Authentication ("Who are you?"), Authorization ("What are you allowed to do?"), and Accounting ("What did you do?"). It's the fundamental model for network access control.</li>
+                <li><strong>RADIUS:</strong> This is a protocol that implements the AAA framework. It provides a centralized way to manage user authentication and policies across various network devices like VPNs and wireless access points.</li>
+            </ul>
+         </div>
+    </section>
+
+    <section id="appsec" class="main-content">
+        <h2>Application Security (AppSec)</h2>
+        <div class="process-block">
+            <h3>The Importance of Application Security</h3>
+            <p>Applications are often the primary target of cyberattacks. Securing them is critical to protect sensitive data, maintain business continuity, and build customer trust. A strong AppSec program integrates security into every phase of the software development lifecycle (a practice known as DevSecOps).</p>
+        </div>
+        <div class="process-block">
+            <h3>Key Application Security Techniques</h3>
+            <p>These techniques are used to build and maintain secure applications.</p>
+            <ul>
+                <li><strong>Input Validation:</strong> Never trust user input. This technique involves rigorously checking all data submitted by a user to ensure it is safe before processing. It's the primary defense against injection attacks like SQL injection and cross-site scripting (XSS).
+                    <ul>
+                       <li><strong>Whitelisting:</strong> Only allowing known-good input.</li>
+                       <li><strong>Sanitization:</strong> Removing potentially harmful characters from input.</li>
+                    </ul>
+                </li>
+                <li><strong>Secure Cookies:</strong> User session cookies can be a target for attackers. Securing them with the `HttpOnly` flag prevents them from being stolen via XSS, and the `Secure` flag ensures they are only ever transmitted over encrypted HTTPS connections.</li>
+                <li><strong>Static Code Analysis (SAST):</strong> Using automated tools to scan an application's source code for potential security vulnerabilities before the code is even run. This helps developers find and fix flaws early in the development process.</li>
+                <li><strong>Code Signing:</strong> This provides a digital signature for software, which verifies the identity of the author and ensures the code hasn't been tampered with since it was signed. It helps prevent users from installing malicious software masquerading as a legitimate application.</li>
+                <li><strong>Sandboxing:</strong> Running an application in a restricted, isolated environment (a "sandbox"). This limits the application's access to the host system's files and resources, containing any potential damage if the application is compromised.</li>
+                <li><strong>Real-time Application Monitoring:</strong> Continuously analyzing application logs and behavior to detect and respond to anomalies or threats as they happen.</li>
+            </ul>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "Anything that has value to an organization, whether tangible or intangible, is known as an _______.", options: ["Object", "Item", "Resource", "Asset"], answer: "Asset" },
+        { question: "The process of verifying a user's identity is called _______.", options: ["Authorization", "Authentication", "Accounting", "Auditing"], answer: "Authentication" },
+        { question: "_______ is a security mechanism for running programs in a restricted environment to contain potential threats.", options: ["Code Signing", "Sandboxing", "Input Validation", "Whitelisting"], answer: "Sandboxing" },
+        { question: "The process of securely wiping data from a device before disposal is called data _______.", options: ["Classification", "Sanitization", "Retention", "Archiving"], answer: "Sanitization" },
+        { question: "SAST stands for _______ Application Security Testing.", options: ["Secure", "Static", "System", "Standard"], answer: "Static" },
+        { question: "The _______ protocol is commonly used to provide centralized AAA services for network access.", options: ["HTTP", "SMTP", "RADIUS", "FTP"], answer: "RADIUS" },
+        { question: "Setting the _______ flag on a cookie prevents it from being accessed by client-side scripts, mitigating XSS attacks.", options: ["Secure", "SameSite", "Domain", "HttpOnly"], answer: "HttpOnly" },
+        { question: "The final phase of the asset management lifecycle is secure _______ and decommissioning.", options: ["Acquisition", "Monitoring", "Assignment", "Disposal"], answer: "Disposal" }
+    ];
+
+    const trueOrFalse = [
+        { question: "Asset management is only concerned with physical hardware like laptops and servers.", answer: false },
+        { question: "Input validation is a primary defense against SQL injection attacks.", answer: true },
+        { question: "In the AAA framework, 'Authorization' happens before 'Authentication'.", answer: false },
+        { question: "Code signing verifies that software has not been tampered with since it was signed.", answer: true },
+        { question: "Once an asset is decommissioned, it no longer poses any security risk.", answer: false },
+        { question: "A centralized asset database helps in quickly identifying systems affected by a new vulnerability.", answer: true },
+        { question: "SAST tools analyze an application's code while it is running.", answer: false },
+        { question: "Data classification involves categorizing data based on its sensitivity and criticality.", answer: true },
+        { question: "RADIUS is a framework, not a specific protocol.", answer: false },
+        { question: "Effective patch management relies on having an accurate software inventory.", answer: true }
+    ];
+
+    const multipleChoice = [
+        { question: "What are the three core components of the AAA framework?", options: ["Asset, Authorization, Accounting", "Authentication, Authorization, Accounting", "Application, Authentication, Auditing", "Access, Administration, Auditing"], answer: "Authentication, Authorization, Accounting" },
+        { question: "Which of the following is the best way to ensure data on a hard drive is unrecoverable at the end of its lifecycle?", options: ["Deleting the files", "Reformatting the drive", "Software-based wiping or physical destruction", "Hiding the drive in a secure location"], answer: "Software-based wiping or physical destruction" },
+        { question: "A developer is building a web form. To prevent cross-site scripting (XSS), what is the most important technique they should use?", options: ["Code Signing", "Sandboxing", "Input Validation and Sanitization", "Using a strong password"], answer: "Input Validation and Sanitization" },
+        { question: "An organization wants to give access to its network to a partner company without creating new accounts for every partner employee. Which concept enables this?", options: ["Asset Classification", "RADIUS", "Federation", "Sandboxing"], answer: "Federation" },
+        { question: "What is the primary purpose of code signing?", options: ["To make the code run faster", "To encrypt the code so no one can read it", "To verify the author's identity and the code's integrity", "To find bugs in the code before release"], answer: "To verify the author's identity and the code's integrity" },
+        { question: "The first step in a robust asset management lifecycle is:", options: ["Disposal", "Monitoring", "Acquisition with security in mind", "Assignment of ownership"], answer: "Acquisition with security in mind" },
+        { question: "Which technique is used to analyze an application's source code for vulnerabilities *before* it is compiled or run?", options: ["Dynamic Application Security Testing (DAST)", "Static Application Security Testing (SAST)", "Penetration Testing", "Real-time Monitoring"], answer: "Static Application Security Testing (SAST)" },
+        { question: "An administrator configures a cookie with the 'Secure' flag. What does this ensure?", options: ["The cookie can only be read by the server.", "The cookie expires after one hour.", "The cookie is only sent over an encrypted HTTPS connection.", "The cookie cannot be accessed by JavaScript."], answer: "The cookie is only sent over an encrypted HTTPS connection." }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
