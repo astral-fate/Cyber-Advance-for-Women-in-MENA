@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-
-<html lang="en"\>
-<head\>
-<meta charset="UTF-8"\>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"\>
-<title\>Cybersecurity - Module 15: Incident Response & Management (Comprehensive)</title\>
-<style\>
-body {
-font-family: Arial, sans-serif;
-background-color: \#f8f9fa;
-margin: 0;
-padding: 20px;
-line-height: 1.6;
-color: \#333;
-}
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 15: Incident Response & Management (Comprehensive)</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
 
     .container {
         max-width: 900px;
@@ -267,14 +266,10 @@ color: \#333;
         border: 1px solid #f5c6cb;
     }
 </style>
-```
-
-</head\>
-<body\>
-<div class="container"\>
-<h1\>Module 15: Incident Response & Management (Comprehensive)</h1\>
-
-```
+</head>
+<body>
+<div class="container">
+<h1>Module 15: Incident Response & Management (Comprehensive)</h1>
     <div class="main-tabs">
         <button class="tab-button active" data-tab="glossary">Glossary</button>
         <button class="tab-button" data-tab="processes">Processes & Techniques</button>
@@ -325,7 +320,7 @@ color: \#333;
             <div class="accordion-item">
                 <button class="accordion-header">Digital Forensics</button>
                 <div class="accordion-panel">
-                    <p>A crucial component of cybersecurity that involves the collection, analysis, and interpretation of digital evidence to investigate and respond to cyber incidents.</p>
+                    <p>A crucial component of cybersecurity that involves the collection, analysis, and interpretation of digital evidence to investigate and respond to to cyber incidents.</p>
                 </div>
             </div>
             <div class="accordion-item">
@@ -370,7 +365,8 @@ color: \#333;
                     <p>A proactive cybersecurity practice that involves actively searching through networks and systems to detect and isolate advanced threats that may have evaded existing security controls.</p>
                 </div>
             </div>
-        </div> </section>
+        </div>
+    </section>
 
     <section id="processes" class="main-content">
          <h2>Processes & Techniques</h2>
@@ -383,16 +379,16 @@ color: \#333;
                 <li><strong>Alert:</strong> An event is flagged as abnormal (e.g., a user logs in from two different countries simultaneously). This generates an alert for an analyst.</li>
                 <li><strong>Incident:</strong> An analyst investigates the alert. If it's a real threat with significant potential impact (not a false positive), it is officially declared an incident, triggering a formal response.</li>
             </ul>
-            <div class="example"><p><strong>Example: A Phishing Email</strong></p><div class="solution"><p>An employee receives a phishing email (an **event**). The email filter blocks it, so no alert is needed. Later, another phishing email gets through and the user clicks a link. The Endpoint Detection and Response (EDR) software blocks the malicious connection and generates an **alert**. A security analyst sees the alert and confirms a user's credentials were nearly stolen. Because of the potential for data loss, this is escalated to an **incident**.</p></div></div>
+            <div class="example"><p><strong>Example: A Phishing Email</strong></p><div class="solution"><p>An employee receives a phishing email (an <strong>event</strong>). The email filter blocks it, so no alert is needed. Later, another phishing email gets through and the user clicks a link. The Endpoint Detection and Response (EDR) software blocks the malicious connection and generates an <strong>alert</strong>. A security analyst sees the alert and confirms a user's credentials were nearly stolen. Because of the potential for data loss, this is escalated to an <strong>incident</strong>.</p></div></div>
          </div>
 
          <h3>The People & The Plan: CSIRT and Documentation</h3>
          <div class="process-block">
             <h4>Building Your Defense Team</h4>
-            <p>A **Computer Security Incident Response Team (CSIRT)** is the core group that manages incidents. It's not just for tech experts.</p>
+            <p>A <strong>Computer Security Incident Response Team (CSIRT)</strong> is the core group that manages incidents. It's not just for tech experts.</p>
              <ul>
                 <li><strong>Key Roles:</strong> A good CSIRT includes a Team Leader, Lead Investigator, Analysts, Communications Specialists, Legal Representation, and an Executive Sponsor.</li>
-                <li><strong>The Plan:</strong> The team operates using an **Incident Response Plan (IRP)**. This is a detailed document outlining procedures, roles, communication strategies, and everything needed to handle a crisis smoothly.</li>
+                <li><strong>The Plan:</strong> The team operates using an <strong>Incident Response Plan (IRP)</strong>. This is a detailed document outlining procedures, roles, communication strategies, and everything needed to handle a crisis smoothly.</li>
             </ul>
          </div>
 
@@ -410,7 +406,7 @@ color: \#333;
                         <li><strong>Recovery:</strong> Restore systems to normal operation. This involves restoring from clean backups and monitoring closely to ensure the threat is truly gone.</li>
                     </ul>
                 </li>
-                <li><strong>4. Post-Incident Analysis:</strong> Also called "Lessons Learned." The team meets to review the entire incident. The goal is not to assign blame, but to identify what went well, what didn't, and how to improve. This often involves a **Root Cause Analysis (RCA)** to find the fundamental weakness that allowed the incident to happen.</li>
+                <li><strong>4. Post-Incident Analysis:</strong> Also called "Lessons Learned." The team meets to review the entire incident. The goal is not to assign blame, but to identify what went well, what didn't, and how to improve. This often involves a <strong>Root Cause Analysis (RCA)</strong> to find the fundamental weakness that allowed the incident to happen.</li>
             </ul>
          </div>
 
@@ -419,9 +415,9 @@ color: \#333;
             <h4>Preserving the Digital Crime Scene</h4>
             <p>When an incident might lead to legal action, handling digital evidence correctly is critical.</p>
             <ul>
-                <li><strong>Forensic Acquisition:</strong> Creating a perfect, bit-by-bit copy (a forensic image) of a compromised device's storage without altering the original. This is done using **write-blockers**.</li>
+                <li><strong>Forensic Acquisition:</strong> Creating a perfect, bit-by-bit copy (a forensic image) of a compromised device's storage without altering the original. This is done using <strong>write-blockers</strong>.</li>
                 <li><strong>Chain of Custody:</strong> A meticulous log documenting everyone who has handled the evidence, where it's been stored, and what was done to it. This proves the evidence hasn't been tampered with.</li>
-                <li><strong>Legal Hold:</strong> A formal process to preserve all potentially relevant data when litigation is anticipated. This prevents the intentional or accidental destruction of evidence (**spoliation**).</li>
+                <li><strong>Legal Hold:</strong> A formal process to preserve all potentially relevant data when litigation is anticipated. This prevents the intentional or accidental destruction of evidence (<strong>spoliation</strong>).</li>
                 <li><strong>E-discovery:</strong> The formal process of identifying, collecting, and producing electronically stored information (ESI) in response to a legal request.</li>
             </ul>
          </div>
@@ -442,7 +438,8 @@ color: \#333;
         <div id="mc-questions"></div>
     </div>
 
-</div> <script>
+</div>
+<script>
     // --- START OF QUIZ DATA ---
     const fillInTheBlank = [
         {
@@ -831,6 +828,5 @@ color: \#333;
     }); // End DOMContentLoaded
     // --- END OF SCRIPT LOGIC ---
 </script>
-
-</body\>
-</html\>
+</body>
+</html>
