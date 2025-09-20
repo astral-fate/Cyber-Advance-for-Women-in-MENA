@@ -1,1 +1,689 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 4: Security Controls</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 4: Security Controls</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="fundamentals">Risk Fundamentals</button>
+        <button class="tab-button" data-tab="categories">Control Categories</button>
+        <button class="tab-button" data-tab="proactive">Proactive Control Types</button>
+        <button class="tab-button" data-tab="reactive">Reactive Control Types</button>
+        <button class="tab-button" data-tab="assessments">Assessments & Layering</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">Security Control</button><div class="accordion-panel"><p>A measure or safeguard put in place to protect systems and data from threats, reduce vulnerabilities, and minimize the impact of an attack.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Threat</button><div class="accordion-panel"><p>Any potential danger or harmful event that can exploit a vulnerability. Examples include a malicious actor, malware, or a natural disaster.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Vulnerability</button><div class="accordion-panel"><p>A weakness or gap in a system's security posture that could be exploited by a threat. Examples include unpatched software, weak passwords, or misconfigured permissions.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Risk</button><div class="accordion-panel"><p>The likelihood that a threat will exploit a vulnerability, combined with the potential impact or damage it could cause. Risk = Threat x Vulnerability.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Technical Control</button><div class="accordion-panel"><p>A control implemented using technology, such as firewalls, encryption, and antivirus software.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Managerial (Administrative) Control</button><div class="accordion-panel"><p>A high-level control that involves policies, procedures, and strategic decisions made by management, such as risk assessments and security training programs.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Operational Control</button><div class="accordion-panel"><p>A control implemented by people through day-to-day procedures and practices, such as data backups, change management, and incident handling.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Physical Control</button><div class="accordion-panel"><p>A tangible measure to protect physical assets like facilities and hardware, such as locks, security guards, and surveillance cameras.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Preventive Control</button><div class="accordion-panel"><p>A control designed to stop a security incident before it happens. Example: A firewall blocking malicious traffic.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Detective Control</button><div class="accordion-panel"><p>A control designed to identify and detect a security incident that has already occurred or is in progress. Example: An Intrusion Detection System (IDS) sending an alert.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Corrective Control</button><div class="accordion-panel"><p>A control designed to restore a system after a security incident has occurred. Example: Restoring data from a backup after a ransomware attack.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Deterrent Control</button><div class="accordion-panel"><p>A control designed to discourage potential attackers through psychological means. Example: A "Protected by Video Surveillance" sign.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Directive Control</button><div class="accordion-panel"><p>A control that mandates specific behaviors through policies and procedures. Example: An Acceptable Use Policy.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Compensating Control</button><div class="accordion-panel"><p>An alternative control used when a primary control is not feasible. Example: Using enhanced monitoring when a system cannot be patched.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Defense-in-Depth</button><div class="accordion-panel"><p>A security strategy that uses multiple layers of diverse security controls to protect an asset. If one layer fails, another is in place to stop an attack.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Hardening</button><div class="accordion-panel"><p>The process of securing a system by reducing its attack surface. This includes disabling unnecessary services, applying patches, and enforcing strong configurations.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Penetration Testing</button><div class="accordion-panel"><p>Also known as ethical hacking, it's a simulated cyberattack against your own system to check for exploitable vulnerabilities.</p></div></div>
+        </div>
+    </section>
+
+    <section id="fundamentals" class="main-content">
+         <h2>Risk Fundamentals</h2>
+         <div class="process-block">
+            <h3>Threats, Vulnerabilities, and Risk</h3>
+            <p>
+                Understanding the relationship between these three concepts is the foundation of cybersecurity strategy.
+            </p>
+            <ul>
+                <li><strong>Threat:</strong> The potential for harm. A threat is the "who" or "what" that could cause damage.
+                    <br><em>Example: A hacker, a piece of malware, or a flood.</em>
+                </li>
+                <li><strong>Vulnerability:</strong> A weakness or flaw. A vulnerability is the "how" a threat could cause damage.
+                    <br><em>Example: Unpatched software, a weak password, or a server room in a basement.</em>
+                </li>
+                <li><strong>Risk:</strong> The likelihood of a threat exploiting a vulnerability and the resulting impact.
+                    <br><em>Example: The risk of a data breach is high if a hacker (threat) targets your unpatched web server (vulnerability).</em>
+                </li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>The Four Strategies of Risk Mitigation</h3>
+            <p>Once a risk is identified, organizations must decide how to handle it. There are four primary strategies:</p>
+            <ul>
+                <li><strong>Acceptance:</strong> Acknowledging a risk and choosing not to take action, usually because the cost of mitigation outweighs the potential impact.
+                    <div class="example"><strong>SpaceX</strong> accepted the risk of failure in its early rocket launches as a necessary part of the innovation process.</div>
+                </li>
+                <li><strong>Avoidance:</strong> Eliminating a risk by not engaging in the activity that creates it.
+                    <div class="example"><strong>Apple</strong> avoids certain data breach risks by designing systems that limit the amount of user data stored on their servers.</div>
+                </li>
+                <li><strong>Transfer:</strong> Shifting the financial impact of a risk to a third party, most commonly through insurance.
+                    <div class="example">After its massive data breach, <strong>Target</strong> transferred some of the financial risk by using insurance to cover a portion of the costs from lawsuits and settlements.</div>
+                </li>
+                <li><strong>Reduction (Mitigation):</strong> Implementing security controls to reduce the likelihood or impact of a risk.
+                    <div class="example"><strong>Google</strong> actively reduces its risk of cyberattacks by implementing robust security measures like encryption, regular patching, and employing security researchers.</div>
+                </li>
+            </ul>
+         </div>
+    </section>
+
+    <section id="categories" class="main-content">
+        <h2>Control Categories</h2>
+        <div class="process-block">
+            <h3>The Four Categories of Controls</h3>
+            <p>Security controls can be grouped into four main categories based on their nature and how they are implemented.</p>
+            <div class="example">
+                <strong>Analogy - Securing a Grocery Store:</strong>
+                <ul>
+                    <li><strong>Technical Controls:</strong> Alarm systems that detect unauthorized entry (software/hardware-based).</li>
+                    <li><strong>Managerial Controls:</strong> The store's policy on which employees are allowed in the cash office (strategic/policy-based).</li>
+                    <li><strong>Operational Controls:</strong> The daily procedure for employees to lock the doors and set the alarm at closing time (people/process-based).</li>
+                    <li><strong>Physical Controls:</strong> Surveillance cameras, locks on the doors, and security guards (tangible measures).</li>
+                </ul>
+            </div>
+        </div>
+        <div class="process-block">
+            <h3>A Deeper Look at the Categories</h3>
+            <ul>
+                <li><strong>Technical (or Logical) Controls:</strong> These controls use technology to protect systems. They are implemented through hardware or software, such as firewalls, encryption, antivirus software, and Intrusion Detection Systems (IDS).</li>
+                <li><strong>Managerial (or Administrative) Controls:</strong> These are high-level controls that focus on strategy, governance, and risk management. They include security policies, risk assessments, third-party vendor management, and security awareness training.
+                    <div class="example"><strong>Case Study:</strong> The 2013 Target data breach occurred because attackers exploited a vulnerability in a third-party HVAC vendor. This highlighted a failure in Target's managerial controls related to third-party risk management.</div>
+                </li>
+                <li><strong>Operational Controls:</strong> These are the day-to-day procedures and practices implemented by people to enforce security policies. Examples include data backup procedures, change management processes, and incident handling.</li>
+                <li><strong>Physical Controls:</strong> These are tangible measures used to protect facilities, hardware, and other physical assets. Examples include locks, fences, security guards, fire suppression systems, and surveillance cameras.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="proactive" class="main-content">
+        <h2>Proactive Control Types: Preventing & Deterring</h2>
+        <div class="process-block">
+            <h3>Preventive Controls</h3>
+            <p>Preventive controls are designed to stop a security incident before it can happen. They are the first line of defense.</p>
+            <ul>
+                <li><strong>Hardening & Patching:</strong> The process of making systems more secure by reducing their attack surface. This includes applying security patches, disabling unneeded services, and enforcing secure configurations.
+                    <div class="example"><strong>Case Study:</strong> The 2017 WannaCry ransomware attack primarily affected organizations that had failed to apply a critical Windows security patch. A simple preventive control (timely patching) could have stopped a global incident.</div>
+                </li>
+                <li><strong>Security Awareness Training:</strong> Educating employees to recognize and avoid threats like phishing reduces the risk of human error.</li>
+                <li><strong>Firewalls & Intrusion Prevention Systems (IPS):</strong> Firewalls act as a barrier to block unauthorized traffic, while an IPS actively monitors the network and can automatically block detected threats.</li>
+                <li><strong>Change Management:</strong> A formal process for managing changes to IT systems to ensure they don't introduce new vulnerabilities.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Deterrent & Directive Controls</h3>
+            <ul>
+                <li><strong>Deterrent Controls:</strong> These controls are designed to discourage potential attackers through psychological means. Their goal is to make an attacker think twice. Examples include warning signs, visible security cameras, and policies outlining severe penalties for security violations.</li>
+                <li><strong>Directive Controls:</strong> These controls mandate specific actions and behaviors through formal policies and procedures. They provide guidance to ensure compliance. Examples include an Acceptable Use Policy (AUP), security standards, and legal regulations like HIPAA or GDPR.</li>
+            </ul>
+        </div>
+    </section>
+
+    <section id="reactive" class="main-content">
+        <h2>Reactive Control Types: Detecting & Correcting</h2>
+        <div class="process-block">
+            <h3>Detective Controls</h3>
+            <p>Detective controls are used to identify and alert on security incidents that are in progress or have already occurred. They are crucial for timely incident response.</p>
+            <ul>
+                <li><strong>Log Monitoring & SIEM:</strong> A Security Information and Event Management (SIEM) system collects and correlates log data from across the network to detect suspicious patterns and generate alerts.</li>
+                <li><strong>Intrusion Detection Systems (IDS):</strong> An IDS is a passive system that monitors network traffic and alerts administrators when it detects a potential threat. Unlike an IPS, it does not block the threat itself.</li>
+                <li><strong>Security Audits & Video Surveillance:</strong> Regular audits check for policy violations and security gaps, while video surveillance can provide evidence of a physical breach after the fact.</li>
+            </ul>
+            <div class="example"><strong>Case Study:</strong> During the 2013 Target data breach, the company's detective controls (a SIEM system) actually generated alerts about the suspicious activity. However, due to a failure in operational processes, these alerts were missed or ignored, allowing the attack to continue for weeks.</div>
+        </div>
+        <div class="process-block">
+            <h3>Corrective & Compensating Controls</h3>
+            <ul>
+                <li><strong>Corrective Controls:</strong> These controls are implemented after an incident to fix the damage and restore systems to normal. The goal is to correct the problem and prevent it from happening again.
+                    <div class="example"><strong>Case Study:</strong> After the shipping giant Maersk was crippled by the NotPetya malware in 2017, their recovery was a massive corrective action. They had to rebuild their entire global network, a process made possible only by a single offline backup of a domain controller that had survived the attack.</div>
+                </li>
+                <li><strong>Compensating Controls:</strong> These are alternative measures used when a primary control is not feasible. For example, if an old legacy system cannot be patched (a preventive control failure), a compensating control might be to place it on an isolated network segment and apply enhanced monitoring (a detective control).</li>
+            </ul>
+        </div>
+    </section>
+    
+    <section id="assessments" class="main-content">
+        <h2>Assessments & Defense-in-Depth</h2>
+        <div class="process-block">
+            <h3>Defense-in-Depth: The Layered Approach</h3>
+            <p>
+                Defense-in-Depth is a core cybersecurity strategy that acknowledges that no single control is perfect. It involves implementing multiple, overlapping layers of different security controls throughout the infrastructure.
+            </p>
+            <p>
+                The goal is to create a resilient defense where if an attacker bypasses one layer, they will still be stopped by subsequent layers. A robust strategy combines various categories (Technical, Managerial, etc.) and types (Preventive, Detective, etc.) of controls to protect critical assets from diverse threats.
+            </p>
+        </div>
+        <div class="process-block">
+            <h3>Security Control Assessments</h3>
+            <p>Assessments are systematic evaluations used to verify the effectiveness of security controls and identify weaknesses. Regular assessments are crucial for maintaining a strong security posture.</p>
+            <ul>
+                <li><strong>Risk Assessment:</strong> A high-level process to identify, analyze, and prioritize potential risks to the organization. It helps determine where to focus security efforts and resources.</li>
+                <li><strong>Vulnerability Assessment:</strong> A technical process that uses scanning tools (like Nessus) to identify known vulnerabilities and misconfigurations in systems and applications. It answers the question, "What are our weaknesses?"</li>
+                <li><strong>Penetration Testing (Ethical Hacking):</strong> A simulated, real-world attack on an organization's defenses. Testers actively try to exploit vulnerabilities to determine the real-world effectiveness of existing controls. It answers the question, "Can an attacker get in, and what can they do?"</li>
+            </ul>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions</div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "A security measure designed to stop an incident before it occurs, such as a firewall, is a _______ control.", options: ["Detective", "Corrective", "Preventive", "Deterrent"], answer: "Preventive" },
+        { question: "The likelihood that a threat will exploit a vulnerability is known as _______.", options: ["A control", "An asset", "Risk", "A policy"], answer: "Risk" },
+        { question: "The strategy of layering multiple, diverse security controls is called _______.", options: ["Risk Acceptance", "Defense-in-Depth", "Change Management", "Penetration Testing"], answer: "Defense-in-Depth" },
+        { question: "A control that is implemented by people through day-to-day procedures, like performing data backups, is an _______ control.", options: ["Operational", "Technical", "Physical", "Managerial"], answer: "Operational" },
+        { question: "A _______ control is an alternative measure used when a primary control is not feasible.", options: ["Directive", "Deterrent", "Corrective", "Compensating"], answer: "Compensating" },
+        { question: "A simulated attack performed by ethical hackers to test an organization's defenses is called _______.", options: ["A Risk Assessment", "A Vulnerability Assessment", "Penetration Testing", "A Security Audit"], answer: "Penetration Testing" },
+        { question: "Security policies and risk assessments are examples of _______ controls.", options: ["Technical", "Physical", "Operational", "Managerial"], answer: "Managerial" },
+        { question: "An Intrusion Detection System (IDS) is a primary example of a _______ control.", options: ["Preventive", "Detective", "Corrective", "Deterrent"], answer: "Detective" }
+    ];
+
+    const trueOrFalse = [
+        { question: "A vulnerability is a potential danger, while a threat is a weakness.", answer: false },
+        { question: "The four risk mitigation strategies are Accept, Avoid, Transfer, and Reduce.", answer: true },
+        { question: "A corrective control aims to stop an attack before it happens.", answer: false },
+        { question: "The Target breach of 2013 was a failure of detective controls, as alerts were generated but ignored.", answer: true },
+        { question: "Physical controls, like locks and security cameras, are not considered part of a cybersecurity strategy.", answer: false },
+        { question: "Hardening a system involves increasing its attack surface to make it more complex for attackers.", answer: false },
+        { question: "An Intrusion Prevention System (IPS) is a preventive control because it can actively block threats.", answer: true },
+        { question: "The Maersk recovery from NotPetya highlights the importance of online, continuously synced backups.", answer: false },
+        { question: "Managerial controls and operational controls are the same thing.", answer: false },
+        { question: "Buying cybersecurity insurance is an example of risk acceptance.", answer: false }
+    ];
+
+    const multipleChoice = [
+        { question: "The 2017 Equifax data breach was caused by a failure to apply a critical security patch. This represents a failure of which type of control?", options: ["Detective", "Preventive", "Corrective", "Deterrent"], answer: "Preventive" },
+        { question: "An organization places a large, visible sign at its entrance that reads: 'All activities monitored by 24/7 video surveillance.' What type of control is this?", options: ["Preventive", "Corrective", "Deterrent", "Compensating"], answer: "Deterrent" },
+        { question: "Which of the following best describes a technical control?", options: ["A company's acceptable use policy.", "Daily backup procedures.", "Encryption software for a hard drive.", "A security guard at the front door."], answer: "Encryption software for a hard drive." },
+        { question: "After a ransomware attack encrypts all their data, a company restores its systems from a recent offline backup. This action is an example of what type of control?", options: ["Detective", "Preventive", "Corrective", "Directive"], answer: "Corrective" },
+        { question: "What is the primary goal of Defense-in-Depth?", options: ["To rely on a single, powerful security solution.", "To have multiple, layered security controls so that if one fails, others are still in place.", "To completely eliminate all risk.", "To transfer all security responsibility to a third party."], answer: "To have multiple, layered security controls so that if one fails, others are still in place." },
+        { question: "A SIEM system alerts the security team to suspicious network traffic. The SIEM is functioning as what type of control?", options: ["Preventive", "Detective", "Corrective", "Compensating"], answer: "Detective" },
+        { question: "The Target data breach originated from a compromised third-party HVAC vendor. This primarily points to a weakness in which control category?", options: ["Technical", "Physical", "Managerial", "Operational"], answer: "Managerial" },
+        { question: "Which of the following is a primary goal of a preventive control?", options: ["To restore systems after an incident.", "To identify that an incident has occurred.", "To stop an incident before it happens.", "To discourage an attacker with warnings."], answer: "To stop an incident before it happens." },
+        { question: "A company cannot enforce a strong password policy on a legacy system. Instead, they implement Multi-Factor Authentication (MFA) for that system. MFA here is acting as a:", options: ["Preventive Control", "Directive Control", "Compensating Control", "Deterrent Control"], answer: "Compensating Control" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
