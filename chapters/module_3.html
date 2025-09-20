@@ -1,1 +1,669 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 3: Introduction to Security Concepts</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+    
+    pre {
+        background-color: #e9ecef;
+        padding: 15px;
+        border-radius: 5px;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+        font-family: 'Courier New', Courier, monospace;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px;
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em;
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden;
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6;
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative;
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg);
+    }
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0;
+        color: #333;
+    }
+
+    /* --- End Accordion Styles --- */
+
+
+    /* Processes Styles */
+    .process-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 25px;
+    }
+    .process-block ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+    .process-block .example {
+         margin-top: 15px;
+         padding: 15px;
+         border-left: 4px solid #17a2b8; /* Info Blue */
+         background-color: #f1faff;
+         border-radius: 5px;
+    }
+     .process-block .solution {
+         margin-top: 10px;
+         font-style: italic;
+         color: #555;
+    }
+
+    /* Quiz Styles */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff;
+        position: relative;
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa;
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+<h1>Module 3: Introduction to Security Concepts</h1>
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="models">Core Security Models</button>
+        <button class="tab-button" data-tab="privacy">Data Privacy & PII</button>
+        <button class="tab-button" data-tab="breaches">Breaches & Threats</button>
+        <button class="tab-button" data-tab="defense">Proactive Defense & Ethics</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+            <div class="accordion-item"><button class="accordion-header">CIA Triad</button><div class="accordion-panel"><p>A foundational security model that guides policies for information security. It consists of three principles: <b>Confidentiality</b> (data is accessible only to authorized users), <b>Integrity</b> (data is accurate and reliable), and <b>Availability</b> (data is accessible when needed).</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">AAA Model</button><div class="accordion-panel"><p>A framework for controlling access to resources. It consists of three processes: <b>Authentication</b> (verifying identity), <b>Authorization</b> (granting appropriate permissions), and <b>Accounting</b> (tracking user activities).</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Zero Trust Model</button><div class="accordion-panel"><p>A security framework based on the principle of "never trust, always verify." It eliminates implicit trust and requires continuous verification for every user and device, regardless of their location.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Information Privacy</button><div class="accordion-panel"><p>The relationship between the collection and dissemination of data, technology, public expectations of privacy, and the surrounding legal issues.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">PII (Personally Identifiable Information)</button><div class="accordion-panel"><p>Any data that can be used to identify, contact, or locate a specific individual. Examples include name, Social Security number, IP address, and biometric data.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">De-anonymization</button><div class="accordion-panel"><p>The process of re-identifying individuals from a dataset that was supposed to be anonymous by cross-referencing it with other available data sources.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Data Breach</button><div class="accordion-panel"><p>A security incident where unauthorized parties gain access to sensitive or confidential data. The primary focus is the theft of information.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Security Breach</button><div class="accordion-panel"><p>A broader term for any incident that compromises a system or network. It can include data breaches, malware infections, or attacks that affect system availability, not just data confidentiality.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Insider Threat</button><div class="accordion-panel"><p>A security threat that originates from within an organization, such as a current or former employee, contractor, or business associate who misuses their authorized access.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Deception Technology</button><div class="accordion-panel"><p>Proactive security measures designed to mislead and detect attackers by deploying decoy assets within a network.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Honeypot</button><div class="accordion-panel"><p>A decoy computer system designed to attract and trap attackers, allowing security teams to study their methods without exposing real assets.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Honeynet</button><div class="accordion-panel"><p>A network of two or more honeypots designed to simulate a real network, providing a more comprehensive view of an attacker's behavior.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Honeyfile / Honeytoken</button><div class="accordion-panel"><p>Fake decoy files (honeyfiles) or pieces of data like credentials (honeytokens) placed within a system. Any interaction with them triggers an alert, signaling a potential breach.</p></div></div>
+            <div class="accordion-item"><button class="accordion-header">Ethics</button><div class="accordion-panel"><p>The moral principles that govern a person's behavior or the conducting of an activity. In cybersecurity, it involves responsible data handling, respecting privacy, and being transparent.</p></div></div>
+        </div>
+    </section>
+
+    <section id="models" class="main-content">
+         <h2>Core Security Models</h2>
+         <div class="process-block">
+            <h3>The CIA Triad</h3>
+            <p>
+                The CIA Triad is a cornerstone model for information security, composed of three core principles that guide the development of security policies.
+            </p>
+            <ul>
+                <li><strong>Confidentiality:</strong> Ensures that information is accessible only to authorized individuals. It's about preventing the unauthorized disclosure of data. (e.g., encryption).</li>
+                <li><strong>Integrity:</strong> Ensures the accuracy and reliability of data by protecting it from unauthorized alteration. (e.g., hashing, digital signatures).</li>
+                <li><strong>Availability:</strong> Ensures that systems and data are accessible to authorized users when needed. It's about preventing disruption of service. (e.g., redundancy, backups).</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>The AAA Model</h3>
+            <p>The AAA model provides a framework for intelligently controlling access to computer resources.</p>
+            <ul>
+                <li><strong>Authentication:</strong> This is the process of verifying a user's identity. It answers the question, "Who are you?" (e.g., using a password, fingerprint, or security token).</li>
+                <li><strong>Authorization:</strong> After a user is authenticated, this process determines what they are allowed to do. It answers the question, "What are you allowed to access?" (e.g., granting a user "read-only" access to a file).</li>
+                <li><strong>Accounting (Auditing):</strong> This process tracks what a user does while accessing the system. It answers the question, "What did you do?" (e.g., logging file access and changes).</li>
+            </ul>
+         </div>
+         <div class="process-block">
+            <h3>The Zero Trust Model</h3>
+            <p>Zero Trust is a modern security framework that shifts away from the traditional "trust but verify" mindset of perimeter-based security.</p>
+            <ul>
+                <li><strong>Core Principle: "Never Trust, Always Verify."</strong> This model assumes that a breach is inevitable or has likely already occurred.</li>
+                <li><strong>Eliminates Implicit Trust:</strong> No user or device is trusted by default, even if it is inside the corporate network. Traditional security often trusted anyone inside the network perimeter.</li>
+                <li><strong>Enforces Least Privilege:</strong> Users are granted the absolute minimum level of access required to perform their specific tasks.</li>
+                <li><strong>Continuous Verification:</strong> Every access request is continuously authenticated and authorized before resources are granted, often using contextual factors like location, device health, and user risk profile.</li>
+            </ul>
+         </div>
+    </section>
+
+    <section id="privacy" class="main-content">
+        <h2>Data Privacy & PII</h2>
+        <div class="process-block">
+            <h3>Information Privacy and Regulation</h3>
+            <p>Information privacy concerns the protection of personal data and is governed by an increasingly complex landscape of laws. These regulations dictate how organizations must handle the PII of individuals.</p>
+            <ul>
+                <li><strong>GDPR (General Data Protection Regulation):</strong> A landmark EU law that gives individuals significant control over their personal data. It applies to any organization processing the data of EU citizens, regardless of location.</li>
+                <li><strong>CCPA/CPRA (California Consumer Privacy Act / California Privacy Rights Act):</strong> A key US privacy law giving California consumers rights over their personal information, such as the right to know, delete, and opt-out of the sale of their data. Many other US states have followed with similar laws.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Personally Identifiable Information (PII)</h3>
+            <p>PII is any information that can be used to distinguish or trace an individual's identity, either alone or when combined with other information.</p>
+            <ul>
+                <li><strong>Direct Identifiers:</strong> Name, Social Security number, driver's license number, biometric records.</li>
+                <li><strong>Indirect Identifiers:</strong> Information that can be combined to identify someone, such as birthdate, geographic location, IP address, and device IDs.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>De-anonymization: When Anonymous Data Isn't</h3>
+            <p>De-anonymization is the process of re-identifying individuals from a dataset that was meant to be anonymous. This is often done by cross-referencing the "anonymous" data with other public data sources.</p>
+            <div class="example">
+                <strong>Case Study - The Strava Heat Map (2017):</strong> The fitness app Strava released a global "heatmap" showing the aggregated GPS tracks of its users. While no names were attached, the data was not truly anonymous. Journalists and researchers were able to identify the locations and patrol routes of secret military bases in conflict zones by observing the consistent running patterns of soldiers using the app. This was a powerful real-world example of de-anonymization.
+            </div>
+        </div>
+    </section>
+
+    <section id="breaches" class="main-content">
+        <h2>Breaches & Threats</h2>
+        <div class="process-block">
+            <h3>Data Breach vs. Security Breach</h3>
+            <p>While often used interchangeably, these terms have distinct meanings. The CIA Triad helps explain the difference.</p>
+            <ul>
+                <li>A <strong>Data Breach</strong> specifically involves the unauthorized access and theft of sensitive information, compromising <strong>Confidentiality</strong>.
+                    <div class="example"><strong>Case Study - Target (2013):</strong> Attackers installed malware on point-of-sale systems to steal credit card details and PII for 41 million and 70 million customers, respectively. This was a classic data breach.</div>
+                </li>
+                <li>A <strong>Security Breach</strong> is a broader term for any incident that compromises a system or network. It can affect any part of the CIA Triad.
+                    <div class="example"><strong>Case Study - MGM Resorts:</strong> When attackers breached MGM's systems, they made key cards for hotel rooms and casino machines inoperable. While data was also stolen, the primary public impact was on <strong>Availability</strong>, making it a security breach that went beyond just data theft.</div>
+                </li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Common Security Threats</h3>
+            <ul>
+                <li><strong>Malware:</strong> Includes viruses, worms (self-propagating), Trojans (disguised malware), ransomware (encrypts data for a fee), and spyware (monitors user activity).</li>
+                <li><strong>Phishing:</strong> Social engineering attacks using fraudulent emails or websites to trick users into revealing sensitive information.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Insider Threats</h3>
+            <p>An insider threat is a security risk that comes from within an organization. These can be more dangerous than external threats because insiders already have legitimate access and knowledge of the systems.</p>
+            <ul>
+                <li><strong>Malicious Insider:</strong> Intentionally causes harm, often motivated by revenge, financial gain, or ideology.</li>
+                <li><strong>Negligent/Accidental Insider:</strong> Unintentionally causes harm through carelessness, like falling for a phishing attack or sending sensitive data to the wrong recipient.</li>
+            </ul>
+            <div class="example">
+                <strong>Case Study - Edward Snowden (2013):</strong> As an NSA contractor, Snowden had authorized access to classified documents. Motivated by ideology, he leaked a massive trove of these documents, revealing global surveillance programs. This is a prime example of a malicious insider threat.
+            </div>
+        </div>
+    </section>
+    
+    <section id="defense" class="main-content">
+        <h2>Proactive Defense & Ethics</h2>
+        <div class="process-block">
+            <h3>Deception Technology: The "Fly Trap" Approach</h3>
+            <p>Deception technology is a proactive defense strategy that uses decoys to mislead, detect, and study attackers. By luring them into a controlled environment, security teams can learn about their methods without risking real assets.</p>
+            <ul>
+                <li><strong>Honeypots:</strong> A decoy system (e.g., a server) designed to look like a legitimate and attractive target. Any interaction with the honeypot is, by definition, malicious and triggers an alert.</li>
+                <li><strong>Honeynets:</strong> A network of multiple honeypots that simulates a larger, more realistic network environment to analyze more complex, coordinated attacks.</li>
+                <li><strong>Honeyfiles:</strong> Decoy files placed on a network with enticing names (e.g., `Employee_Salaries_2025.xlsx`). When an attacker opens the file, it secretly alerts the security team.</li>
+                <li><strong>Honeytokens:</strong> Fake data or credentials (e.g., a fake API key or user account) embedded in a system. If this token is ever used, it immediately signals a breach.</li>
+            </ul>
+        </div>
+        <div class="process-block">
+            <h3>Ethics in Cybersecurity</h3>
+            <p>Ethics refers to the moral principles that govern behavior. For cybersecurity professionals, who hold immense power over sensitive data and critical systems, practicing sound ethics is a moral imperative.</p>
+            <ul>
+                <li><strong>Responsible Data Handling:</strong> Adhering to the principles of confidentiality and integrity when managing data and complying with privacy regulations.</li>
+                <li><strong>Respecting Privacy:</strong> Designing systems with 'privacy by design' principles, which involves minimizing data collection and ensuring transparency with users.</li>
+                <li><strong>Transparency:</strong> Being open and honest about the capabilities and limitations of security technologies and clearly communicating risks to stakeholders.</li>
+                <li><strong>Professional Conduct:</strong> Acting honorably and responsibly, and ethically disclosing vulnerabilities when they are discovered (e.g., to the vendor first, not to the public).</li>
+            </ul>
+        </div>
+    </section>
+    
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions</div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions</div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "The three core principles of the CIA Triad are Confidentiality, _______, and Availability.", options: ["Accounting", "Authorization", "Integrity", "Authentication"], answer: "Integrity" },
+        { question: "The security model based on the principle 'Never Trust, Always Verify' is called the _______ model.", options: ["AAA", "CIA Triad", "Perimeter", "Zero Trust"], answer: "Zero Trust" },
+        { question: "Any data that can be used to identify a specific individual is known as _______.", options: ["PHI", "IP", "PII", "AAA"], answer: "PII" },
+        { question: "A decoy system designed to attract and trap attackers is called a _______.", options: ["Honeytoken", "Honeypot", "Honeyfile", "Firewall"], answer: "Honeypot" },
+        { question: "The process of re-identifying individuals from an anonymized dataset is known as _______.", options: ["Authentication", "De-anonymization", "Authorization", "Encryption"], answer: "De-anonymization" },
+        { question: "A security threat that originates from a current or former employee is an _______ threat.", options: ["External", "Zero-Day", "Insider", "Phishing"], answer: "Insider" },
+        { question: "Verifying a user's identity is _______, while granting them specific permissions is Authorization.", options: ["Accounting", "Auditing", "Authentication", "Access"], answer: "Authentication" },
+        { question: "_______ is a major EU data privacy law that has had a global impact on how organizations handle personal data.", options: ["HIPAA", "CCPA", "GDPR", "PIPL"], answer: "GDPR" }
+    ];
+
+    const trueOrFalse = [
+        { question: "A data breach and a security breach are the exact same thing.", answer: false },
+        { question: "The Zero Trust model grants implicit trust to any device inside the corporate network.", answer: false },
+        { question: "The Strava Heat Map incident demonstrated that anonymized location data can never be traced back to individuals.", answer: false },
+        { question: "An attack that makes a system unavailable to its users primarily violates the 'Confidentiality' principle of the CIA Triad.", answer: false },
+        { question: "Edward Snowden is considered a real-world example of a malicious insider threat.", answer: true },
+        { question: "A honeyfile is a fake network designed to lure in attackers.", answer: false },
+        { question: "In the AAA model, 'Accounting' refers to tracking what a user does on a system.", answer: true },
+        { question: "The Target breach of 2013 was primarily an attack on data availability, not confidentiality.", answer: false },
+        { question: "Ethics in cybersecurity involves being transparent about risks and responsibly handling user data.", answer: true },
+        { question: "PII only includes a person's name and Social Security number.", answer: false }
+    ];
+
+    const multipleChoice = [
+        { question: "The Strava Heat Map incident, which revealed the locations of secret military bases, is a real-world example of what privacy risk?", options: ["Data Poisoning", "Insider Threat", "De-anonymization", "Ransomware"], answer: "De-anonymization" },
+        { question: "When attackers disabled key cards at MGM Resorts, which principle of the CIA Triad was most directly impacted?", options: ["Confidentiality", "Integrity", "Availability", "Authentication"], answer: "Availability" },
+        { question: "Which of the following is NOT a component of the AAA model?", options: ["Authentication", "Authorization", "Availability", "Accounting"], answer: "Availability" },
+        { question: "A security team places a fake file named 'Q4_Financial_Projections.xlsx' on a server. When an attacker opens it, an alert is sent. What is this file an example of?", options: ["Honeypot", "Honeynet", "Honeyfile", "Ransomware"], answer: "Honeyfile" },
+        { question: "Which of the following best describes the core philosophy of the Zero Trust Model?", options: ["Trust but verify", "Trust all internal users", "Never trust, always verify", "Trust only encrypted connections"], answer: "Never trust, always verify" },
+        { question: "The actions of Edward Snowden at the NSA are a classic case study of a(n):", options: ["Phishing attack", "Zero-day exploit", "Insider threat", "DDoS attack"], answer: "Insider threat" },
+        { question: "A user's name, IP address, and birthdate are all examples of what?", options: ["Deception Technology", "Non-confidential information", "Personally Identifiable Information (PII)", "The AAA Model"], answer: "Personally Identifiable Information (PII)" },
+        { question: "Which of the following is a primary goal of deception technology?", options: ["To encrypt all company data", "To comply with GDPR", "To train employees on phishing", "To mislead and study attackers in a safe environment"], answer: "To mislead and study attackers in a safe environment" },
+        { question: "Ensuring that data has not been altered by an unauthorized party relates to which part of the CIA Triad?", options: ["Confidentiality", "Integrity", "Availability", "Accounting"], answer: "Integrity" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab');
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+                button.classList.add('active');
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                this.classList.toggle('active');
+                const panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px";
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                    panel.style.padding = "15px 20px";
+                }
+            });
+        });
+
+        function handleOptionSelection(button, questionDiv) {
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            button.classList.add('selected');
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = 'Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            const checkButton = questionDiv.querySelector('.check-answer');
+            if (checkButton) {
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = '';
+            fillInTheBlank.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = '';
+            trueOrFalse.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = '';
+            multipleChoice.forEach((q) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                const questionText = document.createElement('p');
+                questionText.textContent = q.question;
+                questionDiv.appendChild(questionText);
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+                q.options.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+</script>
+</body>
+</html>
