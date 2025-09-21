@@ -11,24 +11,46 @@ document.addEventListener('DOMContentLoaded', () => {
     const scoreEl = document.getElementById('score');
     const questionJumpInput = document.getElementById('question-jump-input');
     const jumpBtn = document.getElementById('jump-btn');
-    const categoryFilterEl = document.getElementById('category-filter'); // New filter dropdown
+    const categoryFilterEl = document.getElementById('category-filter');
+    const themeToggleBtn = document.getElementById('theme-toggle-btn');
+
+    // --- Theme Toggle Logic ---
+    const applySavedTheme = () => {
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            themeToggleBtn.textContent = '☀️';
+        } else {
+            document.body.classList.remove('dark-mode');
+            themeToggleBtn.textContent = '🌙';
+        }
+    };
+
+    themeToggleBtn.addEventListener('click', () => {
+        const isDarkMode = document.body.classList.toggle('dark-mode');
+        if (isDarkMode) {
+            localStorage.setItem('theme', 'dark');
+            themeToggleBtn.textContent = '☀️';
+        } else {
+            localStorage.setItem('theme', 'light');
+            themeToggleBtn.textContent = '🌙';
+        }
+    });
 
     // State Variables
     let currentQuestionIndex = 0;
     let score = 0;
-    let userAnswers = {}; // Stores answers using the *original* index as the key
-    let activeQuestions = []; // The currently filtered list of questions
+    let userAnswers = {};
+    let activeQuestions = [];
 
     function startQuiz() {
         populateCategoryFilter();
-        filterQuestions(); // Initial filter to show all questions
+        filterQuestions();
     }
 
     function populateCategoryFilter() {
-        // Get unique categories from the main question list
         const categories = [...new Set(quizQuestions.map(q => q.category))];
-        categories.sort(); // Sort them alphabetically
-
+        categories.sort();
         categories.forEach(category => {
             const option = document.createElement('option');
             option.value = category;
@@ -39,16 +61,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function filterQuestions() {
         const selectedCategory = categoryFilterEl.value;
-        
         if (selectedCategory === 'all') {
             activeQuestions = [...quizQuestions];
         } else {
             activeQuestions = quizQuestions.filter(q => q.category === selectedCategory);
         }
-
-        // Reset quiz state for the new filtered view
         currentQuestionIndex = 0;
-        score = 0; // Reset score when category changes
+        score = 0;
         updateScore();
         loadQuestion(currentQuestionIndex);
     }
@@ -73,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentQuestion = activeQuestions[index];
         const originalIndex = quizQuestions.indexOf(currentQuestion);
 
-        questionNumberEl.textContent = index + 1; // Display number in current view
+        questionNumberEl.textContent = index + 1;
         totalQuestionsEl.textContent = activeQuestions.length;
         questionCategoryEl.textContent = currentQuestion.category;
         questionTextEl.innerHTML = currentQuestion.question;
@@ -112,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const selectedKey = selectedButton.dataset.answerKey;
         const currentQuestion = activeQuestions[currentQuestionIndex];
         const originalIndex = quizQuestions.indexOf(currentQuestion);
-        userAnswers[originalIndex] = selectedKey; // Store answer against original index
+        userAnswers[originalIndex] = selectedKey;
 
         const correctKeys = currentQuestion.answer.split(' ').filter(k => k);
         if (correctKeys.includes(selectedKey)) {
@@ -192,5 +211,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Initial setup calls
+    applySavedTheme();
     startQuiz();
 });
