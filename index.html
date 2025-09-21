@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CompTIA Security+ (SY0-701) Study Hub</title>
+    <title>Cybersecurity Course Hub & Practice Quiz</title>
     
-    <!-- Embedded CSS for styling the syllabus page -->
+    <!-- STYLES FOR THE ENTIRE PAGE (SYLLABUS + QUIZ) -->
     <style>
+
+        
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
         body {
@@ -128,15 +130,376 @@
             color: #888;
             font-size: 0.9em;
         }
+        /* General Page & Syllabus Styles */
+        html {
+            box-sizing: border-box;
+        }
+        *, *:before, *:after {
+            box-sizing: inherit;
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 25px 40px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            border-bottom: 2px solid #eee;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+        h2 {
+            color: #007bff;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+            margin-top: 30px;
+            font-size: 1.5em;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            font-size: 0.9em;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 10px 12px;
+            text-align: left;
+            vertical-align: top;
+        }
+        th {
+            background-color: #e9ecef;
+            font-weight: bold;
+            color: #495057;
+        }
+        tbody tr:nth-child(odd) {
+            background-color: #f8f9fa;
+        }
+        tbody tr:hover {
+            background-color: #e2e6ea;
+        }
+        a {
+            color: #0056b3;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        th:nth-child(1), td:nth-child(1) { width: 10%; }
+        th:nth-child(2), td:nth-child(2) { width: 50%; }
+        th:nth-child(3), td:nth-child(3) { width: 40%; }
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+            margin-top: 5px;
+            margin-bottom: 5px;
+        }
+        li {
+             margin-bottom: 5px;
+        }
+        strong {
+            color: #28a745;
+        }
+        .course-desc {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #555;
+        }
+        
+        /* ---------------------------------- */
+        /* ----- QUIZ SPECIFIC STYLES ----- */
+        /* ---------------------------------- */
+        
+        .quiz-section-container {
+            margin-top: 50px;
+            padding-top: 30px;
+            border-top: 3px solid #0056b3;
+        }
+        
+        .quiz-container {
+            background-color: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            padding: 30px;
+            box-sizing: border-box;
+            border: 1px solid #ddd;
+        }
+        
+        #quiz-header {
+            text-align: center;
+            border-bottom: 2px solid #e0e0e0;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+        
+        #quiz-header h3 {
+            margin: 0 0 15px 0;
+            color: #003366;
+            font-size: 1.6em;
+        }
+        
+        #category-filter-container {
+            margin-bottom: 15px;
+        }
+        
+        #category-filter-container label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        
+        #category-filter {
+            padding: 8px 12px;
+            border-radius: 5px;
+            border: 2px solid #ced4da;
+            font-size: 1em;
+        }
+        
+        #quiz-progress {
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            color: #555;
+            margin-top: 10px;
+        }
+        
+        #jump-navigation {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        #question-jump-input {
+            width: 120px;
+            padding: 8px;
+            border: 2px solid #ced4da;
+            border-radius: 5px;
+            text-align: center;
+            font-size: 1em;
+        }
+        
+        #jump-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 8px 15px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        #jump-btn:hover {
+            background-color: #218838;
+        }
+        
+        #question-card {
+            margin-bottom: 20px;
+        }
+        
+        #question-category {
+            background-color: #e7f3ff;
+            color: #0056b3;
+            padding: 5px 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+            font-weight: 500;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        #question-text {
+            font-size: 1.4em;
+            font-weight: 500;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+        
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        
+        .option-btn {
+            background-color: #f8f9fa;
+            border: 2px solid #ced4da;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: left;
+            font-size: 1em;
+            cursor: pointer;
+            transition: all 0.2s ease-in-out;
+            width: 100%;
+            display: flex;
+            align-items: center;
+        }
+        
+        .option-btn:hover:not([disabled]) {
+            background-color: #e9ecef;
+            border-color: #adb5bd;
+        }
+        
+        .option-btn.selected {
+            border-color: #007bff;
+            background-color: #cce5ff;
+        }
+        
+        .option-prefix {
+            font-weight: 700;
+            margin-right: 10px;
+            color: #003366;
+        }
+        
+        .option-btn.correct {
+            background-color: #d4edda;
+            border-color: #c3e6cb;
+            color: #155724;
+        }
+        
+        .option-btn.incorrect {
+            background-color: #f8d7da;
+            border-color: #f5c6cb;
+            color: #721c24;
+        }
+        
+        .option-btn:disabled {
+            cursor: not-allowed;
+            opacity: 0.7;
+        }
+        
+        #navigation-buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        #prev-btn, #submit-btn, #next-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 12px 30px;
+            font-size: 1.1em;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        
+        #prev-btn {
+            background-color: #6c757d;
+        }
+        
+        #prev-btn:hover {
+            background-color: #5a6268;
+        }
+        
+        #submit-btn:hover, #next-btn:hover {
+            background-color: #0056b3;
+        }
+        
+        .hide {
+            display: none;
+        }
+
+        /* Responsive Styles For Syllabus Table */
+        @media screen and (max-width: 992px) {
+            .container {
+                width: 90%;
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 20px 15px;
+            }
+            h1 { font-size: 1.6em; }
+            h2 { font-size: 1.3em; }
+            table { border: 0; }
+            table thead { display: none; }
+            table tr {
+                display: block;
+                margin-bottom: 25px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            }
+            tbody tr:nth-child(odd) { background-color: #fff; }
+            tbody tr:hover { background-color: #f9f9f9; }
+            table td {
+                display: block;
+                padding: 10px 15px 10px 35%;
+                position: relative;
+                border-bottom: 1px dashed #eee;
+                text-align: left;
+                width: 100% !important;
+            }
+            table td:last-child { border-bottom: none; }
+            table td:first-child {
+                background-color: #e9ecef;
+                color: #0056b3;
+                font-weight: bold;
+                font-size: 1.1em;
+                padding: 12px 15px;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+                border-bottom: 1px solid #ddd;
+            }
+            table td:first-child a { color: #0056b3 !important; }
+            table td:first-child::before { display: none; }
+            table td::before {
+                content: "";
+                position: absolute;
+                left: 15px;
+                top: 50%;
+                transform: translateY(-50%);
+                width: calc(35% - 25px);
+                font-weight: bold;
+                color: #555;
+                text-align: left;
+                white-space: normal;
+                font-size: 0.9em;
+            }
+            table td:nth-of-type(2)::before { content: "Main Ideas/Topics:"; }
+            table td:nth-of-type(3)::before { content: "Technologies/Tools:"; }
+            table td ul { padding-left: 15px; margin: 5px 0; }
+            table td ul li { margin-bottom: 3px; }
+        }
+        @media screen and (max-width: 480px) {
+            h1 { font-size: 1.4em; }
+            h2 { font-size: 1.2em; }
+            .container { padding: 15px 10px; }
+            table td { padding: 8px 10px 8px 40%; }
+            table td::before { width: calc(40% - 20px); font-size: 0.85em; }
+            table td:first-child { padding: 10px 10px; font-size: 1em; }
+            .course-desc { font-size: 1em; }
+        }
     </style>
 </head>
 <body>
-
     <div class="container">
-        <header>
-            <h1>CompTIA Security+ (SY0-701) Syllabus</h1>
-            <p>A structured guide to the concepts, procedures, and skills required for the CompTIA Security+ certification exam.</p>
-        </header>
+       <h1>Cybersecurity Course Module Summary </h1>
+        <p class="course-desc">
+             This document provides a summary of the modules covered in the cybersecurity course, outlining the main topics, ideas, and technologies for each section.
+        </p>
+
 
         <main>
             <section class="content-section">
@@ -203,14 +566,237 @@
                 </p>
                 
                 <!-- This link points to your quiz inside the 'quiz' folder -->
-                <a href="quiz/quiz1.html" class="quiz-button">Start the Practice Quiz</a>
+                <a href="quiz/mockup1.html" class="quiz-button">Start the Practice Quiz</a>
             </section>
         </main>
 
-        <footer>
-            <p>&copy; 2025 Security+ Study Materials. All rights reserved.</p>
-        </footer>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Module</th>
+                   <th>Main Ideas/Topics </th>
+                   <th>Technologies/Tools </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td><strong><a href="#">Module 1</a></strong></td><td><ul><li>CIA Triad</li><li>IT vs InfoSec vs CyberSec</li><li>Basic security concepts</li></ul></td><td><ul><li>None</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 2</a></strong></td><td><ul><li>Computing basics</li><li>Operating systems</li><li>Networking fundamentals</li><li>Cloud & Virtualization</li><li>File management</li><li>OSI model</li></ul></td><td><ul><li>Cloud models (IaaS, PaaS, SaaS)</li><li>Networking devices</li><li>CLI tools (bash, vim, top, etc.)</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 3</a></strong></td><td><ul><li>Security fundamentals, AAA, Zero Trust</li><li>Deception and disruption</li><li>Honeypots, honeynets, honeyfiles</li><li>Ethics in cybersecurity</li></ul></td><td><ul><li>Honeypot systems</li><li>Deception technologies</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 4</a></strong></td><td><ul><li>Types of security controls</li><li>Preventive, detective, corrective</li><li>Layered security</li></ul></td><td><ul><li>Firewalls, IDS, Encryption</li><li>CCTV, Access control</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 5</a></strong></td><td><ul><li>Threat actor types</li><li>Nation-states, hacktivists, insiders</li><li>Motivations and attributes</li></ul></td><td><ul><li>Threat intelligence platforms</li><li>Malware analysis systems</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 6</a></strong></td><td><ul><li>Threat vectors & attack surfaces</li><li>Indicators of Compromise (IoCs)</li><li>MITRE ATT&CK Framework</li><li>Cyber Kill Chain</li><li>Vulnerability scoring (CVE)</li></ul></td><td><ul><li>VirusTotal</li><li>MITRE ATT&CK Navigator</li><li>NVD</li><li>EDR solutions</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 7</a></strong></td><td><ul><li>Proactive vs Reactive mitigation</li><li>Enterprise security posture</li><li>Incident response planning</li><li>Security awareness training</li></ul></td><td><ul><li>Access control systems</li><li>IAM platforms</li><li>EDR, iptables</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 8</a></strong></td><td><ul><li>Infrastructure design</li><li>Security zones & segmentation</li><li>Secure network protocols</li><li>Zero Trust architecture</li></ul></td><td><ul><li>Firewalls, IDS/IPS</li><li>Port security (802.1X), TLS</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 9</a></strong></td><td><ul><li>Data protection & backups</li><li>Disaster recovery planning</li><li>Testing methods (tabletop, failover)</li><li>Recovery objectives (RTO/RPO)</li></ul></td><td><ul><li>Backup systems, Cloud storage</li><li>Encryption, DLP tools</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 10</a></strong></td><td><ul><li>Review Module</li></ul></td><td><ul><li>(Not specified)</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 11</a></strong></td><td><ul><li>Secure baselines & hardening</li><li>Mobile Device Management (MDM)</li><li>Asset lifecycle management</li><li>Wireless security</li></ul></td><td><ul><li>MDM solutions</li><li>WPA3</li><li>Asset management systems</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 12</a></strong></td><td><ul><li>Vulnerability management lifecycle</li><li>Patch management</li><li>Log4Shell case study</li><li>Penetration testing</li></ul></td><td><ul><li>Vulnerability scanners</li><li>SIEM platforms</li><li>Pen testing tools</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 13</a></strong></td><td><ul><li>Authentication methods</li><li>IAM components (Id, Auth, AuthZ)</li><li>Multi-factor authentication (MFA)</li><li>Network intrusion detection</li></ul></td><td><ul><li>Snort IDS</li><li>MFA solutions</li><li>IAM platforms</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 14</a></strong></td><td><ul><li>Security automation</li><li>Scripting for security</li><li>User provisioning</li><li>CI/CD concepts</li></ul></td><td><ul><li>Python, PowerShell, Bash</li><li>Metasploit, SIEM</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 15</a></strong></td><td><ul><li>Incident response process</li><li>Digital forensics</li><li>Chain of custody, legal hold</li><li>E-discovery</li></ul></td><td><ul><li>Forensics tools</li><li>Log analysis systems</li><li>Data recovery tools</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 16</a></strong></td><td><ul><li>Risk mitigation strategies</li><li>Risk management frameworks</li><li>Compliance requirements</li><li>NIST Cybersecurity Framework</li></ul></td><td><ul><li>NIST SP 800-53, ISO 27001</li><li>CIS Controls, COBIT</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 17</a></strong></td><td><ul><li>Legislation vs executive orders</li><li>US & International regulations</li><li>HIPAA, GDPR, CCPA</li><li>Government data regulations</li></ul></td><td><ul><li>Compliance management tools</li><li>Data protection platforms</li></ul></td></tr>
+                <tr><td><strong><a href="#">Module 18</a></strong></td><td><ul><li>AI/ML in security</li><li>Blockchain applications</li><li>IoT & 5G security</li><li>Quantum computing threats</li><li>Deepfakes</li></ul></td><td><ul><li>AI/ML security analytics</li><li>Quantum-resistant encryption</li></ul></td></tr>
+            </tbody>
+        </table>
+        
+
+        
     </div>
 
+    <!-- This script file contains the array of all 569 questions -->
+    <script src="questions.js"></script> 
+    
+    <!-- This embedded script contains all the logic for the quiz -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // DOM Elements
+            const questionNumberEl = document.getElementById('question-number');
+            const totalQuestionsEl = document.getElementById('total-questions');
+            const questionCategoryEl = document.getElementById('question-category');
+            const questionTextEl = document.getElementById('question-text');
+            const optionsContainerEl = document.getElementById('options-container');
+            const submitBtn = document.getElementById('submit-btn');
+            const nextBtn = document.getElementById('next-btn');
+            const prevBtn = document.getElementById('prev-btn');
+            const scoreEl = document.getElementById('score');
+            const questionJumpInput = document.getElementById('question-jump-input');
+            const jumpBtn = document.getElementById('jump-btn');
+            const categoryFilterEl = document.getElementById('category-filter');
+
+            // State Variables
+            let currentQuestionIndex = 0;
+            let score = 0;
+            let userAnswers = {};
+            let activeQuestions = [];
+
+            function startQuiz() {
+                populateCategoryFilter();
+                filterQuestions();
+            }
+
+            function populateCategoryFilter() {
+                const categories = [...new Set(quizQuestions.map(q => q.category))];
+                categories.sort();
+                categories.forEach(category => {
+                    const option = document.createElement('option');
+                    option.value = category;
+                    option.textContent = category;
+                    categoryFilterEl.appendChild(option);
+                });
+            }
+
+            function filterQuestions() {
+                const selectedCategory = categoryFilterEl.value;
+                activeQuestions = (selectedCategory === 'all') ? [...quizQuestions] : quizQuestions.filter(q => q.category === selectedCategory);
+                currentQuestionIndex = 0;
+                score = 0;
+                updateScore();
+                loadQuestion(currentQuestionIndex);
+            }
+            
+            function loadQuestion(index) {
+                if (activeQuestions.length === 0) {
+                    questionTextEl.textContent = 'No questions found for this category.';
+                    optionsContainerEl.innerHTML = '';
+                    questionCategoryEl.textContent = '';
+                    questionNumberEl.textContent = '0';
+                    totalQuestionsEl.textContent = '0';
+                    prevBtn.classList.add('hide');
+                    nextBtn.classList.add('hide');
+                    submitBtn.classList.add('hide');
+                    return;
+                }
+
+                while (optionsContainerEl.firstChild) {
+                    optionsContainerEl.removeChild(optionsContainerEl.firstChild);
+                }
+                
+                const currentQuestion = activeQuestions[index];
+                const originalIndex = quizQuestions.indexOf(currentQuestion);
+
+                questionNumberEl.textContent = index + 1;
+                totalQuestionsEl.textContent = activeQuestions.length;
+                questionCategoryEl.textContent = currentQuestion.category;
+                questionTextEl.innerHTML = currentQuestion.question;
+
+                for (const key in currentQuestion.options) {
+                    const button = document.createElement('button');
+                    button.classList.add('option-btn');
+                    button.dataset.answerKey = key;
+                    button.innerHTML = `<span class="option-prefix">${key}.</span><span>${currentQuestion.options[key]}</span>`;
+                    button.addEventListener('click', () => selectOption(button));
+                    optionsContainerEl.appendChild(button);
+                }
+
+                updateNavigationButtons();
+                
+                if (userAnswers.hasOwnProperty(originalIndex)) {
+                    restoreAnswerState(originalIndex, currentQuestion.answer);
+                }
+            }
+
+            function selectOption(selectedButton) {
+                const previouslySelected = optionsContainerEl.querySelector('.selected');
+                if (previouslySelected) {
+                    previouslySelected.classList.remove('selected');
+                }
+                selectedButton.classList.add('selected');
+            }
+
+            function checkAnswer() {
+                const selectedButton = optionsContainerEl.querySelector('.selected');
+                if (!selectedButton) {
+                    alert('Please select an answer!');
+                    return;
+                }
+
+                const selectedKey = selectedButton.dataset.answerKey;
+                const currentQuestion = activeQuestions[currentQuestionIndex];
+                const originalIndex = quizQuestions.indexOf(currentQuestion);
+                userAnswers[originalIndex] = selectedKey;
+
+                const correctKeys = currentQuestion.answer.split(' ').filter(k => k);
+                if (correctKeys.includes(selectedKey)) {
+                    score++;
+                    updateScore();
+                }
+                
+                restoreAnswerState(originalIndex, currentQuestion.answer);
+            }
+
+            function restoreAnswerState(originalIndex, correctAnswer) {
+                const selectedKey = userAnswers[originalIndex];
+                const correctKeys = correctAnswer.split(' ').filter(k => k);
+
+                Array.from(optionsContainerEl.children).forEach(button => {
+                    const buttonKey = button.dataset.answerKey;
+                    if (correctKeys.includes(buttonKey)) {
+                        button.classList.add('correct');
+                    }
+                    if (buttonKey === selectedKey && !correctKeys.includes(selectedKey)) {
+                        button.classList.add('incorrect');
+                    }
+                    button.disabled = true;
+                });
+
+                submitBtn.classList.add('hide');
+                nextBtn.classList.remove('hide');
+                updateNavigationButtons();
+            }
+
+            function updateNavigationButtons() {
+                prevBtn.classList.toggle('hide', currentQuestionIndex === 0);
+                const isAnswered = userAnswers.hasOwnProperty(quizQuestions.indexOf(activeQuestions[currentQuestionIndex]));
+                submitBtn.classList.toggle('hide', isAnswered);
+                nextBtn.classList.toggle('hide', !isAnswered || currentQuestionIndex === activeQuestions.length - 1);
+            }
+            
+            function updateScore() {
+                scoreEl.textContent = score;
+            }
+
+            function showNextQuestion() {
+                if (currentQuestionIndex < activeQuestions.length - 1) {
+                    currentQuestionIndex++;
+                    loadQuestion(currentQuestionIndex);
+                }
+            }
+            
+            function showPreviousQuestion() {
+                if (currentQuestionIndex > 0) {
+                    currentQuestionIndex--;
+                    loadQuestion(currentQuestionIndex);
+                }
+            }
+
+            function jumpToQuestion() {
+                const questionNum = parseInt(questionJumpInput.value);
+                if (isNaN(questionNum) || questionNum < 1 || questionNum > activeQuestions.length) {
+                    alert(`Please enter a number between 1 and ${activeQuestions.length}.`);
+                    return;
+                }
+                
+                currentQuestionIndex = questionNum - 1;
+                loadQuestion(currentQuestionIndex);
+                questionJumpInput.value = '';
+            }
+
+            // Event Listeners
+            categoryFilterEl.addEventListener('change', filterQuestions);
+            submitBtn.addEventListener('click', checkAnswer);
+            nextBtn.addEventListener('click', showNextQuestion);
+            prevBtn.addEventListener('click', showPreviousQuestion);
+            jumpBtn.addEventListener('click', jumpToQuestion);
+            questionJumpInput.addEventListener('keyup', (event) => {
+                if (event.key === 'Enter') {
+                    jumpToQuestion();
+                }
+            });
+
+            startQuiz();
+        });
+    </script>
 </body>
 </html>
