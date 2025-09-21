@@ -7,26 +7,23 @@
     
     <!-- Embedded CSS for styling the syllabus page -->
     <style>
-        /* Import a clean, modern font */
         @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
 
-        /* General Body Styling */
         body {
             font-family: 'Roboto', sans-serif;
-            background-color: #f0f4f8;
+            background-color: #f4f7f9;
             color: #333;
             margin: 0;
             padding: 20px;
-            line-height: 1.6;
+            line-height: 1.7;
         }
 
-        /* Main container for the content */
         .container {
             max-width: 900px;
             margin: 20px auto;
             background-color: #ffffff;
             border-radius: 15px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             padding: 40px;
         }
 
@@ -45,9 +42,10 @@
         header p {
             font-size: 1.1em;
             color: #555;
+            max-width: 700px;
+            margin: 10px auto 0;
         }
 
-        /* Styling for content sections */
         .content-section {
             margin-bottom: 40px;
         }
@@ -57,41 +55,71 @@
             border-bottom: 1px solid #ddd;
             padding-bottom: 10px;
             margin-bottom: 20px;
+            font-size: 1.8em;
+        }
+        
+        ul {
+            list-style-type: disc;
+            padding-left: 20px;
+        }
+        
+        li {
+            margin-bottom: 10px;
         }
 
-        /* Specific styling for the Interactive Material section */
+        /* Styling for the syllabus table */
+        .syllabus-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        .syllabus-table th, .syllabus-table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: left;
+        }
+        .syllabus-table th {
+            background-color: #0056b3;
+            color: white;
+            font-weight: 500;
+        }
+        .syllabus-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        /* Styling for the Interactive Quiz Section */
         .interactive-section {
             text-align: center;
-            background-color: #f8f9fa;
-            border: 1px solid #e0e0e0;
+            background-color: #e7f3ff;
+            border: 1px solid #b3d7ff;
             border-radius: 10px;
             padding: 30px;
+            margin-top: 50px;
         }
         
         .interactive-section p {
             font-size: 1.1em;
-            color: #495057;
+            color: #004085;
             margin-bottom: 25px;
         }
 
-        /* This is the CSS that makes your link look like a button */
+        /* This is the CSS for the large button */
         .quiz-button {
             display: inline-block;
-            padding: 15px 30px;
-            font-size: 1.2em;
-            font-weight: 500;
+            padding: 15px 35px;
+            font-size: 1.25em;
+            font-weight: 700;
             color: #ffffff;
             background-color: #007bff;
-            text-decoration: none; /* Removes the default link underline */
+            text-decoration: none;
             border-radius: 8px;
             transition: background-color 0.2s ease, transform 0.2s ease;
-            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
 
-        /* Style for when you hover over the button */
         .quiz-button:hover {
-            background-color: #0056b3; /* Darker blue on hover */
-            transform: translateY(-2px); /* Lifts the button slightly */
+            background-color: #0056b3;
+            transform: translateY(-2px);
         }
         
         footer {
@@ -107,37 +135,80 @@
     <div class="container">
         <header>
             <h1>CompTIA Security+ (SY0-701) Syllabus</h1>
-            <p>Your comprehensive guide to preparing for the certification exam.</p>
+            <p>A structured guide to the concepts, procedures, and skills required for the CompTIA Security+ certification exam.</p>
         </header>
 
         <main>
             <section class="content-section">
-                <h2>Course Overview</h2>
+                <h2>Course Description</h2>
                 <p>
-                    This study guide covers the essential principles for network security and risk management,
-                    which are crucial for the CompTIA Security+ SY0-701 certification. The topics include threats,
-                    attacks, vulnerabilities, security architecture, and operational security measures.
+                    This course provides foundational knowledge in cybersecurity, covering essential principles for network security and risk management. It is designed to help professionals validate their baseline skills to perform core security functions and pursue an IT security career.
                 </p>
             </section>
+            
+            <section class="content-section">
+                <h2>Learning Objectives</h2>
+                <ul>
+                    <li>Assess the security posture of an enterprise environment and recommend and implement appropriate security solutions.</li>
+                    <li>Monitor and secure hybrid environments, including cloud, mobile, and IoT.</li>
+                    <li>Operate with an awareness of applicable laws and policies, including principles of governance, risk, and compliance.</li>
+                    <li>Identify, analyze, and respond to security events and incidents.</li>
+                </ul>
+            </section>
+            
+            <section class="content-section">
+                <h2>Exam Domain Breakdown</h2>
+                <p>The SY0-701 exam is broken down into the following domains, each with a specific weight.</p>
+                <table class="syllabus-table">
+                    <thead>
+                        <tr>
+                            <th>Category</th>
+                            <th>Number of Questions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Security Operations</td>
+                            <td>87</td>
+                        </tr>
+                        <tr>
+                            <td>General Security Concepts</td>
+                            <td>311</td>
+                        </tr>
+                        <tr>
+                            <td>Security Program Management and Oversight</td>
+                            <td>51</td>
+                        </tr>
+                         <tr>
+                            <td>Threats, Vulnerabilities, and Mitigations</td>
+                            <td>69</td>
+                        </tr>
+                        <tr>
+                            <td>Security Architecture</td>
+                            <td>51</td>
+                        </tr>
+                        <tr>
+                            <td><strong>TOTAL</strong></td>
+                            <td><strong>569</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
 
-            <!-- This is the section containing the button that links to your quiz -->
+            <!-- This is the section for your new Interactive Quiz Button -->
             <section class="interactive-section">
-                <h2>Interactive Material</h2>
+                <h2>Interactive Practice Quiz</h2>
                 <p>
-                    Test your knowledge with our comprehensive practice quiz. This quiz covers all 569 questions
-                    from the study guide, allowing you to filter by category and navigate freely.
+                    Ready to test your skills? Click the button below to launch the full interactive practice quiz with all 569 questions.
                 </p>
                 
-                <!-- 
-                    IMPORTANT: This link assumes your quiz files are in a folder named 'quiz'.
-                    The path href="quiz/quiz1.html" points to the quiz1.html file inside the 'quiz' folder.
-                -->
+                <!-- This link points to your quiz inside the 'quiz' folder -->
                 <a href="quiz/quiz1.html" class="quiz-button">Start the Practice Quiz</a>
             </section>
         </main>
 
         <footer>
-            <p>&copy; 2025 Security+ Study Group</p>
+            <p>&copy; 2025 Security+ Study Materials. All rights reserved.</p>
         </footer>
     </div>
 
