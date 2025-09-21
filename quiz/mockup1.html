@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CompTIA Security+ Practice Quiz</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="quiz-container">
+        <div id="quiz-header">
+            <h1>CompTIA SY0-701 Practice Quiz</h1>
+            
+            <!-- New Category Filter -->
+            <div id="category-filter-container">
+                <label for="category-filter">Filter by Category:</label>
+                <select id="category-filter">
+                    <option value="all">All Categories</option>
+                    <!-- Categories will be dynamically inserted here -->
+                </select>
+            </div>
+
+            <div id="quiz-progress">
+                <p>Question <span id="question-number"></span> of <span id="total-questions"></span></p>
+                <p id="score-tracker">Score: <span id="score">0</span></p>
+            </div>
+            
+            <div id="jump-navigation">
+                <input type="number" id="question-jump-input" placeholder="Go to # in view">
+                <button id="jump-btn">Go</button>
+            </div>
+        </div>
+
+        <div id="question-card">
+            <p class="category" id="question-category"></p>
+            <h2 id="question-text">Loading question...</h2>
+            <div id="options-container"></div>
+        </div>
+
+        <div id="navigation-buttons">
+            <button id="prev-btn" class="hide">Previous</button>
+            <button id="submit-btn">Submit Answer</button>
+            <button id="next-btn" class="hide">Next</button>
+        </div>
+    </div>
+
+    <script src="questions.js"></script> 
+    <script src="quiz.js"></script>
+
+</body>
+</html>
