@@ -1900,11 +1900,11 @@ const quizQuestions = [
     "question": "The Chief Information Security Officer of an organization needs to ensure recovery from ransomware would likely occur within the organization's agreed-upon RPOs end RTOs. Which of the following backup scenarios would best ensure recovery?",
     "options": {
       "A": "Hourly differential backups stored on a local SAN array",
-      "B": "Dally full backups stored on premises in magnetic offline media",
-      "C": "Daly differential backups maintained by a third-party cloud provider",
+      "B": "Daily full backups stored on premises in magnetic offline media",
+      "C": "Daily differential backups maintained by a third-party cloud provider",
       "D": "Weekly full backups with daily incremental stored on a NAS drive"
     },
-    "answer": "D"
+    "answer": "A"
   },
   {
     "questionNumber": 160,
@@ -3158,7 +3158,7 @@ const quizQuestions = [
       "C": "Brute-forced password",
       "D": "Cryptojacking"
     },
-    "answer": "D"
+    "answer": "B"
   },
   {
     "questionNumber": 263,
