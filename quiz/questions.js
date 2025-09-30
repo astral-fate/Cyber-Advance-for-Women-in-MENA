@@ -1273,8 +1273,8 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "A growing company would like to enhance the ability of its security operations center to detect threats but reduce the amount of manual work required tor the security analysts. Which of the following would best enable the reduction in manual work?",
     "options": {
-      "A": "SOAR",
-      "B": "SIEM",
+      "A": "SOAR (Security Orchestration, Automation, and Response)",
+      "B": "SIEM (Security Information and Event Management system)",
       "C": "MDM",
       "D": "DLP"
     },
@@ -1528,7 +1528,7 @@ const quizQuestions = [
       "A": "IDS",
       "B": "ACL",
       "C": "EDR",
-      "D": "NAC"
+      "D": "NAC (Network Access Control)"
     },
     "answer": "C"
   },
@@ -1803,7 +1803,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "A security analyst wants to automate a task that shares data between systems. Which of the following is the best option for the analyst to use?",
     "options": {
-      "A": "SOAR",
+      "A": "SOAR (Security Orchestration, Automation, and Response)",
       "B": "API",
       "C": "SFTP",
       "D": "RDP"
@@ -2321,7 +2321,7 @@ const quizQuestions = [
     "category": "Security Operations",
     "question": "Which of the following can best contribute to prioritizing patch applications?",
     "options": {
-      "A": "CVSS",
+      "A": "CVSS (Common Vulnerability Scoring System)",
       "B": "SCAP",
       "C": "OSINT",
       "D": "CVE"
@@ -2664,7 +2664,7 @@ const quizQuestions = [
       "A": "Endpoint",
       "B": "Application",
       "C": "Firewall",
-      "D": "NAC"
+      "D": "NAC (Network Access Control)"
     },
     "answer": "A"
   },
@@ -2751,7 +2751,7 @@ const quizQuestions = [
       "B": "Add the server to the asset inventory.",
       "C": "Remove unnecessary services.",
       "D": "Document default passwords.",
-      "E": "Send server logs to the SIEM.",
+      "E": "Send server logs to the SIEM (Security Information and Event Management system).",
       "F": "Join the server to the corporate domain."
     },
     "answer": "A C"
@@ -2873,7 +2873,7 @@ const quizQuestions = [
     "category": "Security Operations",
     "question": "Which of the following should be used to aggregate log data in order to create alerts and detect anomalous activity?",
     "options": {
-      "A": "SIEM",
+      "A": "SIEM (Security Information and Event Management system)",
       "B": "WAF",
       "C": "Network taps",
       "D": "IDS"
@@ -3165,9 +3165,9 @@ const quizQuestions = [
     "category": "Threats, Vulnerabilities, and Mitigations",
     "question": "Which of the following can a security director use to prioritize vulnerability patching within a company's IT environment?",
     "options": {
-      "A": "SOAR",
-      "B": "CVSS",
-      "C": "SIEM",
+      "A": "SOAR (Security Orchestration, Automation, and Response)",
+      "B": "CVSS (Common Vulnerability Scoring System)",
+      "C": "SIEM (Security Information and Event Management system)",
       "D": "CVE"
     },
     "answer": "B"
@@ -3191,7 +3191,7 @@ const quizQuestions = [
     "options": {
       "A": "SPF",
       "B": "GPO",
-      "C": "NAC",
+      "C": "NAC (Network Access Control)",
       "D": "FIM"
     },
     "answer": "D"
@@ -3240,7 +3240,7 @@ const quizQuestions = [
       "A": "Wireless access point",
       "B": "Switch",
       "C": "Firewall",
-      "D": "NAC"
+      "D": "NAC (Network Access Control)"
     },
     "answer": "A"
   },
@@ -3264,7 +3264,7 @@ const quizQuestions = [
       "A": "NGFW",
       "B": "UTM",
       "C": "WAF",
-      "D": "NAC"
+      "D": "NAC (Network Access Control)"
     },
     "answer": "C"
   },
@@ -3653,7 +3653,7 @@ const quizQuestions = [
     "options": {
       "A": "UBA",
       "B": "EDR",
-      "C": "NAC",
+      "C": "NAC (Network Access Control)",
       "D": "DLP"
     },
     "answer": "A"
@@ -3940,9 +3940,9 @@ const quizQuestions = [
     "category": "Security Operations",
     "question": "A company's Chief Information Security Officer (CISO) wants to enhance the capabilities of the incident response team. The CISO directs the incident response team to deploy a tool that rapidlyanalyzes host and network data from potentially compromised systems and forwards the data for further review. Which of the following tools should the incident response team deploy?",
     "options": {
-      "A": "NAC",
+      "A": "NAC (Network Access Control)",
       "B": "IPS",
-      "C": "SIEM",
+      "C": "SIEM (Security Information and Event Management system)",
       "D": "EDR"
     },
     "answer": "D"
@@ -4207,7 +4207,7 @@ const quizQuestions = [
     "question": "An enterprise security team is researching a new security architecture to better protect the company's networks and applications against the latest cyberthreats. The company has a fully remote workforce. The solution should be highly redundant and enable users to connect to a VPN with an integrated, software-based firewall. Which of the following solutions meets these requirements?",
     "options": {
       "A": "IPS",
-      "B": "SIEM",
+      "B": "SIEM (Security Information and Event Management syste)",
       "C": "SASE",
       "D": "CASB"
     },
@@ -4328,7 +4328,7 @@ const quizQuestions = [
     "options": {
       "A": "Device fingerprinting",
       "B": "Compliance attestation",
-      "C": "NAC",
+      "C": "NAC (Network Access Control)",
       "D": "802.1X"
     },
     "answer": "B"
@@ -5506,7 +5506,7 @@ const quizQuestions = [
     "question": "Which of the following should an organization focus on the most when making decisions about vulnerability prioritization?",
     "options": {
       "A": "Exposure factor",
-      "B": "CVSS",
+      "B": "CVSS (Common Vulnerability Scoring System)",
       "C": "CVE",
       "D": "Industry impact"
     },
@@ -6085,7 +6085,7 @@ const quizQuestions = [
     "question": "Which of the following is used to quantitatively measure the criticality of a vulnerability?",
     "options": {
       "A": "CVE",
-      "B": "CVSS",
+      "B": "CVSS (Common Vulnerability Scoring System)",
       "C": "CIA",
       "D": "CERT"
     },
@@ -6327,7 +6327,7 @@ const quizQuestions = [
     "category": "Security Operations",
     "question": "Which of the following describes a security alerting and monitoring tool that collects system, application, and network logs from multiple sources in a centralized system?",
     "options": {
-      "A": "SIEM",
+      "A": "SIEM (Security Information and Event Management syste)",
       "B": "DLP",
       "C": "IDS",
       "D": "SNMP"
@@ -6709,8 +6709,8 @@ const quizQuestions = [
     "options": {
       "A": "IPS",
       "B": "FIM",
-      "C": "NAC",
-      "D": "SIEM"
+      "C": "NAC (Network Access Control)",
+      "D": "SIEM (Security Information and Event Management syste)"
     },
     "answer": "D"
   },
