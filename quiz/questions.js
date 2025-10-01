@@ -914,9 +914,9 @@ const quizQuestions = [
     "question": "An organization recently started hosting a new service that customers access through a web portal. A security engineer needs to add to the existing security devices a new solution to protect this new service. Which of the following is the engineer most likely to deploy?",
     "options": {
       "A": "Layer 4 firewall",
-      "B": "NGFW",
-      "C": "WAF",
-      "D": "UTM"
+      "B": "NGFW (Next Generation Firewall)",
+      "C": "WAF (Web Application Firewall)",
+      "D": "UTM (Unified Threat Management)"
     },
     "answer": "C"
   },
@@ -3507,7 +3507,7 @@ const quizQuestions = [
     "options": {
       "A": "Information security policy",
       "B": "Service-level expectations",
-      "C": "Standard operating procedure",
+      "C": "Standard operating procedure (SOP)",
       "D": "Test result report"
     },
     "answer": "C"
@@ -4947,7 +4947,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "Which of the following would be best suited for constantly changing environments?",
     "options": {
-      "A": "RTOS",
+      "A": "RTOS (Recovery Time Objectives)",
       "B": "Containers",
       "C": "Embedded systems",
       "D": "SCADA"
@@ -6144,8 +6144,8 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "Which of the following would be most useful in determining whether the long-term cost to transfer a risk is less than the impact of the risk?",
     "options": {
-      "A": "ARO",
-      "B": "RTO",
+      "A": "ARO (Annualized Rate of Occurrence)",
+      "B": "RTO ",
       "C": "RPO",
       "D": "ALE",
       "E": "SLE"
