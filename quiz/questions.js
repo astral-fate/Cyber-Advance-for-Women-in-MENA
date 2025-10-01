@@ -1610,7 +1610,7 @@ const quizQuestions = [
     "question": "Company A jointly develops a product with Company B, which is located in a different country. Company A finds out that their intellectual property is being shared with unauthorized companies. Which of the following has been breached?",
     "options": {
       "A": "SLA (Service Level Agreement)",
-      "B": "AUP",
+      "B": "Acceptable Use Policy (AUP)",
       "C": "SOW",
       "D": "MOA (Memorandum of Agreement)"
     },
@@ -1827,7 +1827,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "Which of the following organizational documents is most often used to establish and communicate expectations associated with integrity and ethical behavior within an organization?",
     "options": {
-      "A": "AUP",
+      "A": "Acceptable Use Policy (AUP)",
       "B": "SLA (Service Level Agreement)",
       "C": "EULA",
       "D": "MOA (Memorandum of Agreement)"
@@ -5674,7 +5674,7 @@ const quizQuestions = [
     "question": "A new employee accessed an unauthorized website. An investigation found that the employee violated the company's rules. Which of the following did the employee violate?",
     "options": {
       "A": "MOU (Memorandum of Understanding)",
-      "B": "AUP",
+      "B": "Acceptable Use Policy (AUP)",
       "C": "NDA (Non-Disclosure Agreement)",
       "D": "MOA (Memorandum of Agreement)"
     },
