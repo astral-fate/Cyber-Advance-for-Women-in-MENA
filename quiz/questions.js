@@ -1275,7 +1275,7 @@ const quizQuestions = [
     "options": {
       "A": "SOAR (Security Orchestration, Automation, and Response)",
       "B": "SIEM (Security Information and Event Management system)",
-      "C": "MDM",
+      "C": "MDM (Mobile Device Management)",
       "D": "DLP (Data Loss Prevention)"
     },
     "answer": "A"
@@ -1309,7 +1309,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "An employee who was working remotely lost a mobile device containing company data. Which of the following provides the best solution to prevent future data loss?",
     "options": {
-      "A": "MDM",
+      "A": "MDM (Mobile Device Management)",
       "B": "DLP (Data Loss Prevention)",
       "C": "FDE",
       "D": "EDR"
@@ -2540,10 +2540,10 @@ const quizQuestions = [
     "category": "Security Program Management and Oversight",
     "question": "A company is implementing a policy to allow employees to use their personal equipment for work. However, the company wants to ensure that only company-approved applications can be installed. Which of the following addresses this concern?",
     "options": {
-      "A": "MDM",
+      "A": "MDM (Mobile Device Management)",
       "B": "Containerization",
       "C": "DLP (Data Loss Prevention)",
-      "D": "FIM"
+      "D": "FIM (File Integrity Monitoring)"
     },
     "answer": "A"
   },
@@ -3192,7 +3192,7 @@ const quizQuestions = [
       "A": "SPF",
       "B": "GPO (Group Policy Object)",
       "C": "NAC (Network Access Control)",
-      "D": "FIM"
+      "D": "FIM (File Integrity Monitoring)"
     },
     "answer": "D"
   },
@@ -4147,7 +4147,7 @@ const quizQuestions = [
     "question": "A company is utilizing an offshore team to help support the finance department. The company wants to keep the data secure by keeping it on a company device but does not want to provide equipment to the offshore team. Which of the following should the company implement to meet this requirement?",
     "options": {
       "A": "VDI",
-      "B": "MDM",
+      "B": "MDM (Mobile Device Management)",
       "C": "VPN",
       "D": "VPC"
     },
@@ -6708,7 +6708,7 @@ const quizQuestions = [
     "question": "Which of the following tools is best for logging and monitoring in a cloud environment?",
     "options": {
       "A": "IPS (Intrusion Prevention System)",
-      "B": "FIM",
+      "B": "FIM (File Integrity Monitoring)",
       "C": "NAC (Network Access Control)",
       "D": "SIEM (Security Information and Event Management syste)"
     },
