@@ -843,7 +843,7 @@ const quizQuestions = [
     "options": {
       "A": "MAC filtering",
       "B": "Segmentation",
-      "C": "Certification",
+      "C": "Certification (Certificate of Destruction)",
       "D": "Isolation"
     },
     "answer": "A"
