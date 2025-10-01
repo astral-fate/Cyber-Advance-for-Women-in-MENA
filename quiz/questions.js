@@ -174,7 +174,7 @@ const quizQuestions = [
     "category": "Security Architecture",
     "question": "A systems administrator wants to use a technical solution to explicitly define file permissions for the entire team. Which of the following should the administrator implement?",
     "options": {
-      "A": "ACL",
+      "A": "ACL (Access Control List)",
       "B": "Monitoring",
       "C": "Isolation",
       "D": "HIPS"
@@ -1299,7 +1299,7 @@ const quizQuestions = [
     "options": {
       "A": "CIA",
       "B": "AA",
-      "C": "ACL",
+      "C": "ACL (Access Control List)",
       "D": "PEM"
     },
     "answer": "B"
@@ -1526,7 +1526,7 @@ const quizQuestions = [
     "question": "Which of the following is used to protect a computer from viruses, malware, and Trojans being installed and moving laterally across the network?",
     "options": {
       "A": "IDS",
-      "B": "ACL",
+      "B": "ACL (Access Control List)",
       "C": "EDR",
       "D": "NAC (Network Access Control)"
     },
@@ -2801,7 +2801,7 @@ const quizQuestions = [
     "category": "Threats, Vulnerabilities, and Mitigations",
     "question": "An enterprise has been experiencing attacks focused on exploiting vulnerabilities in older browser versions with well-known exploits. Which of the following security solutions should be configured to best provide the ability to monitor and block these known signature-based attacks?",
     "options": {
-      "A": "ACL",
+      "A": "ACL (Access Control List)",
       "B": "DLP (Data Loss Prevention)",
       "C": "IDS",
       "D": "IPS (Intrusion Prevention System)"
@@ -4314,7 +4314,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "Which of the following should an organization use to protect its environment from external attacks conducted by an unauthorized hacker?",
     "options": {
-      "A": "ACL",
+      "A": "ACL (Access Control List)",
       "B": "IDS",
       "C": "HIDS",
       "D": "NIPS"
@@ -4518,7 +4518,7 @@ const quizQuestions = [
     "options": {
       "A": "IPS (Intrusion Prevention System)",
       "B": "Firewall",
-      "C": "ACL",
+      "C": "ACL (Access Control List)",
       "D": "Windows security"
     },
     "answer": "B"
@@ -5698,7 +5698,7 @@ const quizQuestions = [
     "question": "A systems administrator wants to prevent users from being able to access data based on their responsibilities. The administrator also wants to apply the required access structure via a simplified format. Which of the following should the administrator apply to the site recovery resource group?",
     "options": {
       "A": "RBAC",
-      "B": "ACL",
+      "B": "ACL (Access Control List)",
       "C": "SAML",
       "D": "GPO (Group Policy Object)"
     },
@@ -6366,7 +6366,7 @@ const quizQuestions = [
     "question": "A penetration test identifies that an SMBvl Is enabled on multiple servers across an organization. The organization wants to remediate this vulnerability in the most efficient way possible. Which of the following should the organization use for this purpose?",
     "options": {
       "A": "GPO (Group Policy Object)",
-      "B": "ACL",
+      "B": "ACL (Access Control List)",
       "C": "SFTP (Secure File Transfer Protocol)",
       "D": "DLP (Data Loss Prevention)"
     },
