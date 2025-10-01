@@ -940,7 +940,7 @@ const quizQuestions = [
       "A": "MSA",
       "B": "SLA (Service Level Agreement)",
       "C": "BPA (Business Partnership Agreement)",
-      "D": "SOW"
+      "D": "SWO (Statement of Work)"
     },
     "answer": "D"
   },
@@ -1611,7 +1611,7 @@ const quizQuestions = [
     "options": {
       "A": "SLA (Service Level Agreement)",
       "B": "Acceptable Use Policy (AUP)",
-      "C": "SOW",
+      "C": "SWO (Statement of Work)",
       "D": "MOA (Memorandum of Agreement)"
     },
     "answer": "D"
@@ -2200,7 +2200,7 @@ const quizQuestions = [
     "question": "A client demands at least 99.99% uptime from a service provider's hosted security services. Which of the following documents includes the information the service provider should return to the client?",
     "options": {
       "A": "MOA (Memorandum of Agreement)",
-      "B": "SOW",
+      "B": "SWO (Statement of Work)",
       "C": "MOU (Memorandum of Understanding)",
       "D": "SLA (Service Level Agreement)"
     },
@@ -6181,7 +6181,7 @@ const quizQuestions = [
     "category": "Security Program Management and Oversight",
     "question": "A company is working with a vendor to perform a penetration test Which of the following includes an estimate about the number of hours required to complete the engagement?",
     "options": {
-      "A": "SOW",
+      "A": "SWO (Statement of Work)",
       "B": "BPA (Business Partnership Agreement)",
       "C": "SLA (Service Level Agreement)",
       "D": "NDA (Non-Disclosure Agreement)"
@@ -6609,7 +6609,7 @@ const quizQuestions = [
     "category": "Security Program Management and Oversight",
     "question": "Which of the following agreement types defines the time frame in which a vendor needs to respond?",
     "options": {
-      "A": "SOW",
+      "A": "SWO (Statement of Work)",
       "B": "SLA (Service Level Agreement)",
       "C": "MOA (Memorandum of Agreement)",
       "D": "MOU (Memorandum of Understanding)"
