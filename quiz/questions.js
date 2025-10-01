@@ -6125,7 +6125,7 @@ const quizQuestions = [
       "C": "Certification",
       "D": "Procurement"
     },
-    "answer": "B"
+    "answer": "C"
   },
   {
     "questionNumber": 509,
