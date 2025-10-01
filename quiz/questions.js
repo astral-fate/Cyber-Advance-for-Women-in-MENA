@@ -2685,8 +2685,8 @@ const quizQuestions = [
     "category": "Security Program Management and Oversight",
     "question": "A vendor needs to remotely and securely transfer files from one server to another using the command line. Which of the following protocols should be Implemented to allow for this type of access? (Select two).",
     "options": {
-      "A": "SSH",
-      "B": "SNMP",
+      "A": "SSH (Secure Shell)",
+      "B": "SNMP (Simple Network Management Protocol)",
       "C": "RDP",
       "D": "S/MIME",
       "E": "SMTP",
@@ -6330,7 +6330,7 @@ const quizQuestions = [
       "A": "SIEM (Security Information and Event Management syste)",
       "B": "DLP (Data Loss Prevention)",
       "C": "IDS",
-      "D": "SNMP"
+      "D": "SNMP (Simple Network Management Protocol)"
     },
     "answer": "A"
   },
@@ -6389,7 +6389,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "An organization implemented cloud-managed IP cameras to monitor building entry points and sensitive areas. The service provider enables direct TCP/IP connection to stream live video footage from each camera. The organization wants to ensure this stream is encrypted and authenticated. Which of the following protocols should be implemented to best meet this objective?",
     "options": {
-      "A": "SSH",
+      "A": "SSH (Secure Shell)",
       "B": "SRTP",
       "C": "S/MIME",
       "D": "PPTP"
