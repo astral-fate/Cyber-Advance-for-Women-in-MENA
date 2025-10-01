@@ -6724,7 +6724,7 @@ const quizQuestions = [
       "C": "It is considered noise.",
       "D": "Compensating controls exist."
     },
-    "answer": "A"
+    "answer": "D"
   },
   {
     "questionNumber": 558,
