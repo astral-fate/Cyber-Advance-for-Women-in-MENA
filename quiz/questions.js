@@ -1021,7 +1021,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "A company's website is www. Company. com Attackers purchased the domain wwww. company.com Which of the following types of attacks describes this example?",
     "options": {
-      "A": "Typosquatting",
+      "A": "Typosquatting (AKA Url hijacking)",
       "B": "Brand Impersonation",
       "C": "On-path",
       "D": "Watering-hole"
@@ -1513,7 +1513,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "A systems administrator receives a text message from an unknown number claiming to be the Chief Executive Officer of the company. The message states an emergency situation requires a password reset. Which of the following threat vectors is being used?",
     "options": {
-      "A": "Typosquatting",
+      "A": "Typosquatting (AKA URL hijacking",
       "B": "Smishing",
       "C": "Pretexting",
       "D": "Impersonation"
@@ -2165,7 +2165,7 @@ const quizQuestions = [
     "options": {
       "A": "Brand impersonation",
       "B": "Pretexting",
-      "C": "Typosquatting",
+      "C": "Typosquatting (AKA URL hijacking)",
       "D": "Phishing"
     },
     "answer": "D"
@@ -3543,7 +3543,7 @@ const quizQuestions = [
     "options": {
       "A": "Pretexting",
       "B": "Misinformation",
-      "C": "Typosquatting",
+      "C": "Typosquatting (AKA URL hijacking)",
       "D": "Watering-hole"
     },
     "answer": "C"
@@ -3613,7 +3613,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "An employee receives a text message that appears to have been sent by the payroll department and is asking for credential verification. Which of the following social engineering techniques are being attempted? (Choose two.)",
     "options": {
-      "A": "Typosquatting",
+      "A": "Typosquatting (AKA URL hijacking)",
       "B": "Phishing",
       "C": "Impersonation",
       "D": "Vishing",
@@ -6491,7 +6491,7 @@ const quizQuestions = [
     "options": {
       "A": "Cross-site scripting",
       "B": "Pretexting",
-      "C": "Typosquatting",
+      "C": "Typosquatting (AKA URL hijacking)",
       "D": "Vishing"
     },
     "answer": "C"
