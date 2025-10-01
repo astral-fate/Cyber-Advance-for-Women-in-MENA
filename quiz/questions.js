@@ -450,7 +450,7 @@ const quizQuestions = [
   {
     "questionNumber": 38,
     "category": "Security Program Management and Oversight",
-    "question": "An organization is implementing a COPE mobile device management policy. Which of the following should the organization include in the COPE policy? (Select two).",
+    "question": "An organization is implementing a COPE (Corporate-Owned, Personally Enabled) mobile device management policy. Which of the following should the organization include in the COPE policy? (Select two).",
     "options": {
       "A": "Remote wiping of the device",
       "B": "Data encryption",
