@@ -3700,7 +3700,7 @@ const quizQuestions = [
     "question": "Which of the following can best protect against an employee inadvertently installing malware on a company system?",
     "options": {
       "A": "Host-based firewall",
-      "B": "System isolation",
+      "B": "System isolation (AKA Air Gap)",
       "C": "Least privilege",
       "D": "Application allow list"
     },
