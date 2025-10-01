@@ -1370,7 +1370,7 @@ const quizQuestions = [
     "question": "A security analyst is reviewing alerts in the SIEM related to potential malicious network traffic coming from an employee’s corporate laptop. The security analyst has determined that additional data about the executable running on the machine is necessary to continue the investigation. Which of the following logs should the analyst use as a data source?",
     "options": {
       "A": "Application",
-      "B": "IPS/IDS",
+      "B": "IPS/IDS, (Intrusion Prevention/Detention System)",
       "C": "Network",
       "D": "Endpoint"
     },
@@ -1441,7 +1441,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "A company is in the process of migrating to cloud-based services. The company's IT department has limited resources for migration and ongoing support. Which of the following best meets the company's needs?",
     "options": {
-      "A": "IPS",
+      "A": "IPS (Intrusion Prevention System)",
       "B": "WAF",
       "C": "SASE",
       "D": "IAM"
@@ -1890,7 +1890,7 @@ const quizQuestions = [
       "A": "DLP",
       "B": "SNMP traps",
       "C": "SCAP",
-      "D": "IPS"
+      "D": "IPS (Intrusion Prevention System)"
     },
     "answer": "A"
   },
@@ -2804,7 +2804,7 @@ const quizQuestions = [
       "A": "ACL",
       "B": "DLP",
       "C": "IDS",
-      "D": "IPS"
+      "D": "IPS (Intrusion Prevention System)"
     },
     "answer": "D"
   },
@@ -3773,7 +3773,7 @@ const quizQuestions = [
     "options": {
       "A": "Load balancer",
       "B": "Port security",
-      "C": "IPS",
+      "C": "IPS (Intrusion Prevention System)",
       "D": "NGFW"
     },
     "answer": "B"
@@ -3941,7 +3941,7 @@ const quizQuestions = [
     "question": "A company's Chief Information Security Officer (CISO) wants to enhance the capabilities of the incident response team. The CISO directs the incident response team to deploy a tool that rapidlyanalyzes host and network data from potentially compromised systems and forwards the data for further review. Which of the following tools should the incident response team deploy?",
     "options": {
       "A": "NAC (Network Access Control)",
-      "B": "IPS",
+      "B": "IPS (Intrusion Prevention System)",
       "C": "SIEM (Security Information and Event Management system)",
       "D": "EDR"
     },
@@ -4206,7 +4206,7 @@ const quizQuestions = [
     "category": "Security Architecture",
     "question": "An enterprise security team is researching a new security architecture to better protect the company's networks and applications against the latest cyberthreats. The company has a fully remote workforce. The solution should be highly redundant and enable users to connect to a VPN with an integrated, software-based firewall. Which of the following solutions meets these requirements?",
     "options": {
-      "A": "IPS",
+      "A": "IPS (Intrusion Prevention System)",
       "B": "SIEM (Security Information and Event Management syste)",
       "C": "SASE",
       "D": "CASB"
@@ -4516,7 +4516,7 @@ const quizQuestions = [
     "category": "Security Operations",
     "question": "A security analyst is investigating a workstation that is suspected of outbound communication to a command and-control server. During the investigation, the analyst discovered that logs on the endpoint were deleted. Which of the following logs would the analyst most likely look at next?",
     "options": {
-      "A": "IPS",
+      "A": "IPS (Intrusion Prevention System)",
       "B": "Firewall",
       "C": "ACL",
       "D": "Windows security"
@@ -6303,7 +6303,7 @@ const quizQuestions = [
     "category": "Threats, Vulnerabilities, and Mitigations",
     "question": "A hacker gained access to a system via a phishing attempt that was a direct result of a user clicking a suspicious link. The link laterally deployed ransomware, which laid dormant for multiple weeks, across the network. Which of the following would have mitigated the spread?",
     "options": {
-      "A": "IPS",
+      "A": "IPS (Intrusion Prevention System)",
       "B": "IDS",
       "C": "WAF",
       "D": "UAT"
@@ -6707,7 +6707,7 @@ const quizQuestions = [
     "category": "Security Operations",
     "question": "Which of the following tools is best for logging and monitoring in a cloud environment?",
     "options": {
-      "A": "IPS",
+      "A": "IPS (Intrusion Prevention System)",
       "B": "FIM",
       "C": "NAC (Network Access Control)",
       "D": "SIEM (Security Information and Event Management syste)"
