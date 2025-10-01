@@ -100,10 +100,10 @@ const quizQuestions = [
     "category": "Security Program Management and Oversight",
     "question": "Employees sign an agreement that restricts specific activities when leaving the company. Violating the agreement can result in legal consequences. Which of the following agreements does this best describe?",
     "options": {
-      "A": "SLA",
-      "B": "BPA",
-      "C": "NDA",
-      "D": "MOA"
+      "A": "SLA (Service Level Agreement)",
+      "B": "BPA (Business Partnership Agreement)",
+      "C": "NDA (Non-Disclosure Agreement)",
+      "D": "MOA (Memorandum of Agreement)"
     },
     "answer": "C"
   },
@@ -938,8 +938,8 @@ const quizQuestions = [
     "question": "A client asked a security company to provide a document outlining the project, the cost, and the completion time frame. Which of the following documents should the company provide to the client?",
     "options": {
       "A": "MSA",
-      "B": "SLA",
-      "C": "BPA",
+      "B": "SLA (Service Level Agreement)",
+      "C": "BPA (Business Partnership Agreement)",
       "D": "SOW"
     },
     "answer": "D"
@@ -1609,10 +1609,10 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "Company A jointly develops a product with Company B, which is located in a different country. Company A finds out that their intellectual property is being shared with unauthorized companies. Which of the following has been breached?",
     "options": {
-      "A": "SLA",
+      "A": "SLA (Service Level Agreement)",
       "B": "AUP",
       "C": "SOW",
-      "D": "MOA"
+      "D": "MOA (Memorandum of Agreement)"
     },
     "answer": "D"
   },
@@ -1828,9 +1828,9 @@ const quizQuestions = [
     "question": "Which of the following organizational documents is most often used to establish and communicate expectations associated with integrity and ethical behavior within an organization?",
     "options": {
       "A": "AUP",
-      "B": "SLA",
+      "B": "SLA (Service Level Agreement)",
       "C": "EULA",
-      "D": "MOA"
+      "D": "MOA (Memorandum of Agreement)"
     },
     "answer": "A"
   },
@@ -2056,9 +2056,9 @@ const quizQuestions = [
     "question": "A company has yearly engagements with a service provider. The general terms and conditions are the same for all engagements. The company wants to simplify the process and revisit the general terms every three years. Which of the following documents would provide the best way to set the general terms?",
     "options": {
       "A": "MSA",
-      "B": "NDA",
-      "C": "MOU",
-      "D": "SLA"
+      "B": "NDA (Non-Disclosure Agreement)",
+      "C": "MOU (Memorandum of Understanding)",
+      "D": "SLA (Service Level Agreement)"
     },
     "answer": "A"
   },
@@ -2199,10 +2199,10 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "A client demands at least 99.99% uptime from a service provider's hosted security services. Which of the following documents includes the information the service provider should return to the client?",
     "options": {
-      "A": "MOA",
+      "A": "MOA (Memorandum of Agreement)",
       "B": "SOW",
-      "C": "MOU",
-      "D": "SLA"
+      "C": "MOU (Memorandum of Understanding)",
+      "D": "SLA (Service Level Agreement)"
     },
     "answer": "D"
   },
@@ -2613,10 +2613,10 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "Which of the following describes the understanding between a company and a client about what will be provided and the accepted time needed to provide the company with the resources?",
     "options": {
-      "A": "SLA",
-      "B": "MOU",
-      "C": "MOA",
-      "D": "BPA"
+      "A": "SLA (Service Level Agreement)",
+      "B": "MOU (Memorandum of Understanding)",
+      "C": "MOA (Memorandum of Agreement)",
+      "D": "BPA (Business Partnership Agreement)"
     },
     "answer": "A"
   },
@@ -4242,10 +4242,10 @@ const quizQuestions = [
     "category": "Security Operations",
     "question": "Which of the following agreements defines response time, escalation, and performance metrics?",
     "options": {
-      "A": "BPA",
-      "B": "MOA",
-      "C": "NDA",
-      "D": "SLA"
+      "A": "BPA (Business Partnership Agreement)",
+      "B": "MOA (Memorandum of Agreement)",
+      "C": "NDA (Non-Disclosure Agreement)",
+      "D": "SLA (Service Level Agreement)"
     },
     "answer": "D"
   },
@@ -5673,10 +5673,10 @@ const quizQuestions = [
     "category": "Security Program Management and Oversight",
     "question": "A new employee accessed an unauthorized website. An investigation found that the employee violated the company's rules. Which of the following did the employee violate?",
     "options": {
-      "A": "MOU",
+      "A": "MOU (Memorandum of Understanding)",
       "B": "AUP",
-      "C": "NDA",
-      "D": "MOA"
+      "C": "NDA (Non-Disclosure Agreement)",
+      "D": "MOA (Memorandum of Agreement)"
     },
     "answer": "B"
   },
@@ -6182,9 +6182,9 @@ const quizQuestions = [
     "question": "A company is working with a vendor to perform a penetration test Which of the following includes an estimate about the number of hours required to complete the engagement?",
     "options": {
       "A": "SOW",
-      "B": "BPA",
-      "C": "SLA",
-      "D": "NDA"
+      "B": "BPA (Business Partnership Agreement)",
+      "C": "SLA (Service Level Agreement)",
+      "D": "NDA (Non-Disclosure Agreement)"
     },
     "answer": "A"
   },
@@ -6610,9 +6610,9 @@ const quizQuestions = [
     "question": "Which of the following agreement types defines the time frame in which a vendor needs to respond?",
     "options": {
       "A": "SOW",
-      "B": "SLA",
-      "C": "MOA",
-      "D": "MOU"
+      "B": "SLA (Service Level Agreement)",
+      "C": "MOA (Memorandum of Agreement)",
+      "D": "MOU (Memorandum of Understanding)"
     },
     "answer": "B"
   },
