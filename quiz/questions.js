@@ -3733,7 +3733,7 @@ const quizQuestions = [
   {
     "questionNumber": 310,
     "category": "Threats, Vulnerabilities, and Mitigations",
-    "question": "A new vulnerability enables a type of malware that allows the unauthorized movement of data from a system. Which of the following would detect this behavior?",
+    "question": "A new vulnerability enables a type of malware that allows the unauthorized movement of data from a system (aka data exfiltration). Which of the following would detect this behavior?",
     "options": {
       "A": "Implementing encryption",
       "B": "Monitoring outbound traffic",
