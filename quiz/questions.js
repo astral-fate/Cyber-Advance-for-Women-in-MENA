@@ -395,7 +395,7 @@ const quizQuestions = [
       "C": "Perform a factory reset",
       "D": "Terminate the social media account"
     },
-    "answer": "A"
+    "answer": "D"
   },
   {
     "questionNumber": 34,
