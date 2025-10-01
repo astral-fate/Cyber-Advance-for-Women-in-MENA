@@ -1276,7 +1276,7 @@ const quizQuestions = [
       "A": "SOAR (Security Orchestration, Automation, and Response)",
       "B": "SIEM (Security Information and Event Management system)",
       "C": "MDM",
-      "D": "DLP"
+      "D": "DLP (Data Loss Prevention)"
     },
     "answer": "A"
   },
@@ -1310,7 +1310,7 @@ const quizQuestions = [
     "question": "An employee who was working remotely lost a mobile device containing company data. Which of the following provides the best solution to prevent future data loss?",
     "options": {
       "A": "MDM",
-      "B": "DLP",
+      "B": "DLP (Data Loss Prevention)",
       "C": "FDE",
       "D": "EDR"
     },
@@ -1745,7 +1745,7 @@ const quizQuestions = [
     "options": {
       "A": "XDR",
       "B": "SPF",
-      "C": "DLP",
+      "C": "DLP (Data Loss Prevention)",
       "D": "DMARC"
     },
     "answer": "C"
@@ -1805,7 +1805,7 @@ const quizQuestions = [
     "options": {
       "A": "SOAR (Security Orchestration, Automation, and Response)",
       "B": "API",
-      "C": "SFTP",
+      "C": "SFTP (Secure File Transfer Protocol)",
       "D": "RDP"
     },
     "answer": "B"
@@ -1887,7 +1887,7 @@ const quizQuestions = [
     "category": "Security Operations",
     "question": "An administrator has identified and fingerprinted specific files that will generate an alert if an attempt is made to email these files outside of the organization. Which of the following best describes the tool the administrator is using?",
     "options": {
-      "A": "DLP",
+      "A": "DLP (Data Loss Prevention)",
       "B": "SNMP traps",
       "C": "SCAP",
       "D": "IPS (Intrusion Prevention System)"
@@ -2187,7 +2187,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "A company plans to secure its systems by: Preventing users from sending sensitive data over corporate email, and Restricting access to potentially harmful websites. Which of the following features should the company set up? (Select two).",
     "options": {
-      "A": "DLP software",
+      "A": "DLP (Data Loss Prevention) software",
       "B": "DNS filtering",
       "C": "File integrity monitoring",
       "D": "Stateful firewall"
@@ -2307,7 +2307,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "A company plans to secure its systems by: Preventing users from sending sensitive data over corporate email Restricting access to potentially harmful websites Which of the following features should the company set up? (Select two).",
     "options": {
-      "A": "DLP software",
+      "A": "DLP (Data Loss Prevention) software",
       "B": "DNS filtering",
       "C": "File integrity monitoring",
       "D": "Stateful firewall",
@@ -2542,7 +2542,7 @@ const quizQuestions = [
     "options": {
       "A": "MDM",
       "B": "Containerization",
-      "C": "DLP",
+      "C": "DLP (Data Loss Prevention)",
       "D": "FIM"
     },
     "answer": "A"
@@ -2652,7 +2652,7 @@ const quizQuestions = [
       "A": "SCAP",
       "B": "Net Flow",
       "C": "Antivirus",
-      "D": "DLP"
+      "D": "DLP (Data Loss Prevention)"
     },
     "answer": "D"
   },
@@ -2690,7 +2690,7 @@ const quizQuestions = [
       "C": "RDP",
       "D": "S/MIME",
       "E": "SMTP",
-      "F": "SFTP"
+      "F": "SFTP (Secure File Transfer Protocol)"
     },
     "answer": "A F"
   },
@@ -2802,7 +2802,7 @@ const quizQuestions = [
     "question": "An enterprise has been experiencing attacks focused on exploiting vulnerabilities in older browser versions with well-known exploits. Which of the following security solutions should be configured to best provide the ability to monitor and block these known signature-based attacks?",
     "options": {
       "A": "ACL",
-      "B": "DLP",
+      "B": "DLP (Data Loss Prevention)",
       "C": "IDS",
       "D": "IPS (Intrusion Prevention System)"
     },
@@ -3190,7 +3190,7 @@ const quizQuestions = [
     "question": "A security administrator needs a method to secure data in an environment that includes some form of checks so that the administrator can track any changes. Which of the following should the administrator set up to achieve this goal?",
     "options": {
       "A": "SPF",
-      "B": "GPO",
+      "B": "GPO (Group Policy Object)",
       "C": "NAC (Network Access Control)",
       "D": "FIM"
     },
@@ -3654,7 +3654,7 @@ const quizQuestions = [
       "A": "UBA",
       "B": "EDR",
       "C": "NAC (Network Access Control)",
-      "D": "DLP"
+      "D": "DLP (Data Loss Prevention)"
     },
     "answer": "A"
   },
@@ -4304,7 +4304,7 @@ const quizQuestions = [
     "options": {
       "A": "Tokenization",
       "B": "S/MIME",
-      "C": "DLP",
+      "C": "DLP (Data Loss Prevention)",
       "D": "MFA"
     },
     "answer": "C"
@@ -5230,7 +5230,7 @@ const quizQuestions = [
       "A": "Access control list",
       "B": "Application allow list.",
       "C": "Host-based firewall",
-      "D": "DLP solution"
+      "D": "DLP (Data Loss Prevention) solution"
     },
     "answer": "B"
   },
@@ -5700,7 +5700,7 @@ const quizQuestions = [
       "A": "RBAC",
       "B": "ACL",
       "C": "SAML",
-      "D": "GPO"
+      "D": "GPO (Group Policy Object)"
     },
     "answer": "A"
   },
@@ -6328,7 +6328,7 @@ const quizQuestions = [
     "question": "Which of the following describes a security alerting and monitoring tool that collects system, application, and network logs from multiple sources in a centralized system?",
     "options": {
       "A": "SIEM (Security Information and Event Management syste)",
-      "B": "DLP",
+      "B": "DLP (Data Loss Prevention)",
       "C": "IDS",
       "D": "SNMP"
     },
@@ -6365,10 +6365,10 @@ const quizQuestions = [
     "category": "Threats, Vulnerabilities, and Mitigations",
     "question": "A penetration test identifies that an SMBvl Is enabled on multiple servers across an organization. The organization wants to remediate this vulnerability in the most efficient way possible. Which of the following should the organization use for this purpose?",
     "options": {
-      "A": "GPO",
+      "A": "GPO (Group Policy Object)",
       "B": "ACL",
-      "C": "SFTP",
-      "D": "DLP"
+      "C": "SFTP (Secure File Transfer Protocol)",
+      "D": "DLP (Data Loss Prevention)"
     },
     "answer": "A"
   },
