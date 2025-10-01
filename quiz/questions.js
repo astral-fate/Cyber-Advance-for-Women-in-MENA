@@ -2689,7 +2689,7 @@ const quizQuestions = [
       "B": "SNMP (Simple Network Management Protocol)",
       "C": "RDP",
       "D": "S/MIME",
-      "E": "SMTP",
+      "E": "SMTP (Simple Mail Transfer Protocol)",
       "F": "SFTP (Secure File Transfer Protocol)"
     },
     "answer": "A F"
