@@ -652,7 +652,7 @@ const quizQuestions = [
     "options": {
       "A": "802.1X",
       "B": "SAML",
-      "C": "RADIUS",
+      "C": "RADIUS (Remote Authentication Dial-In User Service)",
       "D": "CHAP"
     },
     "answer": "B"
@@ -987,7 +987,7 @@ const quizQuestions = [
     "options": {
       "A": "802.IX",
       "B": "EAP",
-      "C": "RADIUS",
+      "C": "RADIUS (Remote Authentication Dial-In User Service)",
       "D": "WPA2"
     },
     "answer": "A"
@@ -1695,7 +1695,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "A company evaluates several options that would allow employees to have remote access to the network. The security team wants to ensure the solution includes AAA to comply with internal security policies. Which of the following should the security team recommend?",
     "options": {
-      "A": "IPSec with RADIUS",
+      "A": "IPSec with RADIUS (Remote Authentication Dial-In User Service)",
       "B": "RDP connection with LDAPS",
       "C": "Web proxy for all remote traffic",
       "D": "Jump server with 802.1X"
@@ -1972,7 +1972,7 @@ const quizQuestions = [
     "question": "A company prevented direct access from the database administrators’ workstations to the network segment that contains database servers. Which of the following should a database administrator use to access the database servers?",
     "options": {
       "A": "Jump server",
-      "B": "RADIUS",
+      "B": "RADIUS (Remote Authentication Dial-In User Service)",
       "C": "HSM",
       "D": "Load balancer"
     },
@@ -5930,7 +5930,7 @@ const quizQuestions = [
       "A": "VPN",
       "B": "LDAP",
       "C": "FTP",
-      "D": "RADIUS"
+      "D": "RADIUS (Remote Authentication Dial-In User Service)"
     },
     "answer": "A"
   },
