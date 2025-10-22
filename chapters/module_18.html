@@ -1,0 +1,1138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cybersecurity - Module 18: Emerging Threats & Technologies</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f8f9fa;
+        margin: 0;
+        padding: 20px;
+        line-height: 1.6;
+        color: #333;
+    }
+
+    .container {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 30px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+
+    h1, h2, h3 {
+        color: #0056b3; /* Cairo University Blue */
+    }
+
+    h4 {
+        color: #007bff;
+    }
+
+    h1 {
+        text-align: center;
+        margin-bottom: 30px;
+        border-bottom: 2px solid #dee2e6;
+        padding-bottom: 15px;
+    }
+
+    h2 {
+        margin-top: 20px;
+        margin-bottom: 20px;
+        border-bottom: 1px solid #e9ecef;
+        padding-bottom: 10px;
+    }
+
+    h3 {
+        margin-top: 25px;
+        margin-bottom: 15px;
+        color: #007bff; /* Lighter Blue */
+    }
+
+    cite {
+        font-style: normal;
+        font-size: 0.8em;
+        color: #555;
+        margin-left: 4px;
+    }
+
+    /* Main Tabs Styles */
+    .main-tabs {
+        display: flex;
+        justify-content: space-around; /* Or flex-start, center */
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+        margin-bottom: 25px;
+        border-bottom: 2px solid #0056b3;
+    }
+
+    .main-tabs .tab-button {
+        padding: 12px 20px; /* Adjusted padding slightly */
+        border: none;
+        background: none;
+        color: #0056b3;
+        font-size: 0.95em; /* Slightly smaller font */
+        font-weight: bold;
+        cursor: pointer;
+        border-radius: 5px 5px 0 0;
+        transition: background-color 0.3s ease, color 0.3s ease;
+        margin-bottom: -2px; /* Overlap border */
+        border-bottom: 2px solid transparent;
+        text-align: center;
+    }
+
+    .main-tabs .tab-button.active {
+        background: #0056b3;
+        color: white;
+        border-bottom: 2px solid #0056b3;
+    }
+    .main-tabs .tab-button:hover:not(.active) {
+        background-color: #e9ecef;
+        border-bottom: 2px solid #adb5bd;
+    }
+
+    /* Content Sections */
+    .main-content {
+        display: none; /* Hide all main content sections by default */
+        animation: fadeIn 0.5s;
+    }
+
+    .main-content.active {
+        display: block; /* Show only the active one */
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+
+    /* --- Accordion Styles (for Glossary) --- */
+    .glossary-accordion {
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        overflow: hidden; /* Contain borders */
+    }
+
+    .accordion-item {
+        border-bottom: 1px solid #dee2e6; /* Separator */
+    }
+    .accordion-item:last-child {
+        border-bottom: none;
+    }
+
+    .accordion-header {
+        background-color: #f8f9fa;
+        color: #dc3545; /* Highlight Red for terms */
+        cursor: pointer;
+        padding: 15px 20px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 1.1em;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        position: relative; /* For the indicator */
+    }
+
+    .accordion-header:hover {
+        background-color: #e9ecef;
+    }
+
+    /* Indicator (+/-) */
+    .accordion-header::after {
+        content: '\002B'; /* + sign */
+        color: #0056b3;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .accordion-header.active::after {
+        content: "\2212"; /* - sign */
+        transform: rotate(180deg); /* Optional: animate the sign itself */
+    }
+    /* Optional: Slightly different style for active header */
+    .accordion-header.active {
+         background-color: #e7f1ff;
+    }
+
+
+    .accordion-panel {
+        padding: 0 20px; /* Start with 0 padding top/bottom */
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-out, padding 0.3s ease-out; /* Smooth transition */
+    }
+    .accordion-panel p, .accordion-panel ul {
+        margin: 15px 0; /* Add margin back when panel is open */
+        color: #333; /* Reset color for definition */
+    }
+
+    /* --- End Accordion Styles --- */
+
+    /* Concepts Styles */
+    #concepts .concept-block {
+        background-color: #f8f9fa;
+        border: 1px solid #e9ecef;
+        padding: 15px 20px;
+        border-radius: 5px;
+        margin-bottom: 20px;
+    }
+    #concepts ul {
+        list-style-type: square;
+        padding-left: 20px;
+    }
+     #concepts .concept-block ul {
+        list-style-type: disc; /* Use discs for sub-lists */
+        padding-left: 25px;
+        margin-top: 10px;
+    }
+    #concepts .example {
+         margin-top: 15px;
+         padding-left: 15px;
+         border-left: 3px solid #17a2b8; /* Info Blue */
+         background-color: #f4fcfd;
+         padding: 10px 15px;
+    }
+     #concepts .solution { /* Renaming for clarity */
+         margin-top: 10px;
+         padding-left: 15px;
+         font-style: italic;
+    }
+    #concepts .warning {
+         margin-top: 15px;
+         padding-left: 15px;
+         border-left: 3px solid #dc3545; /* Red */
+         background-color: #fff3f3;
+         padding: 10px 15px;
+    }
+
+    /* Quiz Styles (apply within #fill, #tf, #mc) */
+    .question {
+        margin-bottom: 25px;
+        padding: 20px;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        background-color: #ffffff; /* White background for questions */
+        position: relative; /* For feedback positioning */
+    }
+
+    .question p {
+        margin: 0 0 15px;
+        font-weight: bold;
+        font-size: 1.05em;
+    }
+
+    .options {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .option-button {
+        padding: 10px 15px;
+        border: 1px solid #ced4da;
+        background: #f8f9fa; /* Light background for options */
+        color: #495057;
+        cursor: pointer;
+        border-radius: 5px;
+        text-align: left;
+        transition: background-color 0.2s ease, border-color 0.2s ease;
+        width: 100%;
+    }
+    .option-button:hover {
+         background-color: #e9ecef;
+         border-color: #adb5bd;
+    }
+
+    .option-button.selected {
+        background: #007bff;
+        color: white;
+        border-color: #0056b3;
+    }
+
+    .check-answer {
+        margin-top: 15px;
+        padding: 10px 20px;
+        border: none;
+        background: #28a745; /* Success Green */
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: background-color 0.2s ease;
+    }
+    .check-answer:hover {
+         background-color: #218838;
+    }
+
+    .feedback {
+        margin-top: 15px;
+        padding: 10px;
+        border-radius: 5px;
+        font-weight: bold;
+    }
+
+    .feedback.correct {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+    }
+
+    .feedback.incorrect {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <h1>Module 18: Emerging Threats & Technologies</h1>
+
+    <div class="main-tabs">
+        <button class="tab-button active" data-tab="glossary">Glossary</button>
+        <button class="tab-button" data-tab="concepts">Concepts & Examples</button>
+        <button class="tab-button" data-tab="fill">Fill in the Blank</button>
+        <button class="tab-button" data-tab="tf">True/False</button>
+        <button class="tab-button" data-tab="mc">Multiple Choice</button>
+    </div>
+
+    <section id="glossary" class="main-content active">
+        <h2>Glossary of Terms</h2>
+        <div class="glossary-accordion">
+             <div class="accordion-item">
+                <button class="accordion-header">AI (Artificial Intelligence)</button>
+                <div class="accordion-panel">
+                    <p>Computer systems designed to perform tasks that normally require human intelligence, such as recognizing patterns, making decisions, and learning. In cybersecurity, it's used for threat detection, response automation, and behavioral analytics.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Automation (in Cybersecurity)</button>
+                <div class="accordion-panel">
+                    <p>The automatic execution of predefined tasks in cybersecurity processes without human intervention (e.g., automatically blocking a malicious IP).</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Behavioral Analytics</button>
+                <div class="accordion-panel">
+                    <p>Examining user behavior patterns (keystroke dynamics, mouse movements, navigation habits) using AI/ML to establish a baseline of normal behavior and detect deviations indicative of threats.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Biometric Authentication</button>
+                <div class="accordion-panel">
+                    <p>Verifying identity using unique physiological or behavioral characteristics like fingerprints, facial features, or voice patterns.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Blockchain</button>
+                <div class="accordion-panel">
+                    <p>A decentralized and distributed ledger system, originally for Bitcoin, used to record transactions securely and transparently without intermediaries. Used in cybersecurity for data protection, secure transactions, identity management, and supply chain transparency.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Botnet</button>
+                <div class="accordion-panel">
+                    <p>A network of compromised computers or devices (bots/zombies) controlled remotely by an attacker (botmaster) typically via a Command & Control (C2) server, often used for DDoS attacks, spamming, or credential stuffing.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Cloud Computing</button>
+                <div class="accordion-panel">
+                    <p>Delivering computing services—including servers, storage, databases, networking, software, analytics, and intelligence—over the Internet (“the cloud”) to offer faster innovation, flexible resources, and economies of scale. Contrasted with Edge Computing.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Collaborative Sensing</button>
+                <div class="accordion-panel">
+                    <p>Connecting distributed sensors (in homes, vehicles, workplaces) with AI systems to generate insights, improve capabilities of individual sensors, and enable context-aware decisions (e.g., in urban mobility, environmental monitoring).</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Cryptocurrency</button>
+                <div class="accordion-panel">
+                    <p>Digital or virtual currency secured by cryptography, typically using blockchain technology for decentralized transaction recording (e.g., Bitcoin, Ethereum).</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Deepfakes</button>
+                <div class="accordion-panel">
+                    <p>Synthetic media (images, video, audio) created using AI where a person's likeness or voice is replaced with someone else's. Poses threats like misinformation, social engineering, identity theft, and reputation damage.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Digital Twins</button>
+                <div class="accordion-panel">
+                    <p>Digital models of the physical world created using technologies like laser scanning. Used to optimize construction and operational efficiency, reducing carbon impact.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Edge Computing</button>
+                <div class="accordion-panel">
+                    <p>Processing, storing, and analyzing data on local devices or edge servers near the data source, rather than in centralized cloud infrastructure. Reduces latency, optimizes bandwidth, and enhances privacy/security.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Engineered Living Therapeutics</button>
+                <div class="accordion-panel">
+                    <p>Advanced probiotic systems (e.g., microbes) genetically engineered to produce therapeutic substances (drugs, enzymes) within the body in a controlled manner.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">5G</button>
+                <div class="accordion-panel">
+                    <p>The fifth generation of wireless technology, offering faster speeds, lower latency, greater capacity, and more reliable connectivity than previous generations (4G LTE, 3G). Uses technologies like millimeter-wave spectrum and massive MIMO.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Generative AI</button>
+                <div class="accordion-panel">
+                    <p>A type of AI capable of generating new content, such as text, images, audio, or code (e.g., used in mental health monitoring, creating deepfakes, or by hackers for phishing).</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Generative Watermarking</button>
+                <div class="accordion-panel">
+                    <p>Technology that embeds invisible markers in AI-generated content (text, images, audio, video) to verify authenticity and trace origins, helping combat misinformation and protect IP.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Grover's Algorithm</button>
+                <div class="accordion-panel">
+                    <p>A quantum algorithm that can search an unsorted database quadratically faster than classical algorithms ($O(\sqrt{N})$ time). It effectively reduces the key length of symmetric encryption algorithms by half.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Heuristic Analysis</button>
+                <div class="accordion-panel">
+                    <p>A method of detecting viruses by examining code for suspicious properties or abnormal behavior, rather than relying solely on known virus signatures. More adaptable to new threats.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">IAM (Identity and Access Management)</button>
+                <div class="accordion-panel">
+                    <p>The security discipline that enables the right individuals to access the right resources at the right times for the right reasons. Increasingly incorporating biometrics and behavioral analytics.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Immutable</button>
+                <div class="accordion-panel">
+                    <p>Unchangeable or unable to be altered. In blockchain, once data (like a transaction) is added to a block and the block is added to the chain, it cannot be modified.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">IoT (Internet of Things)</button>
+                <div class="accordion-panel">
+                    <p>A network of physical devices, vehicles, home appliances, and other items embedded with electronics, software, sensors, actuators, and connectivity which enables these objects to connect and exchange data.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">IoT Botnet</button>
+                <div class="accordion-panel">
+                    <p>A network of compromised IoT devices controlled remotely by attackers, often used for large-scale attacks like DDoS. Examples include the Mirai botnet.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Machine Learning (ML)</button>
+                <div class="accordion-panel">
+                    <p>A subset of AI that enables systems to learn and improve from experience without being explicitly programmed. Used in cybersecurity for analyzing data, identifying patterns, and making predictions.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">MFA (Multi-Factor Authentication)</button>
+                <div class="accordion-panel">
+                    <p>A security process that requires users to provide two or more verification factors to gain access to a resource (e.g., password + SMS code, biometric + PIN). Recommended for IoT security.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Mirai Botnet</button>
+                <div class="accordion-panel">
+                    <p>A specific malware that targets IoT devices, turning them into remotely controlled bots for large-scale network attacks, notably DDoS attacks. Emerged in 2016.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">MISP (Malware Information Sharing Platform & Threat Sharing)</button>
+                <div class="accordion-panel">
+                    <p>An open-source software solution for collecting, storing, distributing, and sharing cyber security indicators and threats analysis. Recommended as a tool for threat intel feeds.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Nanozymes</button>
+                <div class="accordion-panel">
+                    <p>Laboratory-produced nanomaterials with enzyme-like catalytic properties, offering increased stability, lower production costs, and simpler synthesis compared to natural enzymes. Applications in medicine, environmental remediation, etc.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Natural Language Processing (NLP)</button>
+                <div class="accordion-panel">
+                    <p>A branch of AI that helps computers understand, interpret, and manipulate human language. Used in cybersecurity for analyzing security logs and reports.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Network Segmentation</button>
+                <div class="accordion-panel">
+                    <p>Dividing a computer network into smaller, isolated subnetworks or segments to improve security and performance. Recommended for isolating IoT devices.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Orchestration (in Cybersecurity)</button>
+                <div class="accordion-panel">
+                    <p>The coordinated execution of multiple automated tasks across disparate security tools and systems (e.g., detecting malware, quarantining the device, blocking the source IP, and creating a ticket).</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Osmotic Power Systems</button>
+                <div class="accordion-panel">
+                    <p>Systems that generate clean, renewable energy from salinity (salt content) differences between two water sources (e.g., river water meeting seawater), often using semipermeable membranes.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">P2P (Peer-to-Peer) Networking</button>
+                <div class="accordion-panel">
+                    <p>A distributed network architecture where participants (peers) make a portion of their resources (processing power, disk storage, network bandwidth) directly available to other network participants, without central coordination instances.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Post-Quantum Cryptography (PQC)</button>
+                <div class="accordion-panel">
+                    <p>Cryptographic algorithms (also called quantum-resistant) thought to be secure against attacks by quantum computers. Examples include lattice-based, hash-based, and code-based cryptography.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Quantum Computing</button>
+                <div class="accordion-panel">
+                    <p>A type of computing that uses quantum-mechanical phenomena, such as superposition and entanglement, to perform operations on data. Poses threats to current encryption standards (e.g., via Shor's and Grover's algorithms).</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Self-Sovereign Identity (SSI)</button>
+                <div class="accordion-panel">
+                    <p>An approach to digital identity that empowers individuals to control their own identity data, typically using decentralized technologies like blockchain, without relying on centralized authorities.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Shor's Algorithm</button>
+                <div class="accordion-panel">
+                    <p>A quantum algorithm capable of factoring large prime numbers exponentially faster than classical computers. Poses a significant threat to asymmetric encryption algorithms like RSA and ECC.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Smart Contract</button>
+                <div class="accordion-panel">
+                    <p>Self-executing contracts with the terms of the agreement directly written into code. They run on a blockchain, automatically executing when predefined conditions are met.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Smart Grids</button>
+                <div class="accordion-panel">
+                    <p>Modernized electrical grids using information and communication technology to gather and act on information about the behavior of suppliers and consumers to improve efficiency, reliability, economics, and sustainability.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">SOAR (Security Orchestration, Automation, and Response)</button>
+                <div class="accordion-panel">
+                    <p>Technology solutions that allow organizations to collect security threat data and alerts from different sources, where incident analysis and triage can be performed using a combination of human and machine power to define, prioritize, and drive standardized incident response activities.</p>
+                </div>
+            </div>
+             <div class="accordion-item">
+                <button class="accordion-header">Structural Battery Composites (SBCs)</button>
+                <div class="accordion-panel">
+                    <p>Materials that integrate load-bearing mechanical functionality with rechargeable energy storage, potentially reducing weight and complexity in applications like electric vehicles and aircraft.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">XaaS (Everything as a Service)</button>
+                <div class="accordion-panel">
+                    <p>A general category of cloud computing services that bundle various resources like compute, storage, and networking, delivered over the internet on a subscription basis. Includes SaaS, PaaS, IaaS.</p>
+                </div>
+            </div>
+            <div class="accordion-item">
+                <button class="accordion-header">Zero Trust Architecture</button>
+                <div class="accordion-panel">
+                    <p>A security model based on the principle of "never trust, always verify." It requires strict identity verification for every person and device trying to access resources on a private network, regardless of whether they are sitting within or outside of the network perimeter. Recommended for 5G security.</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="concepts" class="main-content">
+        <h2>Concepts & Examples</h2>
+
+        <div class="concept-block">
+            <h3>Artificial Intelligence (AI) in Cybersecurity</h3>
+            <p>AI is a powerful tool enhancing cybersecurity by enabling more effective threat detection and response. Machine learning (ML) algorithms analyze vast data to spot patterns and anomalies indicating breaches.</p>
+            <ul>
+                <li><strong>Automation:</strong> AI automates tasks like malware detection, threat hunting, and incident response, freeing up human teams.</li>
+                <li><strong>Applications:</strong>
+                    <ul>
+                        <li>AI-based threat detection systems (e.g., Darktrace, CrowdStrike, SentinelOne).</li>
+                        <li>Behavioral analytics for user activity monitoring.</li>
+                        <li>Natural Language Processing (NLP) for analyzing logs and reports.</li>
+                    </ul>
+                </li>
+            </ul>
+             <div class="warning"><p><strong>Warning:</strong> Hackers also use AI tools (like those from OpenAI) to hone their skills, create convincing phishing attacks, and develop adaptive malware.</p></div>
+        </div>
+
+        <hr>
+
+        <div class="concept-block">
+            <h3>Internet of Things (IoT) Security</h3>
+            <p>The large number of connected IoT devices presents unique challenges due to often lacking robust security features. Securing them is critical.</p>
+            <h4>Challenges:</h4>
+            <ul>
+                <li><strong>Volume & Diversity:</strong> Billions of devices from various manufacturers using different protocols make standardization hard.</li>
+                <li><strong>Resource Constraints:</strong> Limited power, memory, and processing capabilities often prevent implementation of strong security.</li>
+            </ul>
+            <h4>Best Practices:</h4>
+             <ul>
+                 <li>Track and Manage Devices: Maintain inventory and monitor continuously.</li>
+                 <li>Patching: Regularly update firmware/software.</li>
+                 <li>Strong Credentials: Avoid default passwords; update regularly.</li>
+                 <li>Encryption: Use up-to-date protocols for data transmission.</li>
+                 <li>Penetration Testing: Test devices before deployment.</li>
+                 <li>Endpoint Security: Profile endpoints and use security tools.</li>
+                 <li>Network Segmentation: Isolate IoT devices from critical networks.</li>
+                 <li>Multi-Factor Authentication (MFA): Add extra verification layers.</li>
+             </ul>
+             <h4>Enhancements:</h4>
+             <ul>
+                 <li><strong>Blockchain:</strong> Can provide a decentralized, tamper-resistant ledger for IoT data and interactions, ensuring integrity.</li>
+                 <li><strong>Edge Computing:</strong> Processing data locally on devices reduces data exposure over networks and allows real-time security responses.</li>
+             </ul>
+        </div>
+
+         <hr>
+
+        <div class="concept-block">
+            <h3>Automation and Orchestration (SOAR)</h3>
+            <p>These technologies streamline security operations and incident response.</p>
+            <ul>
+                <li><strong>Automation:</strong> Automatic execution of single, predefined tasks (e.g., block IP).</li>
+                <li><strong>Orchestration:</strong> Coordinated execution of multiple automated tasks across different tools (e.g., detect threat -> block IP -> quarantine host -> create ticket).</li>
+            </ul>
+            <h4>Challenges Addressed:</h4>
+            <ul>
+                <li>Slow manual processes, alert fatigue, managing too many separate tools (tool sprawl), lack of integration between tools.</li>
+            </ul>
+            <h4>SOAR (Security Orchestration, Automation, and Response):</h4>
+            <p>SOAR platforms integrate security tools, automate workflows (using playbooks), and manage incident response centrally. </p>
+             <ul>
+                <li><strong>Key Components:</strong> Centralized console, integration framework, automation engine, incident response playbooks, analytics/reporting.</li>
+                 <li><strong>Benefits:</strong> Improved efficiency, enhanced visibility, scalability, consistency, and compliance.</li>
+            </ul>
+        </div>
+
+        <hr>
+
+         <div class="concept-block">
+            <h3>Self-Sovereign Identity (SSI)</h3>
+            <p>An approach empowering individuals to own and control their digital identities using decentralized technologies like blockchain, rather than relying on centralized authorities.</p>
+            <h4>Key Principles:</h4>
+             <ul>
+                 <li><strong>Agency:</strong> Representation, Delegation, Equity & Inclusion, Usability/Accessibility.</li>
+                 <li><strong>Autonomy:</strong> Participation, Decentralization, Interoperability, Portability.</li>
+                 <li><strong>Integrity:</strong> Security, Verifiability & Authenticity, Privacy & Minimal Disclosure, Transparency.</li>
+             </ul>
+             <h4>Potential Impact:</h4>
+             <ul>
+                 <li>Enhanced security (reduced identity theft).</li>
+                 <li>Improved privacy (user control over data).</li>
+                 <li>User empowerment.</li>
+                 <li>Streamlined authentication.</li>
+                 <li>Reduced verification costs for organizations.</li>
+             </ul>
+        </div>
+
+        <hr>
+
+        <div class="concept-block">
+            <h3>Emerging Cyber Threats</h3>
+
+            <h4>1. AI-Powered Attacks</h4>
+            <p>Attackers use AI to automate target identification, create adaptive malware, enhance social engineering (phishing, voice cloning), and generate deepfakes.</p>
+            <div class="example">
+                <p><strong>Examples:</strong></p>
+                <ul>
+                    <li>Experimental AI malware like "BlackMamba" bypassed EDR.</li>
+                    <li>AI-written phishing emails had high open/click rates.</li>
+                    <li>AI voice scams targeting individuals financially.</li>
+                    <li>Deepfake fraud cases increasing dramatically.</li>
+                </ul>
+            </div>
+             <p><strong>Defense:</strong> Use AI for defense (threat detection, behavioral analysis), adversarial ML training, and maintain human oversight.</p>
+
+            <h4>2. Quantum Computing Threats</h4>
+            <p>Quantum computers threaten current encryption standards.</p>
+             <ul>
+                 <li><strong>Shor's Algorithm:</strong> Can break asymmetric encryption (RSA, ECC) by factoring large numbers quickly.</li>
+                 <li><strong>Grover's Algorithm:</strong> Can speed up searches, effectively halving the key strength of symmetric encryption (e.g., AES-256 becomes like AES-128).</li>
+             </ul>
+            <p><strong>Defense:</strong> Transitioning to Post-Quantum Cryptography (PQC) algorithms (lattice-based, hash-based, etc.).</p>
+            <div class="warning"><p><strong>Note:</strong> No known quantum attacks have occurred yet, but preparation is crucial.</p></div>
+
+            <h4>3. Deepfakes</h4>
+            <p>AI-generated synthetic media used for misinformation, social engineering, identity theft, and reputation damage.</p>
+             <div class="example">
+                 <p><strong>Examples:</strong></p>
+                 <ul>
+                     <li>Fake videos of politicians to manipulate opinion.</li>
+                     <li>Voice cloning scams impersonating executives to request fund transfers.</li>
+                     <li>Fake celebrity videos or images.</li>
+                 </ul>
+             </div>
+            <p><strong>Defense:</strong> Deepfake detection tools, media literacy education, regulatory measures (like China's legislation requiring labeling).</p>
+
+            <h4>4. IoT Botnets</h4>
+             <p>Networks of compromised IoT devices used for large-scale attacks like DDoS, credential stuffing, or data breaches.</p>
+              <div class="example">
+                 <p><strong>Example:</strong> Mirai botnet (emerged 2016) used hacked IoT devices for massive DDoS attacks.</p>
+             </div>
+             <p><strong>Risks:</strong> Data breaches from devices, privacy violations (eavesdropping), infrastructure disruption via DDoS.</p>
+            <p><strong>Defense:</strong> Strong security on devices (updates, passwords), network segmentation, monitoring, user education.</p>
+        </div>
+
+         <hr>
+
+        <div class="concept-block">
+           <h3>Blockchain in Cybersecurity</h3>
+           <p>Blockchain offers security benefits beyond cryptocurrency.</p>
+           <ul>
+               <li><strong>Immutable Data Storage:</strong> Data recorded cannot be altered, ideal for logs, identities, credentials.</li>
+               <li><strong>Decentralized Identity Management:</strong> Users control their identity via cryptographic keys on a distributed ledger.</li>
+               <li><strong>Smart Contracts:</strong> Automate secure processes based on predefined conditions (e.g., access control, compliance checks).</li>
+               <li><strong>Supply Chain Transparency:</strong> Creates an unchangeable record of goods movement, reducing fraud.</li>
+               <li><strong>Secure Transactions:</strong> Enables peer-to-peer value transfer without central intermediaries.</li>
+               <li><strong>Other Uses:</strong> Mitigating DDoS attacks, securing DNS, verifying software updates, securing edge devices.</li>
+           </ul>
+        </div>
+
+        <hr>
+
+         <div class="concept-block">
+           <h3>Decentralized Networking & P2P</h3>
+           <p>Distributes control and data across multiple nodes instead of a central server.</p>
+            <h4>Benefits:</h4>
+            <ul>
+                <li>Enhanced resilience (no single point of failure).</li>
+                <li>Improved privacy and security (less reliance on intermediaries).</li>
+                <li>Increased scalability.</li>
+            </ul>
+             <h4>Challenges:</h4>
+             <ul>
+                 <li>Potential network fragmentation.</li>
+                 <li>Governance and coordination difficulties.</li>
+                 <li>Security risks (Sybil attacks, 51% attacks, malicious nodes).</li>
+             </ul>
+             <h4>Peer-to-Peer (P2P):</h4>
+             <p>A type of decentralized network where participants (peers) share resources directly.</p>
+             <div class="example">
+                 <p><strong>Applications:</strong> File sharing (BitTorrent), instant messaging, cryptocurrency, content delivery networks (CDNs).</p>
+             </div>
+        </div>
+
+        <hr>
+
+         <div class="concept-block">
+            <h3>Edge Computing</h3>
+            <p>Processing data closer to the source (e.g., on IoT devices or local servers) instead of sending it all to a central cloud.</p>
+             <h4>Benefits for Cybersecurity:</h4>
+             <ul>
+                 <li><strong>Reduced Attack Surface:</strong> Less sensitive data transmitted over networks.</li>
+                 <li><strong>Real-Time Threat Detection:</strong> Faster analysis and response locally.</li>
+                 <li><strong>Data Privacy/Compliance:</strong> Sensitive data stays local.</li>
+                 <li><strong>Resilience:</strong> Can operate even if central connection is lost.</li>
+             </ul>
+              <h4>Mitigation Strategies:</h4>
+              <p>Requires robust security at the edge (encryption, access controls), secure edge-to-cloud integration, continuous monitoring, secure data transmission, and timely patching.</p>
+        </div>
+
+        <hr>
+
+        <div class="concept-block">
+           <h3>5G Technology</h3>
+           <p>The fifth generation of wireless, offering faster speeds, lower latency, and greater capacity.</p>
+            <h4>Cybersecurity Implications:</h4>
+            <ul>
+                <li><strong>Increased Attack Surface:</strong> More connected devices means more potential entry points.</li>
+                <li><strong>IoT Security Risks:</strong> Connects many potentially insecure IoT devices.</li>
+                <li><strong>Network Slicing Vulnerabilities:</strong> Virtual network segments could be compromised.</li>
+                <li><strong>Privacy Concerns:</strong> Vast amounts of data require strong protection.</li>
+            </ul>
+             <h4>Security Strategies:</h4>
+             <p>Robust encryption/authentication, Zero Trust architecture, threat intelligence/monitoring, secure software development, collaboration/information sharing.</p>
+        </div>
+
+        <hr>
+
+        <div class="concept-block">
+            <h3>Biometrics and Behavioral Analytics</h3>
+            <p>Used to enhance Identity and Access Management (IAM).</p>
+            <ul>
+                <li><strong>Biometric Authentication:</strong> Uses unique physical/behavioral traits (fingerprint, face, voice) for verification.</li>
+                <li><strong>Behavioral Analytics:</strong> Analyzes patterns (typing speed, mouse movement) to detect anomalies indicating potential compromise.</li>
+            </ul>
+             <h4>Benefits:</h4>
+             <p>Enhanced security (MFA, continuous risk assessment), streamlined user experience (passwordless), regulatory compliance aid.</p>
+              <h4>Considerations:</h4>
+              <p>Strong protection needed for sensitive biometric data, continuous monitoring/adaptation for behavioral models, user consent and transparency are crucial.</p>
+        </div>
+
+        <hr>
+
+        <div class="concept-block">
+            <h3>XaaS (Everything as a Service)</h3>
+            <p>Cloud-based delivery model for IT resources (SaaS, PaaS, IaaS).</p>
+             <h4>Cybersecurity Implications:</h4>
+             <ul>
+                 <li><strong>Data Security:</strong> Responsibility often shared; requires strong encryption, access controls, governance by the customer.</li>
+                 <li><strong>IAM:</strong> Crucial for managing access to cloud resources.</li>
+                 <li><strong>Compliance:</strong> Must ensure cloud usage meets regulatory requirements (GDPR, HIPAA).</li>
+             </ul>
+             <h4>Risk Management:</h4>
+             <p>Thorough vendor risk assessment, data encryption/redundancy, continuous monitoring, and incident response planning.</p>
+        </div>
+
+    </section>
+
+    <div id="fill" class="main-content">
+        <h2>Fill in the Blank Questions</h2>
+        <div id="fill-questions"></div>
+    </div>
+
+    <div id="tf" class="main-content">
+        <h2>True/False Questions</h2>
+        <div id="tf-questions"></div>
+    </div>
+
+    <div id="mc" class="main-content">
+        <h2>Multiple Choice Questions</h2>
+        <div id="mc-questions"></div>
+    </div>
+
+</div>
+<script>
+    // --- START OF QUIZ DATA ---
+    const fillInTheBlank = [
+        { question: "_______ algorithms analyze vast amounts of data to identify patterns and anomalies indicating potential security breaches.", options: ["Blockchain", "Quantum", "Machine learning", "Hashing"], answer: "Machine learning" },
+        { question: "SOAR stands for Security Orchestration, Automation, and _______.", options: ["Reporting", "Resilience", "Response", "Remediation"], answer: "Response" },
+        { question: "_______ is an identity model empowering individuals to control their own digital identities using technologies like blockchain.", options: ["OAuth", "SAML", "Self-Sovereign Identity (SSI)", "OpenID Connect"], answer: "Self-Sovereign Identity (SSI)" },
+        { question: "AI-generated synthetic media used to impersonate individuals is known as _______.", options: ["Ransomware", "Phishing", "Deepfakes", "Spyware"], answer: "Deepfakes" },
+        { question: "Shor's algorithm, a quantum algorithm, poses a significant threat to _______ encryption methods like RSA.", options: ["Symmetric", "Hashing", "Asymmetric", "Steganographic"], answer: "Asymmetric" },
+        { question: "A network of compromised IoT devices controlled by an attacker is called an IoT _______.", options: ["Gateway", "Honeypot", "Botnet", "Firewall"], answer: "Botnet" },
+        { question: "The blockchain feature ensuring that recorded data cannot be altered is called _______.", options: ["Decentralization", "Transparency", "Immutability", "Tokenization"], answer: "Immutability" },
+        { question: "Processing data closer to the source instead of in a central cloud is known as _______ computing.", options: ["Cloud", "Fog", "Distributed", "Edge"], answer: "Edge" },
+        { question: "The 'P' in P2P networking stands for _______.", options: ["Protocol", "Peer", "Platform", "Private"], answer: "Peer" },
+        { question: "Verifying identity using unique characteristics like fingerprints or facial features is _______ authentication.", options: ["Password-based", "Token-based", "Biometric", "Knowledge-based"], answer: "Biometric" },
+        { question: "XaaS stands for _______ as a Service.", options: ["Xtensibility", "Xenon", "Everything", "Example"], answer: "Everything" },
+        { question: "_______ analysis detects viruses by examining code for suspicious properties, rather than known signatures.", options: ["Signature-based", "Heuristic", "Static", "Dynamic"], answer: "Heuristic" },
+        { question: "Grover's algorithm effectively reduces the key length of _______ encryption algorithms by half.", options: ["Asymmetric", "Symmetric", "Hashing", "Public Key"], answer: "Symmetric" },
+        { question: "Isolating IoT devices from critical systems using _______ segmentation is a recommended security practice.", options: ["Network", "Market", "User", "Data"], answer: "Network" },
+        { question: "_______ contracts are self-executing contracts with terms written directly into code on a blockchain.", options: ["Legal", "Paper", "Smart", "Verbal"], answer: "Smart" }
+    ];
+
+    const trueOrFalse = [
+        { question: "AI is only used by cybersecurity professionals for defense, not by attackers.", answer: false },
+        { question: "SOAR platforms primarily focus on manual incident response processes.", answer: false },
+        { question: "Self-Sovereign Identity (SSI) relies on a central authority to manage user identities.", answer: false },
+        { question: "Deepfakes use AI to create synthetic media, potentially for malicious purposes.", answer: true },
+        { question: "Quantum computing currently poses no threat to modern encryption standards.", answer: false },
+        { question: "Grover's algorithm breaks asymmetric encryption like RSA.", answer: false },
+        { question: "IoT devices are generally considered highly secure out-of-the-box.", answer: false },
+        { question: "Blockchain data, once recorded, can be easily altered by administrators.", answer: false },
+        { question: "Edge computing processes data primarily in large, centralized data centers.", answer: false },
+        { question: "P2P networks rely on a central server for communication between participants.", answer: false },
+        { question: "Biometric authentication uses something you know (like a password) to verify identity.", answer: false },
+        { question: "Behavioral analytics compares current user activity to a baseline of their normal behavior.", answer: true },
+        { question: "XaaS refers exclusively to Software as a Service (SaaS).", answer: false },
+        { question: "Network segmentation can help limit the impact of a compromised IoT device.", answer: true },
+        { question: "Heuristic analysis is less effective than signature-based detection against brand new malware.", answer: false }
+    ];
+
+    const multipleChoice = [
+        { question: "Which technology is NOT explicitly listed as one of the WEF Top 10 Emerging Technologies of 2025 relevant to this module?", options: ["Generative watermarking", "Quantum computing chips", "Collaborative sensing", "Autonomous biochemical sensing"], answer: "Quantum computing chips" },
+        { question: "Which AI application involves analyzing security logs and reports using human language understanding?", options: ["Behavioral Analytics", "Threat Detection Systems", "Natural Language Processing (NLP)", "Automation Engine"], answer: "Natural Language Processing (NLP)" },
+        { question: "Which is a major challenge specific to securing IoT devices?", options: ["High processing power", "Resource constraints (power, memory)", "Universal security standards", "Infrequent software updates"], answer: "Resource constraints (power, memory)" },
+        { question: "What does the 'O' in SOAR stand for?", options: ["Optimization", "Operations", "Orchestration", " Oversight"], answer: "Orchestration" },
+        { question: "Which core principle of SSI emphasizes that individuals control their own identity data?", options: ["Interoperability", "Transparency", "Ownership", "Security"], answer: "Ownership" },
+        { question: "Which quantum algorithm specifically targets asymmetric encryption like RSA?", options: ["Grover's Algorithm", "Shor's Algorithm", "Deutsch-Jozsa Algorithm", "Simon's Algorithm"], answer: "Shor's Algorithm" },
+        { question: "The Mirai malware is primarily known for creating what?", options: ["Ransomware networks", "Phishing campaigns", "IoT Botnets", "Cryptocurrency miners"], answer: "IoT Botnets" },
+        { question: "Which security model operates on the principle 'never trust, always verify'?", options: ["Defense in Depth", "Least Privilege", "Zero Trust Architecture", "Security through Obscurity"], answer: "Zero Trust Architecture" },
+        { question: "What is a primary benefit of using blockchain for supply chain management?", options: ["Reduced storage costs", "Increased processing speed", "Enhanced transparency and traceability", "Simplified user interface"], answer: "Enhanced transparency and traceability" },
+        { question: "Which is NOT a benefit of decentralized networking compared to centralized?", options: ["Enhanced resilience", "Simplified governance", "Improved privacy", "Increased scalability"], answer: "Simplified governance" },
+        { question: "Edge computing primarily aims to reduce what issue associated with cloud computing?", options: ["Storage capacity", "Processing power", "Latency", "Cost"], answer: "Latency" },
+        { question: "Analyzing keystroke dynamics and mouse movements for authentication falls under:", options: ["Biometric Authentication", "Behavioral Analytics", "Multi-Factor Authentication", "Password Hashing"], answer: "Behavioral Analytics" },
+        { question: "SaaS, PaaS, and IaaS are all types of what cloud service model?", options: ["SSI", "PQC", "SOAR", "XaaS"], answer: "XaaS" },
+        { question: "Which attack involves creating multiple fake identities to gain disproportionate influence in a decentralized network?", options: ["DDoS Attack", "Phishing Attack", "Sybil Attack", "Man-in-the-Middle Attack"], answer: "Sybil Attack" },
+         { question: "What technology allows AI systems to independently plan and execute complex, multi-step tasks?", options: ["Generative AI", "Agentic AI", "Behavioral Analytics", "NLP"], answer: "Agentic AI" }
+    ];
+    // --- END OF QUIZ DATA ---
+
+
+    // --- START OF SCRIPT LOGIC ---
+    document.addEventListener('DOMContentLoaded', () => {
+        // Select main tabs and content sections
+        const mainTabButtons = document.querySelectorAll('.main-tabs .tab-button');
+        const mainTabContents = document.querySelectorAll('.main-content');
+
+        // Select quiz content containers
+        const fillContainer = document.getElementById('fill-questions');
+        const tfContainer = document.getElementById('tf-questions');
+        const mcContainer = document.getElementById('mc-questions');
+
+         // Select accordion elements
+        const accordionHeaders = document.querySelectorAll('.accordion-header');
+
+
+        // --- Main Tab Switching Logic ---
+        mainTabButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const tabId = button.getAttribute('data-tab'); // Get the ID of the target content
+
+                // Deactivate all main buttons and content
+                mainTabButtons.forEach(btn => btn.classList.remove('active'));
+                mainTabContents.forEach(content => content.classList.remove('active'));
+
+                // Activate the clicked button
+                button.classList.add('active');
+
+                // Activate the corresponding content section
+                const targetContent = document.getElementById(tabId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+
+        // --- Accordion Logic (for Glossary) ---
+         accordionHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                // Toggle active class on the header for styling (+) (-) sign
+                this.classList.toggle('active');
+
+                // Get the panel sibling
+                const panel = this.nextElementSibling;
+
+                // Toggle the max-height for smooth transition
+                if (panel.style.maxHeight) {
+                    // If panel is open, close it
+                    panel.style.maxHeight = null;
+                    panel.style.padding = "0 20px"; // Remove padding when closing
+                } else {
+                     // If panel is closed, open it
+                    // Add a small buffer to scrollHeight to ensure content fits
+                    panel.style.maxHeight = (panel.scrollHeight + 20) + "px";
+                    panel.style.padding = "15px 20px"; // Add padding back when opening
+                }
+
+                 // Close other open panels (optional, makes it a true accordion)
+                 accordionHeaders.forEach(otherHeader => {
+                    if (otherHeader !== this && otherHeader.classList.contains('active')) {
+                        otherHeader.classList.remove('active');
+                        otherHeader.nextElementSibling.style.maxHeight = null;
+                        otherHeader.nextElementSibling.style.padding = "0 20px";
+                    }
+                 });
+            });
+        });
+
+
+        // --- Function to handle option selection within a question ---
+        function handleOptionSelection(button, questionDiv) {
+            // Deselect siblings within the same question
+            const siblings = questionDiv.querySelectorAll('.option-button.selected');
+            siblings.forEach(sib => sib.classList.remove('selected'));
+            // Select clicked button
+            button.classList.add('selected');
+             // Clear previous feedback when a new option is selected
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+        }
+
+        // --- Function to create and append feedback ---
+        function showFeedback(questionDiv, isCorrect, correctAnswer) {
+             // Remove existing feedback first
+            const existingFeedback = questionDiv.querySelector('.feedback');
+            if (existingFeedback) {
+                existingFeedback.remove();
+            }
+
+            const feedback = document.createElement('div');
+            feedback.className = 'feedback';
+            if (isCorrect) {
+                feedback.classList.add('correct');
+                feedback.textContent = '✅ Correct!';
+            } else {
+                feedback.classList.add('incorrect');
+                feedback.textContent = `❌ Incorrect. Correct answer: ${correctAnswer}`;
+            }
+            // Append feedback after the check button
+            const checkButton = questionDiv.querySelector('.check-answer');
+             if (checkButton) {
+                // Insert after the check button if it exists
+                checkButton.parentNode.insertBefore(feedback, checkButton.nextSibling);
+            } else {
+                 // Otherwise, append to the end of the question div
+                 questionDiv.appendChild(feedback);
+            }
+        }
+
+        // --- Load Fill in the Blank Questions ---
+        function loadFillInTheBlankQuestions() {
+            fillContainer.innerHTML = ''; // Clear previous content
+            fillInTheBlank.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.setAttribute('data-question-index', index);
+
+
+                const questionText = document.createElement('p');
+                questionText.innerHTML = `${index + 1}. ${q.question}`; // Add question number
+                questionDiv.appendChild(questionText);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+
+                // Shuffle options for variety
+                const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+
+                shuffledOptions.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         // Optionally show feedback indicating no answer was selected
+                         showFeedback(questionDiv, false, q.answer); // Or provide a message like "Please select an answer."
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+
+                fillContainer.appendChild(questionDiv);
+            });
+        }
+
+        // --- Load True/False Questions ---
+        function loadTrueFalseQuestions() {
+            tfContainer.innerHTML = ''; // Clear previous content
+            trueOrFalse.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.setAttribute('data-question-index', index);
+
+                const questionText = document.createElement('p');
+                questionText.innerHTML = `${index + 1}. ${q.question}`; // Add question number
+                questionDiv.appendChild(questionText);
+
+                 const optionsDiv = document.createElement('div'); // Keep consistent structure
+                optionsDiv.className = 'options';
+
+                const trueButton = document.createElement('button');
+                trueButton.className = 'option-button';
+                trueButton.textContent = 'True';
+                trueButton.addEventListener('click', () => handleOptionSelection(trueButton, questionDiv));
+                optionsDiv.appendChild(trueButton);
+
+                const falseButton = document.createElement('button');
+                falseButton.className = 'option-button';
+                falseButton.textContent = 'False';
+                falseButton.addEventListener('click', () => handleOptionSelection(falseButton, questionDiv));
+                optionsDiv.appendChild(falseButton);
+
+                questionDiv.appendChild(optionsDiv);
+
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                     const correctAnswerText = q.answer ? 'True' : 'False';
+                    if (selected) {
+                        const isCorrect = (selected.textContent === 'True' && q.answer) || (selected.textContent === 'False' && !q.answer);
+                        showFeedback(questionDiv, isCorrect, correctAnswerText);
+                    } else {
+                        showFeedback(questionDiv, false, correctAnswerText);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+
+                tfContainer.appendChild(questionDiv);
+            });
+        }
+
+        // --- Load Multiple Choice Questions ---
+        function loadMultipleChoiceQuestions() {
+            mcContainer.innerHTML = ''; // Clear previous content
+            multipleChoice.forEach((q, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.className = 'question';
+                questionDiv.setAttribute('data-question-index', index);
+
+                const questionText = document.createElement('p');
+                questionText.innerHTML = `${index + 1}. ${q.question}`; // Add question number
+                questionDiv.appendChild(questionText);
+
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'options';
+
+                 // Shuffle options for variety, including the correct answer
+                 const shuffledOptions = [...q.options].sort(() => Math.random() - 0.5);
+
+                shuffledOptions.forEach(option => {
+                    const optionButton = document.createElement('button');
+                    optionButton.className = 'option-button';
+                    optionButton.textContent = option;
+                    optionButton.addEventListener('click', () => handleOptionSelection(optionButton, questionDiv));
+                    optionsDiv.appendChild(optionButton);
+                });
+                questionDiv.appendChild(optionsDiv);
+
+                const checkButton = document.createElement('button');
+                checkButton.className = 'check-answer';
+                checkButton.textContent = 'Check Answer';
+                checkButton.addEventListener('click', () => {
+                    const selected = questionDiv.querySelector('.option-button.selected');
+                    if (selected) {
+                        showFeedback(questionDiv, selected.textContent === q.answer, q.answer);
+                    } else {
+                         showFeedback(questionDiv, false, q.answer);
+                    }
+                });
+                questionDiv.appendChild(checkButton);
+
+                mcContainer.appendChild(questionDiv);
+            });
+        }
+
+        // --- Initial Load ---
+        // Load all quiz questions initially so they are ready when tabs are clicked
+        loadFillInTheBlankQuestions();
+        loadTrueFalseQuestions();
+        loadMultipleChoiceQuestions();
+
+    }); // End DOMContentLoaded
+    // --- END OF SCRIPT LOGIC ---
+</script>
+</body>
+</html>
+
