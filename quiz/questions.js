@@ -1889,7 +1889,7 @@ const quizQuestions = [
     "options": {
       "A": "DLP (Data Loss Prevention)",
       "B": "SNMP traps",
-      "C": "SCAP",
+      "C": "SCAP (Security Content Automation Protocol)",
       "D": "IPS (Intrusion Prevention System)"
     },
     "answer": "A"
@@ -2322,7 +2322,7 @@ const quizQuestions = [
     "question": "Which of the following can best contribute to prioritizing patch applications?",
     "options": {
       "A": "CVSS (Common Vulnerability Scoring System)",
-      "B": "SCAP",
+      "B": "SCAP (Security Content Automation Protocol)",
       "C": "OSINT",
       "D": "CVE"
     },
@@ -2649,7 +2649,7 @@ const quizQuestions = [
     "category": "General Security Concepts",
     "question": "Which of the following tools can assist with detecting an employee who has accidentally emailed a file containing a customer’s PII?",
     "options": {
-      "A": "SCAP",
+      "A": "SCAP (Security Content Automation Protocol)",
       "B": "Net Flow",
       "C": "Antivirus",
       "D": "DLP (Data Loss Prevention)"
