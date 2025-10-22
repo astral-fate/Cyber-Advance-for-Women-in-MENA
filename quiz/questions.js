@@ -1888,7 +1888,7 @@ const quizQuestions = [
     "question": "An administrator has identified and fingerprinted specific files that will generate an alert if an attempt is made to email these files outside of the organization. Which of the following best describes the tool the administrator is using?",
     "options": {
       "A": "DLP (Data Loss Prevention)",
-      "B": "SNMP traps",
+      "B": "SNMP (Simple Network Management Protocol) traps",
       "C": "SCAP (Security Content Automation Protocol)",
       "D": "IPS (Intrusion Prevention System)"
     },
@@ -2336,7 +2336,7 @@ const quizQuestions = [
       "A": "Compensating control",
       "B": "Network segmentation",
       "C": "Transfer of risk",
-      "D": "SNMP traps"
+      "D": "SNMP (Simple Network Management Protocol) traps"
     },
     "answer": "A"
   },
