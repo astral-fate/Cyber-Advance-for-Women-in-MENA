@@ -4695,8 +4695,8 @@ const quizQuestions = [
     "options": {
       "A": "RPO",
       "B": "ARO",
-      "C": "BIA",
-      "D": "MTTR"
+      "C": "BIA (Business Impact Analysis)",
+      "D": "MTTR (Mean Time to Repair)"
     },
     "answer": "D"
   },
